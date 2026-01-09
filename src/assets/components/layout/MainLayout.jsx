@@ -1,22 +1,24 @@
+import { Outlet } from "react-router-dom";
 import Footer from "../../modules/footer/Footer";
 import Ubicacion from "../../modules/ubicacion/Ubicacion";
-import { Outlet } from "react-router-dom";
+import "./MainLayout.css";
 
 const MainLayout = () => {
   return (
-    <>
-      <div style={{ display: "flex", minHeight: "100vh" }}>
+    <div className="layout">
+      {/* Contenido principal */}
+      <div className="layout-content">
         <Ubicacion />
 
-        <main style={{ padding: "20px", width: "100%" }}>
+        <main className="main">
           <Outlet />
         </main>
       </div>
 
+      {/* Footer siempre al fondo y a ancho completo */}
       <Footer />
-    </>
+    </div>
   );
 };
 
 export default MainLayout;
-

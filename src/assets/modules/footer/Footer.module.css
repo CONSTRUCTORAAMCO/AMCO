@@ -1,0 +1,140 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+/* ---------- FOOTER ---------- */
+.footer {
+  background-color: #0f0f0f;
+  color: #eaeaea;
+  width: 100%;
+  font-family: system-ui, sans-serif;
+
+  padding: 2.5rem 4rem 1.2rem;
+  box-shadow: 0 -10px 24px rgba(0, 0, 0, 0.6);
+
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+/* ---------- BRAND ---------- */
+.brand {
+  max-width: 720px;
+}
+
+.logo {
+  color: #FFD600;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 2.1rem;
+  letter-spacing: 2px;
+  margin-bottom: 0.6rem;
+}
+
+.brand p {
+  line-height: 1.55;
+  color: #bdbdbd;
+  font-size: 0.95rem;
+}
+
+/* ---------- NAV ---------- */
+.socials {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.6rem 1.6rem;
+  width: 100%;
+}
+
+.socials a {
+  color: #9e9e9e;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.socials a:hover {
+  color: #FFD600;
+}
+
+/* ---------- LINE ---------- */
+.line {
+  border: none;
+  border-top: 1px solid #2a2a2a;
+  width: 100%;
+  margin: 0.6rem 0;
+}
+
+/* ---------- BOTTOM (LEGAL) ---------- */
+.bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;          /* 🔑 permite apilar si no cabe */
+  gap: 0.5rem 1.2rem;       /* compacto */
+  font-size: 0.85rem;
+  color: #9e9e9e;
+}
+
+.legal {
+  display: flex;
+  gap: 1.2rem;
+  white-space: nowrap;      /* 🔑 evita saltos feos */
+}
+
+.legal a {
+  color: #9e9e9e;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.legal a:hover {
+  color: #ffffff;
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 768px) {
+  .footer {
+    padding: 2.2rem 2rem 1.3rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .footer {
+    padding: 2rem 1.5rem 1.3rem;
+    gap: 1.2rem;
+  }
+
+  .logo {
+    font-size: 1.8rem;
+  }
+
+  .brand p {
+    font-size: 0.9rem;
+  }
+
+  .bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.4rem;
+  }
+
+  .legal {
+    grid-auto-flow: row;
+    justify-content: start;
+    gap: 3.5rem;
+  }
+}
+@media (max-width: 900px) {
+  .socials {
+    justify-content: flex-start;
+  }
+}

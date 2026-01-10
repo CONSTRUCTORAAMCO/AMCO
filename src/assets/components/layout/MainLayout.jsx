@@ -1,21 +1,24 @@
 import { Outlet } from "react-router-dom";
 import Footer from "../../modules/footer/Footer";
-import Ubicacion from "../../modules/ubicacion/Ubicacion";
-import "./MainLayout.css";
+import Navbar from "./Navbar";
 
 const MainLayout = () => {
   return (
-    <div className="layout">
-      {/* Contenido principal */}
-      <div className="layout-content">
-        <Ubicacion />
+    <div className="min-h-screen flex flex-col">
 
-        <main className="main">
+      {/* Navbar fijo */}
+      <Navbar />
+
+      {/* Contenido principal */}
+      <div className="flex-1 pt-20">
+        {/* pt-20 = altura del navbar (h-20) */}
+
+        <main>
           <Outlet />
         </main>
       </div>
 
-      {/* Footer siempre al fondo y a ancho completo */}
+      {/* Footer */}
       <Footer />
     </div>
   );

@@ -99,6 +99,11 @@ body {
 .legal a:hover {
   color: #ffffff;
 }
+.item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
 
 /* ---------- RESPONSIVE ---------- */
 @media (max-width: 768px) {

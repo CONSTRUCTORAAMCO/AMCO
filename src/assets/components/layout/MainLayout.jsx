@@ -1,6 +1,10 @@
 import { Outlet } from "react-router-dom";
 import Footer from "../../modules/footer/Footer";
+import Historialproyectos from "../../modules/historialproyectos/Historialproyectos";
+import Objetivo from "../../modules/objetivo/Objetivo";
+import Formulario from "../../modules/formulario/Formulario";
 import Navbar from "./Navbar";
+
 
 const MainLayout = () => {
   return (
@@ -8,6 +12,8 @@ const MainLayout = () => {
 
       {/* Navbar fijo */}
       <Navbar />
+      
+
 
       {/* Contenido principal */}
       <div className="flex-1 pt-20">
@@ -17,6 +23,9 @@ const MainLayout = () => {
           <Outlet />
         </main>
       </div>
+      <Historialproyectos />
+      <Objetivo />
+      <Formulario />
 
       {/* Footer */}
       <Footer />

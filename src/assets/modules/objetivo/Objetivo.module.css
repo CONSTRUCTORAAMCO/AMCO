@@ -1,0 +1,119 @@
+/* ================= CONTENEDOR ================= */
+
+.section {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  width: 100%;
+  height: 75vh;                     
+  max-height: 900px;                
+  overflow: hidden;                 
+}
+
+/* ================= IZQUIERDA ================= */
+
+.leftBox {
+  position: relative;
+  background: #000;
+  overflow: hidden;
+}
+
+/* VIDEO */
+.video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; 
+  opacity: 0.45;
+}
+
+/* VIDRIO */
+.glassOverlay {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  padding: clamp(2rem, 3vw, 4rem);
+
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+/* TEXTO */
+.glassOverlay h2 {
+  color: #f5c400;
+  font-size: clamp(1.8rem, 2.5vw, 2.6rem);
+  letter-spacing: 2px;
+  margin-bottom: 1.2rem;
+}
+
+.glassOverlay p {
+  color: #eaeaea;
+  line-height: 1.8;
+  max-width: 520px;
+}
+
+
+
+/* ================= DERECHA ================= */
+
+.rightBox {
+  overflow: hidden; /* RECORTA, NO EMPUJA */
+  transition: transform 0.9s ease;
+}
+
+.rightBox:hover img {
+  transform: scale(1.09);
+}
+
+.rightBox img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* SIEMPRE LLENA */
+}
+
+:global(.reveal) {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease;
+}
+
+:global(.reveal.active) {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ================= LAPTOPS BAJITOS (MacBook) ================= */
+
+@media (max-height: 900px) {
+  .section {
+    height: 70vh;
+  }
+}
+
+/* ================= PANTALLAS MUY GRANDES ================= */
+
+@media (min-width: 1600px) {
+  .section {
+    max-width: 1600px;
+    margin: 0 auto;
+  }
+}
+
+/* ================= MÓVILES ================= */
+/* (la imagen derecha ya NO se renderiza por React) */
+
+@media (max-width: 600px) {
+  .section {
+    height: 100vh;
+  }
+
+  .glassOverlay {
+    padding: 1.6rem;
+  }
+}

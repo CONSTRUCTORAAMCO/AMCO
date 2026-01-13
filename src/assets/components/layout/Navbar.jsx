@@ -48,22 +48,20 @@ const Navbar = () => {
   return (
     <>
       {/* NAVBAR */}
-      <header className={`fixed top-0 left-0 w-full z-40 transition-all duration-300 ${show ? "translate-y-0" : "-translate-y-full"} ${scrolled ? "bg-white shadow-md" : "bg-transparent"}`}>
-        <nav className="relative max-w-7xl mx-auto px-6 h-20 flex items-center">
-          {/* LOGO IMG*/}
-          <img src={AMCO} alt="AMCO" className={`absolute left-6 h-12 w-auto ${scrolled ? "" : "brightness-0 invert"}`}/>
-          {/* LINKS DESKTOP */}
-          <ul className={`hidden md:flex absolute left-1/2 transform -translate-x-1/2 gap-8 text-sm font-semibold uppercase tracking-wide ${scrolled ? "text-black" : "text-white"}`}>
-            {["Inicio", "Nosotros", "Proyectos", "Blog", "Contacto"].map((item) => (
-              <li key={item} className="relative group cursor-pointer">
-                {item}
-                <span className={`absolute bottom-0 left-0 w-0 group-hover:w-full transition-all duration-300 h-0.5 ${scrolled ? "bg-black" : "bg-white"}`}
-                />
-              </li>
-            ))}
-          </ul>
+        <header className={`fixed top-0 left-0 w-full z-40 transition-all duration-300 ${show ? "translate-y-0" : "-translate-y-full"} ${scrolled ? "bg-white shadow-md" : "bg-transparent"}`}>
+         <nav className="relative w-full h-20 flex items-center">
+           {/* LOGO IMG */}
+           <img src={AMCO} alt="AMCO" className={`absolute left-6 h-18 w-auto ${scrolled ? "" : "brightness-0 invert"}`} />
+           {/* LINKS DESKTOP */}
+           <ul className={`hidden md:flex absolute left-1/2 transform -translate-x-1/2 gap-6 sm:gap-8 md:gap-10 lg:gap-12 text-sm font-semibold uppercase tracking-wide ${scrolled ? "text-black" : "text-white"}`}>
+             {["Inicio", "Nosotros", "Proyectos", "Blog", "Contacto"].map((item) => (
+               <li key={item} className="relative group cursor-pointer">
+                 {item}
+                 <span className={`absolute bottom-0 left-0 w-0 group-hover:w-full transition-all duration-300 h-0.5 ${scrolled ? "bg-black" : "bg-white"}`} />
+               </li>
+             ))}
+           </ul>
 
-          {/* RIGHT ACTIONS */}
           <div className="absolute right-6 flex items-center gap-4">
 
             {/* SEARCH INLINE */}
@@ -169,24 +167,24 @@ const Navbar = () => {
       )}
 
 
-{/* MOBILE DRAWER */}
-<div
-  className={`
-    fixed top-0 left-0 h-full w-[75%] max-w-sm 
-    bg-white/95 backdrop-blur-xl 
-    z-50 md:hidden
-    transform transition-all duration-500 ease-[cubic-bezier(.4,0,.2,1)]
-    shadow-2xl
-    ${showMobileMenu ? "translate-x-0 opacity-100" : "-translate-x-full opacity-0"}
-  `}
->
-  {/* CLOSE BUTTON */}
-  <div className="flex justify-end p-6">
-    <i
-      className="ri-close-line text-2xl cursor-pointer text-gray-600 hover:text-black transition-transform duration-300 hover:rotate-90"
-      onClick={() => setShowMobileMenu(false)}
-    />
-  </div>
+    {/* MOBILE DRAWER */}
+    <div
+      className={`
+        fixed top-0 left-0 h-full w-[75%] max-w-sm 
+        bg-white/95 backdrop-blur-xl 
+        z-50 md:hidden
+        transform transition-all duration-500 ease-[cubic-bezier(.4,0,.2,1)]
+        shadow-2xl
+        ${showMobileMenu ? "translate-x-0 opacity-100" : "-translate-x-full opacity-0"}
+      `}
+    >
+     {/* CLOSE BUTTON */}
+     <div className="flex justify-end p-6">
+       <i
+         className="ri-close-line text-2xl cursor-pointer text-gray-600 hover:text-black transition-transform duration-300 hover:rotate-90"
+         onClick={() => setShowMobileMenu(false)}
+       />
+     </div>
 
   {/* LOGO */}
   <div className="px-6">

@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react"; // <- agregué useRef
 import AMCO from "../../img/AMCO.png";
 import { FaChevronDown } from "react-icons/fa";
+import ReactCountryFlag from "react-country-flag";
 
 const Navbar = () => {
   const [show, setShow] = useState(true);
@@ -11,6 +12,9 @@ const Navbar = () => {
   const [showDropdownMobile, setShowDropdownMobile] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
   const [showMobileMenu, setShowMobileMenu] = useState(false);
+  // Refs para detectar clicks fuera del dropdown desktop
+  const dropdownDesktopRef = useRef(null);
+  const dropdownDesktopTriggerRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,36 +28,36 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
 
+  //Cerrar dropdown desktop al hacer click fuera
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        dropdownDesktopRef.current &&
+        !dropdownDesktopRef.current.contains(event.target) &&
+        dropdownDesktopTriggerRef.current &&
+        !dropdownDesktopTriggerRef.current.contains(event.target)
+      ) {
+        setShowDropdownDesktop(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   return (
     <>
       {/* NAVBAR */}
-      <header
-        className={`fixed top-0 left-0 w-full z-40 transition-all duration-300
-          ${show ? "translate-y-0" : "-translate-y-full"}
-          ${scrolled ? "bg-white shadow-md" : "bg-transparent"}`}
-      >
+      <header className={`fixed top-0 left-0 w-full z-40 transition-all duration-300 ${show ? "translate-y-0" : "-translate-y-full"} ${scrolled ? "bg-white shadow-md" : "bg-transparent"}`}>
         <nav className="relative max-w-7xl mx-auto px-6 h-20 flex items-center">
-
-          {/* LOGO */}
-          <img
-            src={AMCO}
-            alt="AMCO"
-            className={`absolute left-6 h-12 w-auto ${scrolled ? "" : "brightness-0 invert"}`}
-          />
-
+          {/* LOGO IMG*/}
+          <img src={AMCO} alt="AMCO" className={`absolute left-6 h-12 w-auto ${scrolled ? "" : "brightness-0 invert"}`}/>
           {/* LINKS DESKTOP */}
-          <ul
-            className={`hidden md:flex absolute left-1/2 transform -translate-x-1/2 gap-8
-              text-sm font-semibold uppercase tracking-wide
-              ${scrolled ? "text-black" : "text-white"}`}
-          >
+          <ul className={`hidden md:flex absolute left-1/2 transform -translate-x-1/2 gap-8 text-sm font-semibold uppercase tracking-wide ${scrolled ? "text-black" : "text-white"}`}>
             {["Inicio", "Nosotros", "Proyectos", "Blog", "Contacto"].map((item) => (
               <li key={item} className="relative group cursor-pointer">
                 {item}
-                <span
-                  className={`absolute bottom-0 left-0 w-0 group-hover:w-full
-                    transition-all duration-300 h-0.5
-                    ${scrolled ? "bg-black" : "bg-white"}`}
+                <span className={`absolute bottom-0 left-0 w-0 group-hover:w-full transition-all duration-300 h-0.5 ${scrolled ? "bg-black" : "bg-white"}`}
                 />
               </li>
             ))}
@@ -80,6 +84,7 @@ const Navbar = () => {
 
             {/* LANGUAGE DESKTOP */}
             <div
+              ref={dropdownDesktopTriggerRef} // 🟢 agregué ref al trigger
               onClick={() => setShowDropdownDesktop(prev => !prev)}
               className={`hidden md:flex items-center gap-1 cursor-pointer
                 text-sm font-semibold uppercase tracking-wide
@@ -89,22 +94,58 @@ const Navbar = () => {
               <FaChevronDown className="text-[10px] transition-transform duration-300" />
             </div>
 
-            {/* LANGUAGE DROPDOWN DESKTOP */}
+            {/* DROPDOWN DESKTOP */}
             {showDropdownDesktop && (
-              <ul className="absolute top-full right-0 mt-2 w-40 bg-white border border-black rounded-xl shadow-md py-2 z-50">
-                {["PT", "EN", "ES"].map((lang) => (
-                  <li
-                    key={lang}
+              <div
+                ref={dropdownDesktopRef} // 🟢 agregué ref al dropdown
+                className="
+                  absolute right-0 top-full mt-2
+                  bg-white/95 backdrop-blur-xl
+                  shadow-xl rounded-2xl
+                  p-4 flex flex-col space-y-3
+                  z-50
+                  w-52
+                  animate-[fadeIn_0.25s_ease-out]
+                "
+              >
+                {[
+                  { name: "Portugues", code: "PT" },
+                  { name: "Español", code: "ES" },
+                  { name: "Ingles", code: "GB" },
+                ].map((item) => (
+                  <div
+                    key={item.name}
                     onClick={() => {
-                      setLanguage(lang);
+                      setLanguage(item.name);
                       setShowDropdownDesktop(false);
                     }}
-                    className="mx-2 px-4 py-3 rounded-lg cursor-pointer text-sm font-semibold uppercase hover:bg-gray-100"
+                    className={`
+                      cursor-pointer font-bold text-sm
+                      py-3 min-h-[42px]
+                      rounded-xl
+                      w-full
+                      flex items-center
+                      text-left
+                      px-6 gap-4
+                      transition-all duration-300
+                      ${language === item.name
+                        ? "bg-gray-100 text-black shadow-sm scale-[1.03]"
+                        : "text-gray-600 hover:bg-gray-50 hover:scale-105 hover:shadow-lg hover:translate-x-1"
+                      }
+                    `}
                   >
-                    {lang}
-                  </li>
+                    <ReactCountryFlag
+                      svg
+                      countryCode={item.code}
+                      style={{
+                        width: "1.5em",
+                        height: "1.5em",
+                      }}
+                    />
+                    <span>{item.name}</span>
+                  </div>
                 ))}
-              </ul>
+              </div>
             )}
 
             {/* MOBILE BUTTON */}
@@ -123,93 +164,134 @@ const Navbar = () => {
       {showMobileMenu && (
         <div
           onClick={() => setShowMobileMenu(false)}
-          className="fixed inset-0 bg-black/40 z-40 md:hidden"
+          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 md:hidden transition-opacity"
         />
       )}
 
-      {/* MOBILE DRAWER */}
-      <div
-        className={`fixed top-0 left-0 h-full w-[70%] max-w-xs bg-white z-50 md:hidden
-          transform transition-all duration-500 ease-in-out
-          ${showMobileMenu ? "translate-x-0 opacity-100" : "-translate-x-full opacity-0"}`}
+
+{/* MOBILE DRAWER */}
+<div
+  className={`
+    fixed top-0 left-0 h-full w-[75%] max-w-sm 
+    bg-white/95 backdrop-blur-xl 
+    z-50 md:hidden
+    transform transition-all duration-500 ease-[cubic-bezier(.4,0,.2,1)]
+    shadow-2xl
+    ${showMobileMenu ? "translate-x-0 opacity-100" : "-translate-x-full opacity-0"}
+  `}
+>
+  {/* CLOSE BUTTON */}
+  <div className="flex justify-end p-6">
+    <i
+      className="ri-close-line text-2xl cursor-pointer text-gray-600 hover:text-black transition-transform duration-300 hover:rotate-90"
+      onClick={() => setShowMobileMenu(false)}
+    />
+  </div>
+
+  {/* LOGO */}
+  <div className="px-6">
+    <div className="flex justify-center mb-6">
+      <img
+        src={AMCO}
+        alt="AMCO"
+        className="h-10 w-auto opacity-90 hover:opacity-100 transition-opacity"
+      />
+    </div>
+
+    <div className="flex justify-center">
+      <div className="h-px w-[70%] bg-gradient-to-r from-transparent via-gray-300 to-transparent" />
+    </div>
+  </div>
+
+  {/* LINKS */}
+  <ul className="flex flex-col gap-8 px-8 py-12 text-lg font-semibold uppercase tracking-wide">
+    {["Inicio", "Nosotros", "Proyectos", "Blog", "Contacto"].map((item) => (
+      <li
+        key={item}
+        className="
+          relative cursor-pointer group
+          text-gray-700
+          transition-all duration-300
+          hover:text-black hover:pl-4
+        "
       >
-        {/* CLOSE BUTTON */}
-        <div className="flex justify-end p-6">
-          <i
-            className="ri-close-line text-2xl cursor-pointer"
-            onClick={() => setShowMobileMenu(false)}
-          />
-        </div>
+        {/* Left indicator */}
+        <span className="absolute left-0 top-1/2 -translate-y-1/2 h-0 w-[3px] bg-black rounded-full transition-all duration-300 group-hover:h-6" />
+        {/* Text */}
+        <span className="relative">
+          {item}
+          {/* Underline */}
+          <span
+            className="absolute left-0 -bottom-1 h-[2px] w-0 bg-black transition-all duration-300 group-hover:w-full"/>
+        </span>
+      </li>
+    ))}
+  </ul>
 
-        {/* LOGO */}
-        <div className="px-6">
-          <div className="flex justify-center mb-4">
-            <img src={AMCO} alt="AMCO" className="h-10 w-auto opacity-90" />
-          </div>
-          <div className="flex justify-center">
-            <div className="h-px w-[75%] bg-gradient-to-r from-transparent via-gray-300 to-transparent" />
-          </div>
-        </div>
-
-        {/* LINKS */}
-        <ul className="flex flex-col gap-6 px-6 py-10 text-lg font-semibold uppercase">
-          {["Inicio", "Nosotros", "Proyectos", "Blog", "Contacto"].map((item) => (
-            <li key={item} className="cursor-pointer">
-              {item}
-            </li>
-          ))}
-        </ul>
 
         {/* Lenguaje DROPDOWN MOBILE */}
         <div className="mt-auto px-6 pb-10">
-          <div className="relative w-full">
-            {/* Trigger */}
+          <div className="relative w-full h-12">
+            {/* Fake select */}
             <div
-              role="button"
-              tabIndex={0}
               onClick={() => setShowDropdownMobile(prev => !prev)}
-              onKeyDown={(e) => e.key === "Enter" && setShowDropdownMobile(prev => !prev)}
-              className="flex items-center justify-between px-4 py-3 bg-white cursor-pointer select-none transition-all duration-300 border border-black"
+              className="w-full h-full px-5 flex items-center justify-between
+                 font-semibold text-sm cursor-pointer
+                 bg-white shadow rounded-lg"
             >
-              <span className="text-sm font-semibold uppercase text-gray-700">
-                Idioma
-              </span>
+              <span>{language}</span>
+
               <FaChevronDown
-                className={`text-sm text-gray-500 transition-transform duration-300 ${showDropdownMobile ? "rotate-180" : ""}`}
+                className={`transition-transform duration-300 text-xs
+          ${showDropdownMobile ? "rotate-0" : "rotate-180"}`}
               />
             </div>
 
-            {/* Dropdown MOBILE */}
-            {showDropdownMobile && (
-              <div className="absolute left-0 right-0 mt-2 bg-white border border-black shadow-md overflow-hidden z-50">
-                {["PT", "EN", "ES"].map((lang) => (
-                  <div
-                    key={lang}
-                    role="button"
-                    tabIndex={0}
-                    onClick={() => {
-                      setLanguage(lang);
-                      setShowDropdownMobile(false);
+          {/* Dropdown */}
+          {showDropdownMobile && (
+            <div className="absolute left-0 right-0 mt-2 bg-white shadow-xl rounded-2xl p-4 flex flex-col space-y-3 z-50 animate-[fadeIn_0.3s_ease-out]">
+              {[
+                { name: "Portugues", code: "PT" },
+                { name: "Español", code: "ES" },
+                { name: "Ingles", code: "GB" },
+              ].map((item) => (
+                <div
+                  key={item.name}
+                  onClick={() => {
+                    setLanguage(item.name);
+                    setShowDropdownMobile(false);
+                  }}
+                  className={`
+                    cursor-pointer font-bold text-sm
+                    py-3 min-h-[44px]
+                    rounded-xl transition-all duration-300
+                    w-60 mx-auto
+                    flex items-center gap-3
+                    text-left px-5
+                  
+                    ${language === item.name
+                      ? "bg-gray-100 text-black shadow-sm scale-[1.03]"
+                      : "text-gray-600"}
+                  `}
+                >
+                  {/* Bandera */}
+                  <ReactCountryFlag
+                    svg
+                    countryCode={item.code}
+                    style={{
+                      width: "1.4em",
+                      height: "1.4em",
                     }}
-                    onKeyDown={(e) =>
-                      e.key === "Enter" && (() => {
-                        setLanguage(lang);
-                        setShowDropdownMobile(false);
-                      })()
-                    }
-                    className={`px-4 py-3 text-sm font-semibold uppercase cursor-pointer transition-colors duration-200 ${
-                      language === lang
-                        ? "bg-gray-100 text-gray-900"
-                        : "text-gray-700 hover:bg-gray-50"
-                    }`}
-                  >
-                    {lang}
-                  </div>
-                ))}
-              </div>
-            )}
+                  />
+
+                  <span>{item.name}</span>
+                </div>
+              ))}
+            </div>
+          )}
           </div>
         </div>
+
       </div>
     </>
   );

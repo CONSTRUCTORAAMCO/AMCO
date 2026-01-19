@@ -1,6 +1,6 @@
 import styles from "./Footer.module.css";
 import { RiMailLine, RiMapPinLine } from "react-icons/ri";
-
+import { Link } from "react-router-dom";
 export default function Footer() {
   return (
     <footer className={styles.footer}>
@@ -28,11 +28,11 @@ export default function Footer() {
 
         {/* Redes / navegación */}
         <div className={styles.socials}>
-          <a href="/">Inicio</a>
-          <a href="/entrecalles">Entrecalles</a>
-          <a href="/historial">Historial</a>
-          <a href="/ubicacion">Ubicación</a>
-          <a href="/contacto">Contacto</a>
+          <Link to="/">Inicio</Link>
+          <Link to="/entrecalles">Entrecalles</Link>
+          <Link to="/historial">Historial</Link>
+          <Link to="/ubicacion">Ubicación</Link>
+          <Link to="/contacto">Contacto</Link>
         </div>
       </div>
 

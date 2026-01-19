@@ -1,12 +1,11 @@
 /* ================= CONTENEDOR ================= */
 
-.section {
+.objetivoSection {
   display: grid;
   grid-template-columns: 1.2fr 1fr;
   width: 100%;
-  height: 75vh;                     
-  max-height: 900px;                
-  overflow: hidden;                 
+  min-height: clamp(500px, 75vh, 900px);
+  overflow: hidden;
 }
 
 /* ================= IZQUIERDA ================= */
@@ -18,12 +17,12 @@
 }
 
 /* VIDEO */
-.video {
+.videoBg {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover; 
+  object-fit: cover;
   opacity: 0.45;
 }
 
@@ -37,7 +36,7 @@
   flex-direction: column;
   justify-content: center;
 
-  padding: clamp(2rem, 3vw, 4rem);
+  padding: clamp(2rem, 4vw, 5rem);
 
   background: rgba(0, 0, 0, 0.45);
   backdrop-filter: blur(14px);
@@ -47,73 +46,74 @@
 /* TEXTO */
 .glassOverlay h2 {
   color: #f5c400;
-  font-size: clamp(1.8rem, 2.5vw, 2.6rem);
+  font-size: clamp(1.8rem, 2.6vw, 2.8rem);
   letter-spacing: 2px;
-  margin-bottom: 1.2rem;
+  margin-bottom: 1.4rem;
 }
 
 .glassOverlay p {
   color: #eaeaea;
-  line-height: 1.8;
-  max-width: 520px;
+  line-height: 1.9;
+  max-width: 560px;
 }
-
-
 
 /* ================= DERECHA ================= */
 
 .rightBox {
-  overflow: hidden; /* RECORTA, NO EMPUJA */
-  transition: transform 0.9s ease;
-}
-
-.rightBox:hover img {
-  transform: scale(1.09);
+  overflow: hidden;
 }
 
 .rightBox img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* SIEMPRE LLENA */
+  object-fit: cover;
+  transition: transform 0.8s ease;
 }
 
-:global(.reveal) {
+.rightBox:hover img {
+  transform: scale(1.08);
+}
+
+/* ================= ANIMACIÓN TEXTO ================= */
+
+.reveal {
   opacity: 0;
   transform: translateY(30px);
-  transition: all 0.8s ease;
+  transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
-:global(.reveal.active) {
+.active {
   opacity: 1;
   transform: translateY(0);
 }
 
-/* ================= LAPTOPS BAJITOS (MacBook) ================= */
+/* ================= TABLETS ================= */
 
-@media (max-height: 900px) {
-  .section {
-    height: 70vh;
+@media (max-width: 1024px) {
+  .objetivoSection {
+    min-height: 70vh;
   }
-}
 
-/* ================= PANTALLAS MUY GRANDES ================= */
-
-@media (min-width: 1600px) {
-  .section {
-    max-width: 1600px;
-    margin: 0 auto;
+  .glassOverlay {
+    padding: 2.5rem;
   }
 }
 
 /* ================= MÓVILES ================= */
-/* (la imagen derecha ya NO se renderiza por React) */
 
-@media (max-width: 600px) {
-  .section {
-    height: 100vh;
+@media (max-width: 768px) {
+  .objetivoSection {
+    grid-template-columns: 1fr;
+    min-height: auto;
   }
 
   .glassOverlay {
-    padding: 1.6rem;
+    padding: 2rem 1.6rem;
+  }
+
+  .glassOverlay p {
+    max-width: 100%;
   }
 }
+
+

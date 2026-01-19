@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 
 import MainLayout from "../components/layout/MainLayout";
 
+import Home from "../../pages/Home";
 import Entrecalles from "../modules/entrecalles/Entrecalles";
 import Historialproyectos from "../modules/historialproyectos/Historialproyectos";
 import Ubicacion from "../modules/ubicacion/Ubicacion";
@@ -12,7 +13,8 @@ const AppRouter = () => {
   return (
     <Routes>
        <Route element={<MainLayout />}>
-      <Route path="/" element={<Entrecalles />} />
+      <Route path="/" element={<Home />} />
+      <Route path="/entrecalles" element={<Entrecalles />} />
       <Route path="/historialproyectos" element={<Historialproyectos />} />
       <Route path="/ubicacion" element={<Ubicacion />} />
       <Route path="/formulario" element={<Formulario />} />

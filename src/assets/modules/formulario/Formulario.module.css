@@ -1,0 +1,442 @@
+/* ================= DISEÑO MINIMALISTA/MODERNO - VERSIÓN HORIZONTAL ================= */
+
+/* Variables Minimalistas */
+:root {
+  --color-blanco: #ffffff;
+  --color-negro: #000000;
+  --color-gris-claro: #f8f8f8;
+  --color-gris-medio: #e0e0e0;
+  --color-gris-oscuro: #333333;
+  --color-accent: #000000;
+  --color-accent-hover: #333333;
+  --sombra-sutil: 0 2px 12px rgba(0, 0, 0, 0.04);
+  --sombra-hover: 0 4px 20px rgba(0, 0, 0, 0.08);
+  --transicion-limpia: all 0.25s ease;
+  --borde-minimal: 0px;
+}
+
+/* Estilo minimalista total */
+.section {
+  width: 100%;
+  min-height: 100vh;
+  padding: clamp(3rem, 6vw, 6rem) 1.5rem;
+  background: var(--color-blanco);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Contenedor ultra limpio */
+.container {
+  max-width: 1000px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+/* Encabezado minimalista */
+.headerMinimal {
+  text-align: center;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--color-gris-medio);
+}
+
+.tituloPrincipal {
+  font-size: 3.5rem;
+  font-weight: 300;
+  letter-spacing: -1.5px;
+  color: var(--color-negro);
+  margin-bottom: 0.5rem;
+  line-height: 1;
+}
+
+.tituloPrincipal strong {
+  font-weight: 700;
+  color: var(--color-accent);
+}
+
+.subtitulo {
+  color: var(--color-gris-oscuro);
+  font-size: 1.1rem;
+  font-weight: 300;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-top: 1rem;
+}
+
+/* Grid de 2 columnas iguales */
+.contenidoGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+/* FORMULARIO MINIMALISTA */
+.formBox {
+  background: var(--color-blanco);
+  padding: 0;
+}
+
+.formBox h2 {
+  font-size: 1.8rem;
+  font-weight: 400;
+  color: var(--color-negro);
+  margin-bottom: 2rem;
+  letter-spacing: -0.5px;
+}
+
+.formBox > p {
+  color: #666;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 2.5rem;
+  font-weight: 300;
+}
+
+/* Campos minimalistas - SIN BORDES VISIBLES */
+.formBox form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.formBox input,
+.formBox textarea {
+  width: 100%;
+  padding: 1rem 0;
+  border: none;
+  border-bottom: 1px solid var(--color-gris-medio);
+  background: transparent;
+  font-size: 1.1rem;
+  color: var(--color-negro);
+  transition: var(--transicion-limpia);
+  font-family: inherit;
+  font-weight: 300;
+}
+
+.formBox input::placeholder,
+.formBox textarea::placeholder {
+  color: #aaa;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+}
+
+/* Efecto línea inferior */
+.formBox .inputContainer {
+  position: relative;
+}
+
+.formBox .inputContainer::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--color-negro);
+  transition: var(--transicion-limpia);
+}
+
+.formBox input:focus,
+.formBox textarea:focus {
+  outline: none;
+  border-bottom-color: transparent;
+}
+
+/* Este selector necesita ajuste en el JSX */
+.formBox input:focus ~ .inputContainer::after,
+.formBox textarea:focus ~ .inputContainer::after {
+  width: 100%;
+}
+
+/* Textarea */
+.formBox textarea {
+  resize: none;
+  min-height: 120px;
+  line-height: 1.5;
+}
+
+/* Botón minimalista - SOLO BORDE */
+.formBox button {
+  margin-top: 1rem;
+  padding: 1.2rem 3rem;
+  background: transparent;
+  color: var(--color-negro);
+  border: 1.5px solid var(--color-negro);
+  font-weight: 500;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: var(--transicion-limpia);
+  align-self: flex-start;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  position: relative;
+  overflow: hidden;
+}
+
+.formBox button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: var(--color-negro);
+  transition: var(--transicion-limpia);
+  z-index: -1;
+}
+
+.formBox button:hover {
+  color: var(--color-blanco);
+  background: var(--color-negro);
+  border-color: var(--color-negro);
+}
+
+.formBox button:hover::before {
+  left: 0;
+}
+
+/* INFO MINIMALISTA - VERSIÓN HORIZONTAL */
+.infoBox {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+/* CONTENEDOR HORIZONTAL PARA CORREO Y TELÉFONO */
+.contactoHorizontal {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 1rem;
+}
+
+/* Tarjetas en horizontal */
+.cardHorizontal {
+  background: var(--color-blanco);
+  padding: 1.5rem 0;
+  border-bottom: 1px solid var(--color-gris-medio);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.cardHorizontal h3 {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--color-negro);
+  margin-bottom: 0.8rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Iconos al lado derecho */
+.cardHorizontal h3 svg {
+  color: var(--color-accent);
+  opacity: 0.8;
+  order: 2; /* Mueve el icono a la derecha */
+  margin-left: 0.5rem;
+}
+
+.cardHorizontal p {
+  color: var(--color-gris-oscuro);
+  font-size: 1.3rem;
+  font-weight: 300;
+  margin: 0;
+  line-height: 1.4;
+  text-align: left;
+}
+
+/* Mapa minimalista */
+.mapCard {
+  margin-top: 1rem;
+  background: var(--color-gris-claro);
+  height: 300px;
+  position: relative;
+  overflow: hidden;
+}
+
+.mapCard iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  filter: grayscale(1);
+  transition: var(--transicion-limpia);
+}
+
+.mapCard:hover iframe {
+  filter: grayscale(0);
+}
+
+/* Mensajes de estado minimalistas */
+.ok,
+.error {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 1rem 1.5rem;
+  margin-top: 1.5rem;
+  font-weight: 300;
+  font-size: 0.95rem;
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.ok {
+  color: #000;
+  background: rgba(0, 0, 0, 0.03);
+}
+
+.error {
+  color: #666;
+  background: rgba(0, 0, 0, 0.03);
+}
+
+/* ================= MODAL ================= */
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(6px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal {
+  background: white;
+  padding: 3rem;
+  width: 90%;
+  max-width: 420px;
+  text-align: center;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+  animation: scaleIn 0.3s ease;
+}
+
+.modal h3 {
+  font-size: 1.6rem;
+  margin-bottom: 0.8rem;
+}
+
+.modal p {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 2rem;
+}
+
+.modal button {
+  padding: 0.8rem 2.5rem;
+  border: 1.5px solid black;
+  background: transparent;
+  cursor: pointer;
+  transition: var(--transicion);
+}
+
+.modal button:hover {
+  background: black;
+  color: white;
+}
+
+.iconSuccess,
+.iconError {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: 2px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+}
+
+.iconError {
+  border-color: #666;
+}
+
+/* ================= ANIMACIONES ================= */
+@keyframes scaleIn {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+/* RESPONSIVE Minimalista */
+@media (max-width: 900px) {
+  .contenidoGrid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  
+  .tituloPrincipal {
+    font-size: 2.8rem;
+  }
+  
+  .contactoHorizontal {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    gap: 3rem;
+  }
+  
+  .tituloPrincipal {
+    font-size: 2.3rem;
+  }
+  
+  .subtitulo {
+    font-size: 0.9rem;
+  }
+  
+  .cardHorizontal p {
+    font-size: 1.1rem;
+  }
+  
+  .formBox button {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .section {
+    padding: 2rem 1rem;
+  }
+  
+  .tituloPrincipal {
+    font-size: 2rem;
+  }
+  
+  .formBox h2 {
+    font-size: 1.5rem;
+  }
+  
+  .mapCard {
+    height: 250px;
+  }
+  
+  .cardHorizontal h3 {
+    font-size: 1rem;
+  }
+  
+  .cardHorizontal p {
+    font-size: 1rem;
+  }
+}

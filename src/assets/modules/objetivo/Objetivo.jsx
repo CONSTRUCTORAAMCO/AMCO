@@ -9,7 +9,7 @@ const Objetivo = () => {
 
   /* Detectar móvil */
   useEffect(() => {
-    const mediaQuery = window.matchMedia("(max-width: 600px)");
+    const mediaQuery = window.matchMedia("(max-width: 768px)");
 
     const handleResize = () => setIsMobile(mediaQuery.matches);
     handleResize();
@@ -18,37 +18,32 @@ const Objetivo = () => {
     return () => mediaQuery.removeEventListener("change", handleResize);
   }, []);
 
-  /* Animación del texto al hacer scroll */
+  /* Animación scroll */
   useEffect(() => {
-  const texto = document.querySelector(".reveal");
-  if (!texto) return;
+    const texto = document.querySelector(`.${styles.reveal}`);
+    if (!texto) return;
 
-  const observer = new IntersectionObserver(
-    ([entry]) => {
-      if (entry.isIntersecting) {
-        texto.classList.add("active");
-      } else {
-        texto.classList.remove("active");
-      }
-    },
-    {
-      threshold: 0.3,
-    }
-  );
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          texto.classList.add(styles.active);
+        } else {
+          texto.classList.remove(styles.active);
+        }
+      },
+      { threshold: 0.3 }
+    );
 
-  observer.observe(texto);
-
-  return () => observer.disconnect();
-}, []);
-
+    observer.observe(texto);
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <section className={styles.section}>
-      
+    <section className={styles.objetivoSection}>
       {/* IZQUIERDA */}
       <div className={styles.leftBox}>
         <video
-          className={styles.video}
+          className={styles.videoBg}
           src={videoBg}
           autoPlay
           loop
@@ -56,22 +51,19 @@ const Objetivo = () => {
           playsInline
         />
 
-        <div className={`${styles.glassOverlay} reveal`}>
+        <div className={`${styles.glassOverlay} ${styles.reveal}`}>
           <h2>OBJETO SOCIAL</h2>
           <p>
-            Constructora AMCO Ltda. es la planeación, diseño, desarrollo,
-            gerencia y ejecución de proyectos de construcción en los sectores
-            de vivienda, oficinas, comercio, institucional e industrial en
-            todo el territorio colombiano. La empresa se compromete a realizar
-            obras bajo estrictas normas técnicas y de calidad, utilizando
-            materiales y tecnologías de avanzada, con el fin de satisfacer las
-            necesidades de sus clientes y contribuir al desarrollo urbano
-            sostenible.
+            Constructora AMCO Ltda. se dedica a la planeación, diseño, desarrollo,
+            gerencia y ejecución de proyectos de construcción en los sectores de
+            vivienda, oficinas, comercio, institucional e industrial, bajo
+            estrictas normas técnicas y de calidad, contribuyendo al desarrollo
+            urbano sostenible de Colombia.
           </p>
         </div>
       </div>
 
-      {/* DERECHA (SOLO DESKTOP) */}
+      {/* DERECHA (solo desktop) */}
       {!isMobile && (
         <div className={styles.rightBox}>
           <img src={imagenProyecto} alt="Proyecto AMCO" />

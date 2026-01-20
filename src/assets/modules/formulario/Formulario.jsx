@@ -1,12 +1,17 @@
 import { useRef, useState, useEffect } from "react";
 import emailjs from "@emailjs/browser";
 import styles from "./Formulario.module.css";
-import { RiMailLine, RiPhoneLine, RiCheckLine, RiCloseLine } from "react-icons/ri";
+import {
+  RiMailLine,
+  RiPhoneLine,
+  RiCheckLine,
+  RiCloseLine,
+} from "react-icons/ri";
 
 const Formulario = () => {
   const formRef = useRef();
   const [estado, setEstado] = useState("");
-  const [mostrarModal, setMostrarModal] = useState(false);
+  const [mostrarToast, setMostrarToast] = useState(false);
 
   const enviarEmail = (e) => {
     e.preventDefault();
@@ -22,33 +27,34 @@ const Formulario = () => {
       .then(
         () => {
           setEstado("enviado");
-          setMostrarModal(true);
+          setMostrarToast(true);
           formRef.current.reset();
         },
         () => {
           setEstado("error");
-          setMostrarModal(true);
+          setMostrarToast(true);
         }
       );
   };
 
-  // ⏱️ Autocierre del modal
+  // ⏱️ Autocierre del toast (5s)
   useEffect(() => {
-    if (mostrarModal) {
+    if (mostrarToast) {
       const timer = setTimeout(() => {
-        setMostrarModal(false);
+        setMostrarToast(false);
         setEstado("");
-      }, 4000);
+      }, 5000);
 
       return () => clearTimeout(timer);
     }
-  }, [mostrarModal]);
+  }, [mostrarToast]);
 
   return (
     <section className={styles.section}>
       <div className={styles.container}>
         {/* IZQUIERDA - FORMULARIO */}
         <div className={styles.formBox}>
+          <br />
           <h1 style={{ textAlign: "center" }}>
             <strong>Contáctanos</strong>
           </h1>
@@ -111,42 +117,41 @@ const Formulario = () => {
               title="Ubicación Constructora AMCO"
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5000!2d-74.0519526!3d4.6786749!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3f9a931ebe1a1d%3A0x1d267cdfe5b0e062!2sBusiness%20center%2093!5e0!3m2!1ses-419!2sco!4v1768488991782"
               loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade">
-            </iframe>
-
-
+              referrerPolicy="no-referrer-when-downgrade"
+            />
           </div>
         </div>
+      </div>
 
-        {/* MODAL */}
-        {mostrarModal && (
-          <div className={styles.modalOverlay}>
-            <div className={styles.modal}>
-              {estado === "enviado" ? (
-                <>
-                  <div className={styles.iconSuccess}>
-                    <RiCheckLine size={40} />
-                  </div>
-                  <h3>Mensaje enviado</h3>
-                  <p>Gracias por escribirnos. Te responderemos pronto.</p>
-                </>
-              ) : (
-                <>
-                  <div className={styles.iconError}>
-                    <RiCloseLine size={40} />
-                  </div>
-                  <h3>Error al enviar</h3>
-                  <p>Intenta nuevamente en unos segundos.</p>
-                </>
-              )}
-
-              <button onClick={() => setMostrarModal(false)}>
-                Aceptar
-              </button>
+      {mostrarToast && (
+        <div className="fixed top-4 right-4 z-50 animate-slide-in w-[90vw] max-w-[220px]">
+          <div className="relative overflow-hidden rounded-lg bg-gray-200 text-black px-6 py-8 shadow-xl">
+      
+            <div className="flex items-start gap-4 text-base">
+              <div className="text-xl mt-1">
+                {estado === "enviado" ? <RiCheckLine /> : <RiCloseLine />}
+              </div>
+      
+              <div className="flex-1">
+                <span className="font-medium block">
+                  {estado === "enviado" ? "Enviado" : "Error al enviar"}
+                </span>
+                <p className="text-sm text-gray-600 mt-2">
+                  {estado === "enviado"
+                    ? "Gracias por contactarnos."
+                    : "Por favor intenta nuevamente."}
+                </p>
+              </div>
+            </div>
+                  
+            {/* Barra de progreso */}
+            <div className="absolute bottom-0 left-0 h-[4px] w-full bg-black/20">
+              <div className={`h-full bg-black ${styles.toastProgress}`} />
             </div>
           </div>
-        )}
-      </div>
+        </div>
+      )}
+
     </section>
   );
 };

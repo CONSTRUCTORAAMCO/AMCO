@@ -440,3 +440,15 @@
     font-size: 1rem;
   }
 }
+@keyframes toast-progress {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0%;
+  }
+}
+
+.toastProgress {
+  animation: toast-progress 5s linear forwards;
+}

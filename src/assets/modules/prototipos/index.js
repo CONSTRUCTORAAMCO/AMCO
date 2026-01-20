@@ -1,0 +1,1 @@
+export { default as ComunidadesCarousel } from "./Propositocarousel";

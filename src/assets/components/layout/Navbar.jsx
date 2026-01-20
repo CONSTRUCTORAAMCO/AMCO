@@ -1,9 +1,12 @@
 import { useEffect, useState, useRef } from "react"; // <- agregué useRef
+import { useNavigate, useLocation } from "react-router-dom";
 import AMCO from "../../img/AMCO.png";
 import { FaChevronDown } from "react-icons/fa";
 import ReactCountryFlag from "react-country-flag";
 
 const Navbar = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const [show, setShow] = useState(true);
   const [scrolled, setScrolled] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
@@ -45,19 +48,28 @@ const Navbar = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  const isScrolledStyle = scrolled || location.pathname !== "/";
+
   return (
     <>
       {/* NAVBAR */}
-        <header className={`fixed top-0 left-0 w-full z-40 transition-all duration-300 ${show ? "translate-y-0" : "-translate-y-full"} ${scrolled ? "bg-white shadow-md" : "bg-transparent"}`}>
+        <header className={`fixed top-0 left-0 w-full z-40 transition-all duration-300 ${show ? "translate-y-0" : "-translate-y-full"} ${isScrolledStyle ? "bg-white shadow-md" : "bg-transparent"}`}>
          <nav className="relative w-full h-20 flex items-center">
            {/* LOGO IMG */}
-           <img src={AMCO} alt="AMCO" className={`absolute left-6 h-18 w-auto ${scrolled ? "" : "brightness-0 invert"}`} />
+           <img src={AMCO} alt="AMCO" className={`absolute left-6 h-18 w-auto ${isScrolledStyle ? "" : "brightness-0 invert"}`} />
            {/* LINKS DESKTOP */}
-           <ul className={`hidden md:flex absolute left-1/2 transform -translate-x-1/2 gap-6 sm:gap-8 md:gap-10 lg:gap-12 text-sm font-semibold uppercase tracking-wide ${scrolled ? "text-black" : "text-white"}`}>
+           <ul className={`hidden md:flex absolute left-1/2 transform -translate-x-1/2 gap-6 sm:gap-8 md:gap-10 lg:gap-12 text-sm font-semibold uppercase tracking-wide ${isScrolledStyle ? "text-black" : "text-white"}`}>
              {["Inicio", "Nosotros", "Proyectos", "Blog", "Contacto"].map((item) => (
-               <li key={item} className="relative group cursor-pointer">
+               <li 
+                 key={item} 
+                 className="relative group cursor-pointer"
+                 onClick={() => {
+                   if (item === "Contacto") navigate("/contacto");
+                   if (item === "Inicio") navigate("/");
+                 }}
+               >
                  {item}
-                 <span className={`absolute bottom-0 left-0 w-0 group-hover:w-full transition-all duration-300 h-0.5 ${scrolled ? "bg-black" : "bg-white"}`} />
+                 <span className={`absolute bottom-0 left-0 w-0 group-hover:w-full transition-all duration-300 h-0.5 ${isScrolledStyle ? "bg-black" : "bg-white"}`} />
                </li>
              ))}
            </ul>
@@ -68,14 +80,14 @@ const Navbar = () => {
             <div className="relative flex items-center gap-2">
               <i
                 onClick={() => setShowSearch(prev => !prev)}
-                className={`ri-search-line cursor-pointer text-lg ${scrolled ? "text-black" : "text-white"}`}
+                className={`ri-search-line cursor-pointer text-lg ${isScrolledStyle ? "text-black" : "text-white"}`}
               />
               <input
                 type="text"
                 placeholder="Buscar..."
                 className={`transition-all duration-300
                   bg-transparent border-b outline-none text-sm
-                  ${scrolled ? "text-black border-black" : "text-white border-white"}
+                  ${isScrolledStyle ? "text-black border-black" : "text-white border-white"}
                   ${showSearch ? "w-36 opacity-100" : "w-0 opacity-0 pointer-events-none"}`}
               />
             </div>
@@ -86,7 +98,7 @@ const Navbar = () => {
               onClick={() => setShowDropdownDesktop(prev => !prev)}
               className={`hidden md:flex items-center gap-1 cursor-pointer
                 text-sm font-semibold uppercase tracking-wide
-                ${scrolled ? "text-black" : "text-white"}`}
+                ${isScrolledStyle ? "text-black" : "text-white"}`}
             >
               {language}
               <FaChevronDown className="text-[10px] transition-transform duration-300" />
@@ -149,7 +161,7 @@ const Navbar = () => {
             {/* MOBILE BUTTON */}
             <div
               onClick={() => setShowMobileMenu(true)}
-              className={`md:hidden text-2xl cursor-pointer ${scrolled ? "text-black" : "text-white"}`}
+              className={`md:hidden text-2xl cursor-pointer ${isScrolledStyle ? "text-black" : "text-white"}`}
             >
               <i className="ri-menu-line"></i>
             </div>
@@ -212,6 +224,16 @@ const Navbar = () => {
           transition-all duration-300
           hover:text-black hover:pl-4
         "
+        onClick={() => {
+          if (item === "Contacto") {
+            navigate("/contacto");
+            setShowMobileMenu(false);
+          }
+          if (item === "Inicio") {
+            navigate("/");
+            setShowMobileMenu(false);
+          }
+        }}
       >
         {/* Left indicator */}
         <span className="absolute left-0 top-1/2 -translate-y-1/2 h-0 w-[3px] bg-black rounded-full transition-all duration-300 group-hover:h-6" />

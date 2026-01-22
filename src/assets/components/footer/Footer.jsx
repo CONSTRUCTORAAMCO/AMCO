@@ -29,9 +29,9 @@ export default function Footer() {
         {/* Redes / navegación */}
         <div className={styles.socials}>
           <Link to="/">Inicio</Link>
+          <Link to="/Nosotros">Nosotros</Link>
+          <Link to="/Proyhectos">Proyectos</Link>
           <Link to="/entrecalles">Entrecalles</Link>
-          <Link to="/historial">Historial</Link>
-          <Link to="/ubicacion">Ubicación</Link>
           <Link to="/contacto">Contacto</Link>
         </div>
       </div>

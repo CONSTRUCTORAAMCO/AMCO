@@ -1,0 +1,174 @@
+/* =========================
+   SECCIÓN
+========================= */
+.section {
+  padding: clamp(4rem, 8vw, 8rem) 1.25rem;
+  background: #ffffff;
+}
+
+.container {
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+/* =========================
+   HEADER
+========================= */
+.header {
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto 4.5rem;
+}
+
+.kicker {
+  display: inline-block;
+  font-size: 0.75rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: #9a9a9a;
+  margin-bottom: 1rem;
+}
+
+.header h2 {
+  font-size: clamp(2.4rem, 6vw, 3.8rem);
+  font-weight: 700;
+  line-height: 1.05;
+  margin-bottom: 1.5rem;
+}
+
+.header h2 strong {
+  color: #f5c400;
+}
+
+.header p {
+  font-size: clamp(1rem, 2.5vw, 1.15rem);
+  line-height: 1.7;
+  color: #555;
+}
+
+/* =========================
+   GRID CENTRADO SIEMPRE
+========================= */
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2.5rem;
+}
+
+/* =========================
+   CARD
+========================= */
+.card {
+  position: relative;
+  flex: 1 1 260px;
+  max-width: 360px; /* evita que se estiren feo */
+  padding: 2.6rem 2.2rem;
+  border-radius: 1.4rem;
+  background: #fafafa;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+  transition: all 0.45s ease;
+}
+
+/* Degradado superior */
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 6px;
+  width: 100%;
+  background: linear-gradient(90deg, #f5c400, #ffdf6c);
+}
+
+/* Overlay negro en hover */
+.card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #0b0b0b;
+  opacity: 0;
+  transition: opacity 0.45s ease;
+  z-index: 0;
+}
+
+/* Hover */
+.card:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 35px 80px rgba(0, 0, 0, 0.18);
+}
+
+.card:hover::after {
+  opacity: 1;
+}
+
+/* =========================
+   TEXTO
+========================= */
+.card h3,
+.card p {
+  position: relative;
+  z-index: 1;
+  transition: color 0.45s ease;
+}
+
+.card h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #111;
+}
+
+.card p {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: #555;
+}
+
+/* Texto blanco en hover */
+.card:hover h3,
+.card:hover p {
+  color: #ffffff;
+}
+
+/* =========================
+   RESPONSIVE FINO
+========================= */
+
+/* Tablets */
+@media (max-width: 1024px) {
+  .grid {
+    gap: 2rem;
+  }
+
+  .card {
+    max-width: 100%;
+  }
+}
+
+/* Mobile grande */
+@media (max-width: 640px) {
+  .header {
+    margin-bottom: 3.5rem;
+  }
+
+  .card {
+    padding: 2.2rem 1.8rem;
+  }
+}
+
+/* Mobile pequeño (320px) */
+@media (max-width: 360px) {
+  .card {
+    padding: 2rem 1.5rem;
+  }
+
+  .card h3 {
+    font-size: 1.1rem;
+  }
+
+  .card p {
+    font-size: 0.9rem;
+  }
+}

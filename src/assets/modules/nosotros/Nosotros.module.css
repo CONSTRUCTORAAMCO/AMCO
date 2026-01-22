@@ -1,0 +1,429 @@
+.nosotros {
+  position: relative;
+  padding: 8rem 2rem;
+  background-color: #ffffff;
+  color: #333333;
+  overflow: hidden;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* TÍTULO PRINCIPAL */
+.mainTitle {
+  font-size: 3.5rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+  color: #1a1a1a;
+  position: relative;
+  letter-spacing: -0.5px;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.mainTitle.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.mainTitle::after {
+  content: "";
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 4px;
+  background-color: #d4af37;
+  border-radius: 2px;
+}
+
+/* SEPARADOR */
+.separator {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #d4af37, transparent);
+  margin: 4rem auto;
+  max-width: 200px;
+}
+
+/* SECCIÓN LA ORGANIZACIÓN */
+.organizacion {
+  margin-bottom: 5rem;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.organizacion.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.organizacionTitle {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 2rem;
+  text-align: center;
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+.organizacionTitle::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background-color: #d4af37;
+}
+
+.organizacionContent {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+}
+
+@media (min-width: 768px) {
+  .organizacionContent {
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+  }
+}
+
+.empresaCard {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 2.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-left: 4px solid #d4af37;
+}
+
+.empresaCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.empresaName {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 0.5rem;
+}
+
+.empresaYear {
+  font-size: 1rem;
+  color: #666666;
+  margin-bottom: 1.5rem;
+  font-style: italic;
+}
+
+.empresaDescription {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #444444;
+  margin-bottom: 1.5rem;
+}
+
+.organizacionText {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  color: #444444;
+  text-align: justify;
+  margin-top: 2rem;
+}
+
+/* SECCIONES MISIÓN Y VISIÓN */
+.misionVision {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  margin-bottom: 5rem;
+}
+
+@media (min-width: 768px) {
+  .misionVision {
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+  }
+}
+
+.misionCard,
+.visionCard {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.misionCard.visible,
+.visionCard.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.misionCard {
+  transition-delay: 0.1s;
+}
+
+.visionCard {
+  transition-delay: 0.2s;
+}
+
+.cardContent {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 2.5rem;
+  height: 100%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border-top: 4px solid #d4af37;
+  display: flex;
+  flex-direction: column;
+}
+
+.cardIcon {
+  font-size: 2.5rem;
+  color: #d4af37;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.cardTitle {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+.cardTitle::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 2px;
+  background-color: #d4af37;
+}
+
+.cardText {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #444444;
+  flex-grow: 1;
+}
+
+/* SECCIÓN POLÍTICAS DE CALIDAD */
+.politicasCalidad {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.politicasCalidad.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.politicasTitle {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 2rem;
+  text-align: center;
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+.politicasTitle::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background-color: #d4af37;
+}
+
+.politicasContent {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 3rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border-right: 4px solid #d4af37;
+}
+
+.politicasText {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  color: #444444;
+  text-align: justify;
+  margin-bottom: 2rem;
+}
+
+.politicasHighlight {
+  background: #fff8e1;
+  border-left: 4px solid #d4af37;
+  padding: 1.5rem;
+  border-radius: 0 4px 4px 0;
+  margin-top: 2rem;
+}
+
+.highlightText {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #5d4037;
+  font-style: italic;
+}
+
+/* TIMELINE VISUAL */
+.timeline {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 3rem 0;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.timeline.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.timelineItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  padding: 0 2rem;
+}
+
+.timelineYear {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #d4af37;
+  margin-bottom: 0.5rem;
+}
+
+.timelineDot {
+  width: 16px;
+  height: 16px;
+  background-color: #d4af37;
+  border-radius: 50%;
+  position: relative;
+}
+
+.timelineDot::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  width: 4rem;
+  height: 2px;
+  background-color: #e0e0e0;
+}
+
+.timelineItem:last-child .timelineDot::after {
+  display: none;
+}
+
+.timelineLabel {
+  font-size: 0.9rem;
+  color: #666666;
+  margin-top: 0.5rem;
+  text-align: center;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .nosotros {
+    padding: 5rem 1.5rem;
+  }
+  
+  .mainTitle {
+    font-size: 2.5rem;
+  }
+  
+  .organizacionTitle,
+  .politicasTitle {
+    font-size: 1.8rem;
+  }
+  
+  .empresaCard,
+  .cardContent,
+  .politicasContent {
+    padding: 2rem;
+  }
+  
+  .timelineItem {
+    padding: 0 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .nosotros {
+    padding: 4rem 1rem;
+  }
+  
+  .mainTitle {
+    font-size: 2rem;
+  }
+  
+  .organizacionTitle,
+  .politicasTitle,
+  .cardTitle {
+    font-size: 1.5rem;
+  }
+  
+  .organizacionText,
+  .cardText,
+  .politicasText {
+    font-size: 1rem;
+  }
+  
+  .timeline {
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  .timelineItem {
+    padding: 1rem 0;
+  }
+  
+  .timelineDot::after {
+    width: 2px;
+    height: 3rem;
+    left: 50%;
+    top: 100%;
+    transform: translateX(-50%);
+  }
+}
+
+/* ANIMACIÓN PARA LOS PÁRRAFOS */
+.animatedParagraph {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.animatedParagraph.visible {
+  opacity: 1;
+  transform: translateY(0);
+}

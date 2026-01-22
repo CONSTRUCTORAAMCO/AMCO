@@ -59,11 +59,12 @@ const Navbar = () => {
            <img src={AMCO} alt="AMCO" className={`absolute left-6 h-18 w-auto ${isScrolledStyle ? "" : "brightness-0 invert"}`} />
            {/* LINKS DESKTOP */}
            <ul className={`hidden md:flex absolute left-1/2 transform -translate-x-1/2 gap-6 sm:gap-8 md:gap-10 lg:gap-12 text-sm font-semibold uppercase tracking-wide ${isScrolledStyle ? "text-black" : "text-white"}`}>
-             {["Inicio", "Nosotros", "Proyectos", "Blog", "Contacto"].map((item) => (
+             {["Inicio", "Nosotros", "Proyectos", "Entrecalles", "Contacto"].map((item) => (
                <li 
                  key={item} 
                  className="relative group cursor-pointer"
                  onClick={() => {
+                   if (item === "Entrecalles") navigate("/Entrecalles");
                    if (item === "Contacto") navigate("/contacto");
                    if (item === "Inicio") navigate("/");
                  }}

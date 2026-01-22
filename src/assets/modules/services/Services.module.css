@@ -1,0 +1,466 @@
+.services {
+  position: relative;
+  padding: 6rem 2rem;
+  background-image: url("../../../assets/img/servicesfondo.png");
+  background-size: cover;
+  background-position: center;
+  background-attachment: scroll;
+  color: #ffffff;
+  overflow: hidden;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .services {
+    background-attachment: fixed;
+    padding: 8rem 2rem;
+  }
+}
+
+.services::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(20, 20, 20, 0.95) 0%,
+    rgba(30, 30, 30, 0.89) 50%,
+    rgba(20, 20, 20, 0.98) 100%
+  );
+  z-index: 0;
+}
+
+.services > * {
+  position: relative;
+  z-index: 2;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* TÍTULO PRINCIPAL - SOLO "CONSTRUCTORA AMCO LTDA." */
+.mainTitle {
+  font-size: 3.5rem;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 2rem;
+  line-height: 1.1;
+  color: #ffffff;
+  position: relative;
+  letter-spacing: -0.5px;
+  text-transform: uppercase;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: titleReveal 1s ease-out forwards;
+}
+
+@keyframes titleReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.mainTitle::after {
+  content: "";
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150px;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, #FFD700, transparent);
+  border-radius: 2px;
+}
+
+/* SUBTÍTULO - "Construyendo Obras Civiles e Infraestructura..." */
+.mainSubtitle {
+  font-size: 1.8rem;
+  font-weight: 400;
+  text-align: center;
+  margin-bottom: 4rem;
+  color: #ffffff;
+  line-height: 1.4;
+  font-style: italic;
+}
+
+/* ===== LAYOUT DE 2 COLUMNAS ===== */
+.twoColumnLayout {
+  display: grid;
+  grid-template-columns: 30% 70%;
+  gap: 4rem;
+  align-items: start;
+}
+
+/* ===== COLUMNA IZQUIERDA ===== */
+.leftColumn {
+  opacity: 0;
+  transform: translateX(-50px);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.leftColumn.slideInLeft {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.subtitleBox {
+  margin-bottom: 2rem;
+}
+
+.subtitle {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 1rem;
+  line-height: 1.4;
+  letter-spacing: 0.5px;
+}
+
+
+@keyframes linePulse {
+  0% {
+    width: 80px;
+    opacity: 0.8;
+  }
+  100% {
+    width: 120px;
+    opacity: 1;
+  }
+}
+
+.contentBox {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.paragraph {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  color: #f0f0f0;
+  font-weight: 300;
+  padding-right: 0;
+}
+
+/* ===== COLUMNA DERECHA ===== */
+.rightColumn {
+  opacity: 0;
+  transform: translateX(50px);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
+}
+
+.rightColumn.slideInRight {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.projectsHeader {
+  margin-bottom: 3rem;
+}
+
+.badge {
+  display: inline-block;
+  background: #ffffff;
+  color: #000000;
+  padding: 0.5rem 1.5rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+}
+
+.projectsTitle {
+  font-size: 2rem;
+  color: #ffffff;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.projectsIntro {
+  font-size: 1.1rem;
+  color: #cccccc;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.projectsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.projectCard {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 10px;
+  padding: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: cardAppear 0.6s ease-out forwards;
+}
+
+@keyframes cardAppear {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.projectCard:hover {
+  background: rgba(255, 255, 255, 0.06);
+  transform: translateY(-5px);
+  border-color: rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.projectCard::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: #ffffff;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.projectCard:hover::before {
+  opacity: 1;
+}
+
+.projectNumber {
+  font-size: 0.9rem;
+  color: #ffffff;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  opacity: 0.7;
+}
+
+.projectName {
+  font-size: 1.1rem;
+  color: #ffffff;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.projectLine {
+  height: 2px;
+  width: 40px;
+  background: rgba(255, 255, 255, 0.3);
+  margin-top: 1rem;
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.projectCard:hover .projectLine {
+  width: 60px;
+}
+
+.missionAuthor {
+  font-size: 1rem;
+  color: #ffffff;
+  font-weight: 600;
+  text-align: right;
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== RESPONSIVE - TODAS LAS PANTALLAS ===== */
+
+/* Tablets (769px - 1024px) - MANTIENE columna derecha */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .services {
+    padding: 6rem 1.5rem;
+    min-height: auto;
+  }
+
+  .mainTitle {
+    font-size: 2.8rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .mainSubtitle {
+    font-size: 1.6rem;
+    margin-bottom: 3.5rem;
+  }
+
+  .twoColumnLayout {
+    grid-template-columns: 1fr;
+    gap: 3.5rem;
+  }
+
+  /* Reseteamos animaciones de entrada para que no se vean raras al apilarse */
+  .leftColumn,
+  .rightColumn {
+    transform: none;
+    opacity: 1;
+    transition: none;
+  }
+
+  .rightColumn {
+    display: block; /* La columna derecha sigue visible en tablets */
+  }
+
+  .paragraph {
+    padding-right: 0;
+  }
+
+  .projectsGrid {
+    /* En tablet, 3 columnas se ven bien */
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Móviles (≤ 768px) - MEJOR DISEÑO PARA MÓVILES */
+@media (max-width: 768px) {
+  .services {
+    padding: 3rem 1rem;
+    min-height: auto;
+    display: block;
+  }
+
+  .mainTitle {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+
+  .mainSubtitle {
+    font-size: 1.2rem;
+    margin-bottom: 2.5rem;
+    line-height: 1.4;
+    font-style: normal;
+  }
+
+  .twoColumnLayout {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  /* OCULTA la columna derecha en móviles */
+  .rightColumn {
+    display: none !important;
+  }
+
+  /* MEJORAS PARA LA COLUMNA IZQUIERDA EN MÓVILES */
+  .leftColumn {
+    width: 100%;
+    padding: 0;
+  }
+
+  .subtitleBox {
+    margin-bottom: 1.5rem;
+  }
+
+  .subtitle {
+    font-size: 1.3rem;
+    margin-bottom: 0.8rem;
+    text-align: center;
+  }
+
+  .accentLine {
+    margin: 0 auto;
+    width: 60px;
+  }
+
+  .contentBox {
+    gap: 1.5rem;
+  }
+
+  .paragraph {
+    font-size: 1rem;
+    line-height: 1.6;
+    text-align: justify;
+  }
+
+
+}
+
+/* Móviles pequeños (≤ 480px) */
+@media (max-width: 480px) {
+  .services {
+    padding: 2.5rem 1rem;
+  }
+
+  .mainTitle {
+    font-size: 1.8rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .mainSubtitle {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+  }
+
+  .subtitle {
+    font-size: 1.2rem;
+  }
+
+  .paragraph {
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+}
+
+/* Pantallas muy grandes (≥ 1600px) */
+@media (min-width: 1600px) {
+  .container {
+    max-width: 1500px;
+  }
+  
+  .twoColumnLayout {
+    gap: 5rem;
+  }
+  
+  .mainTitle {
+    font-size: 4rem;
+  }
+
+  .mainSubtitle {
+    font-size: 2.2rem;
+  }
+  
+  .subtitle {
+    font-size: 2rem;
+  }
+  
+  .paragraph {
+    font-size: 1.3rem;
+  }
+}
+
+/* Pantallas extra grandes (≥ 2000px) */
+@media (min-width: 2000px) {
+  .container {
+    max-width: 1800px;
+  }
+  
+  .mainTitle {
+    font-size: 4.5rem;
+  }
+
+  .mainSubtitle {
+    font-size: 2.5rem;
+  }
+  
+  .paragraph {
+    font-size: 1.4rem;
+  }
+}

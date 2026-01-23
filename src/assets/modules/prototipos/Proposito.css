@@ -8,10 +8,16 @@
 }
 
 .container {
-  max-width: 1200px;
+  max-width: min(1400px, 100%);
   margin: auto;
   padding: 0 24px;
 }
+@media (min-width: 1600px) {
+  .container {
+    max-width: 90vw;
+  }
+}
+
 
 /* Header */
 .header {

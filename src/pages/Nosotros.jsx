@@ -1,7 +1,7 @@
-import Nosotros from "../assets/modules/nosotros/Nosotros";
+import NosotrosModule from "../assets/modules/nosotros/Nosotros";
 
-const Contacto = () => {
-  return <Nosotros />;
+const Nosotros = () => {
+  return <NosotrosModule />;
 };
 
-export default Contacto;
+export default Nosotros;

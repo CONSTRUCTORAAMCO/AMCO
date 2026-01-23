@@ -1,7 +1,7 @@
-import Entrecalles from "../assets/modules/entrecalles/Entrecalles";
+import EntrecallesModule from "../assets/modules/entrecalles/Entrecalles";
 
-const Contacto = () => {
-  return <Entrecalles />;
+const Entrecalles = () => {
+  return <EntrecallesModule />;
 };
 
-export default Contacto;
+export default Entrecalles;

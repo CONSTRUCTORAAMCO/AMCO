@@ -1,153 +1,137 @@
-import { useEffect, useRef, useState } from "react";
-import { comunidades } from "./proposito.data.js";
+import React, { useRef, useState, useEffect } from "react";
+import propositoData from "./Proposito.data";
+import "./Proposito.css";
+import { useLanguage } from "../../../i18n/LanguageContext";
 
-export default function ComunidadesCarousel() {
-  const containerRef = useRef(null);
-  const [autoPlay, setAutoPlay] = useState(true);
-  const [isDragging, setIsDragging] = useState(false);
+const Propositocarousel = () => {
+  const carouselRef = useRef(null);
+
+  const { t } = useLanguage();
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
+  const [isPaused, setIsPaused] = useState(false);
+
+  const scrollAmount = 300;
+
+  // Drag refs
+  const isDragging = useRef(false);
   const startX = useRef(0);
   const scrollStart = useRef(0);
 
-  const isMobile = () => window.innerWidth < 640;
+  /* -------------------- SCROLL BUTTONS -------------------- */
+  const updateScrollButtons = () => {
+    const el = carouselRef.current;
+    if (!el) return;
 
-  /* ===== ANCHO REAL DEL ITEM (MISMO QUE CSS) ===== */
-  const getItemWidth = () => {
-    if (window.innerWidth < 640) return 180;
-    if (window.innerWidth < 768) return 240;
-    if (window.innerWidth < 1024) return 300;
-    if (window.innerWidth < 1280) return 360;
-    return 420;
+    setCanScrollLeft(el.scrollLeft > 0);
+    setCanScrollRight(el.scrollLeft + el.clientWidth < el.scrollWidth - 1);
   };
 
   const scrollNext = () => {
-    if (!containerRef.current) return;
-    containerRef.current.scrollBy({
-      left: getItemWidth(),
-      behavior: "smooth",
-    });
+    carouselRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
   };
 
   const scrollPrev = () => {
-    if (!containerRef.current) return;
-    containerRef.current.scrollBy({
-      left: -getItemWidth(),
-      behavior: "smooth",
-    });
+    carouselRef.current.scrollBy({ left: -scrollAmount, behavior: "smooth" });
   };
 
-  /* ===== AUTOPLAY SOLO DESKTOP ===== */
+  /* -------------------- DRAG (PC + MOBILE) -------------------- */
+  const handlePointerDown = (e) => {
+    isDragging.current = true;
+    carouselRef.current.classList.add("dragging");
+
+    startX.current = e.pageX ?? e.touches[0].pageX;
+    scrollStart.current = carouselRef.current.scrollLeft;
+  };
+
+  const handlePointerMove = (e) => {
+    if (!isDragging.current) return;
+
+    const x = e.pageX ?? e.touches[0].pageX;
+    const walk = (x - startX.current) * 1.4;
+    carouselRef.current.scrollLeft = scrollStart.current - walk;
+  };
+
+  const handlePointerUp = () => {
+    isDragging.current = false;
+    carouselRef.current.classList.remove("dragging");
+  };
+
+  /* -------------------- AUTO SCROLL -------------------- */
   useEffect(() => {
-    if (!autoPlay || isMobile()) return;
+    const interval = setInterval(() => {
+      if (isPaused || !carouselRef.current) return;
 
-    const interval = setInterval(scrollNext, 2800);
+      const el = carouselRef.current;
+      if (el.scrollLeft + el.clientWidth >= el.scrollWidth - 10) {
+        el.scrollTo({ left: 0, behavior: "smooth" });
+      } else {
+        scrollNext();
+      }
+    }, 3000);
+
     return () => clearInterval(interval);
-  }, [autoPlay]);
+  }, [isPaused]);
 
-  /* ===== DRAG (SAFARI FRIENDLY) ===== */
-  const handleMouseDown = (e) => {
-    if (!isMobile()) return;
-    setIsDragging(true);
-    startX.current = e.pageX;
-    scrollStart.current = containerRef.current.scrollLeft;
-  };
-
-  const handleMouseMove = (e) => {
-    if (!isDragging) return;
-    e.preventDefault();
-    const walk = e.pageX - startX.current;
-    containerRef.current.scrollLeft = scrollStart.current - walk;
-  };
-
-  const stopDrag = () => setIsDragging(false);
+  /* -------------------- LISTENERS -------------------- */
+  useEffect(() => {
+    const el = carouselRef.current;
+    updateScrollButtons();
+    el.addEventListener("scroll", updateScrollButtons);
+    return () => el.removeEventListener("scroll", updateScrollButtons);
+  }, []);
 
   return (
-    <section className="w-full mt-24 px-4 sm:px-8 lg:px-16"><br /><br /><br />
-      {/* HEADER */}
-      <div className="relative flex items-center justify-center mb-12">
-        <div className="text-center">
-          <h2 className="font-['Playfair_Display'] italic text-4xl sm:text-5xl md:text-6xl">
-            Nuestros Proyectos
-          </h2>
-          <div className="w-24 h-px bg-gray-800 mx-auto mt-4 opacity-60" />
+    <section className="section">
+      <div className="container">
+
+        <div className="header">
+          <h2>{t('proposito.title')}</h2>
+
+          <div className="controls">
+            <i
+              className={`ri-arrow-left-line nav-icon ${
+                !canScrollLeft ? "disabled" : ""
+              }`}
+              onClick={canScrollLeft ? scrollPrev : undefined}
+            />
+
+            <i
+              className={`ri-arrow-right-line nav-icon primary ${
+                !canScrollRight ? "disabled" : ""
+              }`}
+              onClick={canScrollRight ? scrollNext : undefined}
+            />
+          </div>
         </div>
 
-        {/* FLECHAS */}
-        <div className="hidden sm:flex absolute right-0 top-1/2 -translate-y-1/2 gap-6 text-2xl">
-          <i
-            onClick={scrollPrev}
-            className="ri-arrow-left-line cursor-pointer hover:opacity-60"
-          />
-          <i
-            onClick={scrollNext}
-            className="ri-arrow-right-line cursor-pointer hover:opacity-60"
-          />
-        </div>
-      </div>
-<br /><br /><br />
-      {/* CARRUSEL */}
-      <div
-        ref={containerRef}
-        className={`
-          flex justify-start
-          overflow-x-auto scroll-smooth
-          gap-4 sm:gap-6
-          py-4
-          ${isDragging ? "cursor-grabbing" : "cursor-grab"}
-        `}
-        style={{
-          WebkitOverflowScrolling: "touch",
-          scrollbarWidth: "none",
-        }}
-        onMouseEnter={() => !isMobile() && setAutoPlay(false)}
-        onMouseLeave={() => {
-          !isMobile() && setAutoPlay(true);
-          stopDrag();
-        }}
-        onMouseDown={handleMouseDown}
-        onMouseMove={handleMouseMove}
-        onMouseUp={stopDrag}
-        onMouseLeaveCapture={stopDrag}
-      >
-        <style>{`div::-webkit-scrollbar{display:none}`}</style>
+        <div
+          className="carousel-wrapper"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+        >
+          <div
+            ref={carouselRef}
+            className="carousel snap-x snap-mandatory"
+            onTouchStart={handlePointerDown}
+            onTouchMove={handlePointerMove}
+            onTouchEnd={handlePointerUp}
 
-        {comunidades.map((item, index) => (
-          <article
-            key={index}
-            className="
-              flex-shrink-0
-              w-[180px]
-              sm:w-[240px]
-              md:w-[300px]
-              lg:w-[360px]
-              xl:w-[420px]
-            "
+                        
           >
-            {/* IMAGEN */}
-            <div className="overflow-hidden rounded-xl h-[140px] sm:h-[200px] md:h-[260px] lg:h-[320px] xl:h-[380px]">
-              <img
-                src={item.image}
-                alt={item.title}
-                draggable={false}
-                className="
-                  w-full h-full object-cover
-                  transition-transform duration-500
-                  sm:hover:scale-110
-                "
-              />
-            </div>
+            {propositoData.map((item) => (
+              <div className="card snap-center" key={item.id}>
+                <img src={item.image} alt={item.title} />
+                <h3>{item.title}</h3>
+                <p>{item.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
 
-            {/* TEXTO */}
-            <div className="mt-4 text-center">
-              <h3 className="uppercase text-sm sm:text-base lg:text-lg font-medium">
-                {item.title}
-              </h3>
-              <p className="text-xs sm:text-sm text-gray-500 mt-1">
-                {item.subtitle}
-              </p>
-            </div>
-          </article>
-        ))}
       </div>
     </section>
   );
-}
+};
+
+export default Propositocarousel;

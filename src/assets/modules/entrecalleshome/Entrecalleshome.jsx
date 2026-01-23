@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import styles from './Entrecalleshome.module.css';
 import { Play, MapPin, Building, Youtube } from 'lucide-react';
+import { useLanguage } from '../../../i18n/LanguageContext';
 
 import edificioImage from '../../img/Entrecallesimg1.png'; // Cambia esto por la ruta correcta
 
 const EntreCallesHome = () => {
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
+  const { t } = useLanguage();
 
   const toggleVideoModal = () => {
     setIsVideoModalOpen(!isVideoModalOpen);
@@ -22,19 +24,15 @@ const EntreCallesHome = () => {
         <div className={styles.textSection}>
           <div className={styles.badge}>
             <Building size={14} />
-            <span>PROYECTO EN DESARROLLO</span>
+            <span>{t('entrecalles.badge')}</span>
           </div>
           
           <h1 className={styles.title}>
-            <span className={styles.titleAccent}>Entre Calles</span>
+            <span className={styles.titleAccent}>{t('entrecalles.title')}</span>
           </h1>
           
           <p className={styles.description}>
-            Sobre la intersección de la Avenida 19 con la Calle Real del Comercio, 
-            más conocida como Carrera Séptima; toma vuelo el proyecto que renovará 
-            la cara del centro de Bogotá y de Colombia entera. Una obra que se 
-            convertirá, a la vez, en el punto de encuentro para millones de 
-            capitalinos y en el lugar donde Latinoamérica alcanzará el cielo.
+            {t('entrecalles.description')}
           </p>
         </div>
 
@@ -69,10 +67,10 @@ const EntreCallesHome = () => {
               <div className={styles.videoInfo}>
                 <span className={styles.videoLabel}>
                   <Play size={12} />
-                  Video del proyecto
+                  {t('entrecalles.video_label')}
                 </span>
-                <h3>Entre Calles: El futuro de Bogotá</h3>
-                <p>Descubre el rascacielos que transformará el centro de la ciudad</p>
+                <h3>{t('entrecalles.video_title')}</h3>
+                <p>{t('entrecalles.video_description')}</p>
               </div>
             </div>
           </div>
@@ -82,13 +80,13 @@ const EntreCallesHome = () => {
               <Building size={20} />
               <div>
                 <div className={styles.statNumber}>300+</div>
-                <div className={styles.statText}>metros de altura</div>
+                <div className={styles.statText}>{t('entrecalles.height')}</div>
               </div>
             </div>
             <div className={styles.stat}>
               <MapPin size={20} />
               <div>
-                <div className={styles.statNumber}>Ubicación</div>
+                <div className={styles.statNumber}>{t('entrecalles.location')}</div>
                 <div className={styles.statText}>Avenida 19 con la Carrera Séptima</div>
               </div>
             </div>
@@ -101,7 +99,7 @@ const EntreCallesHome = () => {
         <div className={styles.modalOverlay} onClick={toggleVideoModal}>
           <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
             <div className={styles.modalHeader}>
-              <h3>Video del Proyecto</h3>
+              <h3>{t('entrecalles.modal_title')}</h3>
               <button 
                 className={styles.closeButton}
                 onClick={toggleVideoModal}
@@ -112,7 +110,7 @@ const EntreCallesHome = () => {
             <div className={styles.videoContainer}>
               <iframe
                 src="https://www.youtube.com/embed/k5RfEowqxgI?autoplay=1"
-                title="Entre Calles - Proyecto"
+                title={t('entrecalles.iframe_title')}
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen

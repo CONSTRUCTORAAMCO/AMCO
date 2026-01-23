@@ -1,8 +1,9 @@
-import { useEffect, useState, useRef } from "react"; // <- agregué useRef
+import { useEffect, useState, useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import AMCO from "../../img/AMCO.png";
 import { FaChevronDown } from "react-icons/fa";
 import ReactCountryFlag from "react-country-flag";
+import { useLanguage } from "../../../i18n/LanguageContext";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -10,7 +11,7 @@ const Navbar = () => {
   const [show, setShow] = useState(true);
   const [scrolled, setScrolled] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
-  const [language, setLanguage] = useState("EN");
+  const { language, setLanguage, t } = useLanguage(); // Usar contexto global
   const [showDropdownDesktop, setShowDropdownDesktop] = useState(false);
   const [showDropdownMobile, setShowDropdownMobile] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
@@ -48,6 +49,14 @@ const Navbar = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  const navLinks = [
+    { key: 'nav.home', path: '/' },
+    { key: 'nav.about', path: '/nosotros' },
+    { key: 'nav.projects', path: '/proyectos' },
+    { key: 'nav.entrecalles', path: '/entrecalles' },
+    { key: 'nav.contact', path: '/contacto' }
+  ];
+
   const isScrolledStyle = scrolled || location.pathname !== "/";
 
   return (
@@ -59,17 +68,13 @@ const Navbar = () => {
            <img src={AMCO} alt="AMCO" className={`absolute left-6 h-18 w-auto ${isScrolledStyle ? "" : "brightness-0 invert"}`} />
            {/* LINKS DESKTOP */}
            <ul className={`hidden md:flex absolute left-1/2 transform -translate-x-1/2 gap-6 sm:gap-8 md:gap-10 lg:gap-12 text-sm font-semibold uppercase tracking-wide ${isScrolledStyle ? "text-black" : "text-white"}`}>
-             {["Inicio", "Nosotros", "Proyectos", "Entrecalles", "Contacto"].map((item) => (
+             {navLinks.map((link) => (
                <li 
-                 key={item} 
+                 key={link.key} 
                  className="relative group cursor-pointer"
-                 onClick={() => {
-                   if (item === "Entrecalles") navigate("/Entrecalles");
-                   if (item === "Contacto") navigate("/contacto");
-                   if (item === "Inicio") navigate("/");
-                 }}
+                 onClick={() => navigate(link.path)}
                >
-                 {item}
+                 {t(link.key)}
                  <span className={`absolute bottom-0 left-0 w-0 group-hover:w-full transition-all duration-300 h-0.5 ${isScrolledStyle ? "bg-black" : "bg-white"}`} />
                </li>
              ))}
@@ -85,7 +90,7 @@ const Navbar = () => {
               />
               <input
                 type="text"
-                placeholder="Buscar..."
+                placeholder={t('nav.search')}
                 className={`transition-all duration-300
                   bg-transparent border-b outline-none text-sm
                   ${isScrolledStyle ? "text-black border-black" : "text-white border-white"}
@@ -120,14 +125,14 @@ const Navbar = () => {
                 "
               >
                 {[
-                  { name: "Portugues", code: "PT" },
-                  { name: "Español", code: "ES" },
-                  { name: "Ingles", code: "GB" },
+                  { name: "Portugues", code: "PT", value: "PT" },
+                  { name: "Español", code: "ES", value: "ES" },
+                  { name: "Ingles", code: "GB", value: "EN" }, // GB para bandera, EN para idioma
                 ].map((item) => (
                   <div
                     key={item.name}
                     onClick={() => {
-                      setLanguage(item.name);
+                      setLanguage(item.value);
                       setShowDropdownDesktop(false);
                     }}
                     className={`
@@ -139,7 +144,7 @@ const Navbar = () => {
                       text-left
                       px-6 gap-4
                       transition-all duration-300
-                      ${language === item.name
+                      ${language === item.value
                         ? "bg-gray-100 text-black shadow-sm scale-[1.03]"
                         : "text-gray-600 hover:bg-gray-50 hover:scale-105 hover:shadow-lg hover:translate-x-1"
                       }
@@ -216,9 +221,9 @@ const Navbar = () => {
 
   {/* LINKS */}
   <ul className="flex flex-col gap-8 px-8 py-12 text-lg font-semibold uppercase tracking-wide">
-    {["Inicio", "Nosotros", "Proyectos", "Blog", "Contacto"].map((item) => (
+    {navLinks.map((link) => (
       <li
-        key={item}
+        key={link.key}
         className="
           relative cursor-pointer group
           text-gray-700
@@ -226,21 +231,15 @@ const Navbar = () => {
           hover:text-black hover:pl-4
         "
         onClick={() => {
-          if (item === "Contacto") {
-            navigate("/contacto");
-            setShowMobileMenu(false);
-          }
-          if (item === "Inicio") {
-            navigate("/");
-            setShowMobileMenu(false);
-          }
+          navigate(link.path);
+          setShowMobileMenu(false);
         }}
       >
         {/* Left indicator */}
         <span className="absolute left-0 top-1/2 -translate-y-1/2 h-0 w-[3px] bg-black rounded-full transition-all duration-300 group-hover:h-6" />
         {/* Text */}
         <span className="relative">
-          {item}
+          {t(link.key)}
           {/* Underline */}
           <span
             className="absolute left-0 -bottom-1 h-[2px] w-0 bg-black transition-all duration-300 group-hover:w-full"/>
@@ -272,14 +271,14 @@ const Navbar = () => {
           {showDropdownMobile && (
             <div className="absolute left-0 right-0 mt-2 bg-white shadow-xl rounded-2xl p-4 flex flex-col space-y-3 z-50 animate-[fadeIn_0.3s_ease-out]">
               {[
-                { name: "Portugues", code: "PT" },
-                { name: "Español", code: "ES" },
-                { name: "Ingles", code: "GB" },
+                { name: "Portugues", code: "PT", value: "PT" },
+                { name: "Español", code: "ES", value: "ES" },
+                { name: "Ingles", code: "GB", value: "EN" },
               ].map((item) => (
                 <div
                   key={item.name}
                   onClick={() => {
-                    setLanguage(item.name);
+                    setLanguage(item.value);
                     setShowDropdownMobile(false);
                   }}
                   className={`
@@ -290,7 +289,7 @@ const Navbar = () => {
                     flex items-center gap-3
                     text-left px-5
                   
-                    ${language === item.name
+                    ${language === item.value
                       ? "bg-gray-100 text-black shadow-sm scale-[1.03]"
                       : "text-gray-600"}
                   `}

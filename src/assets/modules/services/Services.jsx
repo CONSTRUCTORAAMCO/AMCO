@@ -1,11 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "./Services.module.css";
+import { useLanguage } from "../../../i18n/LanguageContext";
 
 export default function Services() {
   const textRef = useRef(null);
   const leftRef = useRef(null);
   const rightRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
+  const { t } = useLanguage();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -35,7 +37,7 @@ export default function Services() {
     <section className={styles.services}>
       <div ref={textRef} className={styles.container}>
         <h2 className={styles.mainTitle}>
-          Constructora AMCO Ltda.
+          {t('services.title')}
         </h2>
         <br />
         
@@ -47,17 +49,14 @@ export default function Services() {
           >
             <div className={styles.subtitleBox}>
               <h3 className={styles.subtitle}>
-                Construyendo Obras Civiles e Infraestructura con Excelencia en Colombia
+                {t('services.subtitle')}
               </h3>
               <div className={styles.accentLine}></div>
             </div>
             
             <div className={styles.contentBox}>
               <p className={styles.paragraph}>
-               Constructora AMCO Ltda. es una empresa colombiana con una sólida trayectoria dedicada a la construcción de obras civiles,
-               infraestructura y la promoción de proyectos propios a nivel nacional. Con sede principal en Bogotá, 
-               la compañía se caracteriza por su compromiso con la calidad, la excelencia y la búsqueda del 
-               desarrollo sostenible en cada uno de sus procesos.
+               {t('services.paragraph')}
               </p>
               
            
@@ -74,10 +73,10 @@ export default function Services() {
             className={`${styles.rightColumn} ${isVisible ? styles.slideInRight : ''}`}
           >
             <div className={styles.projectsHeader}>
-              <div className={styles.badge}>PROYECTOS DESTACADOS</div>
-              <h3 className={styles.projectsTitle}>Proyectos y Clientes Destacados</h3>
+              <div className={styles.badge}>{t('services.badge')}</div>
+              <h3 className={styles.projectsTitle}>{t('services.projects_title')}</h3>
               <p className={styles.projectsIntro}>
-                AMCO ha colaborado en importantes proyectos para clientes del sector público y privado
+                {t('services.projects_intro')}
               </p>
             </div>
             
@@ -110,4 +109,3 @@ export default function Services() {
     </section>
   );
 }
-

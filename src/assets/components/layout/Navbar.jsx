@@ -4,7 +4,8 @@ import AMCO from "../../img/AMCO.png";
 import { FaChevronDown } from "react-icons/fa";
 import ReactCountryFlag from "react-country-flag";
 import { useLanguage } from "../../../i18n/LanguageContext";
-
+import { searchIndex } from "../../modules/buscador/buscador";
+import { normalizeText } from "../../modules/buscador/busquedautil";
 const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -16,6 +17,11 @@ const Navbar = () => {
   const [showDropdownMobile, setShowDropdownMobile] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
   const [showMobileMenu, setShowMobileMenu] = useState(false);
+  const searchRef = useRef(null);
+  const searchTriggerRef = useRef(null);
+  const inputRef = useRef(null);
+  const [searchValue, setSearchValue] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
   // Refs para detectar clicks fuera del dropdown desktop
   const dropdownDesktopRef = useRef(null);
   const dropdownDesktopTriggerRef = useRef(null);
@@ -48,6 +54,23 @@ const Navbar = () => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+  useEffect(() => {
+  const handleClickOutsideSearch = (event) => {
+    if (
+      searchRef.current &&
+      !searchRef.current.contains(event.target) &&
+      searchTriggerRef.current &&
+      !searchTriggerRef.current.contains(event.target)
+    ) {
+      setShowSearch(false);
+    }
+  };
+
+  document.addEventListener("mousedown", handleClickOutsideSearch);
+  return () =>
+    document.removeEventListener("mousedown", handleClickOutsideSearch);
+}, []);
+
 
   const navLinks = [
     { key: 'nav.home', path: '/' },
@@ -83,20 +106,77 @@ const Navbar = () => {
           <div className="absolute right-6 flex items-center gap-4">
 
             {/* SEARCH INLINE */}
-            <div className="relative flex items-center gap-2">
+            <div
+              ref={searchRef}
+              className="relative flex items-center gap-2"
+            >
               <i
-                onClick={() => setShowSearch(prev => !prev)}
+                ref={searchTriggerRef}
+                onClick={() => {
+                  setShowSearch((prev) => !prev);
+                  if (!showSearch) {
+                    setTimeout(() => inputRef.current && inputRef.current.focus(), 120);
+                  }
+                }}
                 className={`ri-search-line cursor-pointer text-lg ${isScrolledStyle ? "text-black" : "text-white"}`}
               />
+
               <input
+                ref={inputRef}
                 type="text"
                 placeholder={t('nav.search')}
+                value={searchValue}
+                onChange={(e) => {
+                  const val = e.target.value;
+                  setSearchValue(val);
+                  if (!val.trim()) {
+                    setSearchResults([]);
+                    return;
+                  }
+                  const q = normalizeText(val);
+                  const results = searchIndex.filter((item) =>
+                    normalizeText(item.title).includes(q) ||
+                    item.keywords.some((k) => normalizeText(k).includes(q))
+                  );
+                  setSearchResults(results.slice(0, 6));
+                }}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    if (searchResults && searchResults.length > 0) {
+                      navigate(searchResults[0].path);
+                      setShowSearch(false);
+                      setSearchValue("");
+                      setSearchResults([]);
+                    }
+                  }
+                }}
                 className={`transition-all duration-300
                   bg-transparent border-b outline-none text-sm
                   ${isScrolledStyle ? "text-black border-black" : "text-white border-white"}
                   ${showSearch ? "w-36 opacity-100" : "w-0 opacity-0 pointer-events-none"}`}
               />
             </div>
+                  {showSearch && searchResults.length > 0 && (
+  <div className="absolute top-full mt-3 w-64 bg-white rounded-xl shadow-xl z-50">
+                  {searchResults.length > 0 ? (
+                    searchResults.map((item) => (
+      <div
+        key={item.path}
+        onClick={() => {
+          navigate(item.path);
+          setShowSearch(false);
+          setSearchValue("");
+        }}
+        className="px-4 py-3 cursor-pointer hover:bg-gray-100"
+      >
+        {item.title}
+      </div>
+                    ))
+                  ) : (
+                    <div className="px-4 py-3 text-sm text-gray-500">{t('nav.search_no_results') || 'Sin resultados'}</div>
+                  )}
+  </div>
+)}
 
             {/* LANGUAGE DESKTOP */}
             <div
@@ -125,7 +205,6 @@ const Navbar = () => {
                 "
               >
                 {[
-                  { name: "Portugues", code: "PT", value: "PT" },
                   { name: "Español", code: "ES", value: "ES" },
                   { name: "Ingles", code: "GB", value: "EN" }, // GB para bandera, EN para idioma
                 ].map((item) => (
@@ -271,7 +350,6 @@ const Navbar = () => {
           {showDropdownMobile && (
             <div className="absolute left-0 right-0 mt-2 bg-white shadow-xl rounded-2xl p-4 flex flex-col space-y-3 z-50 animate-[fadeIn_0.3s_ease-out]">
               {[
-                { name: "Portugues", code: "PT", value: "PT" },
                 { name: "Español", code: "ES", value: "ES" },
                 { name: "Ingles", code: "GB", value: "EN" },
               ].map((item) => (

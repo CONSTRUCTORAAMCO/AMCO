@@ -7,16 +7,31 @@ const Propositocarousel = () => {
   const carouselRef = useRef(null);
 
   const { t } = useLanguage();
+
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
   const [isPaused, setIsPaused] = useState(false);
 
   const scrollAmount = 300;
 
-  // Drag refs
+  /* -------------------- DRAG REFS -------------------- */
   const isDragging = useRef(false);
   const startX = useRef(0);
   const scrollStart = useRef(0);
+  const pauseTimeout = useRef(null);
+
+  /* -------------------- PAUSE AUTO SCROLL -------------------- */
+  const pauseAutoScroll = () => {
+    setIsPaused(true);
+
+    if (pauseTimeout.current) {
+      clearTimeout(pauseTimeout.current);
+    }
+
+    pauseTimeout.current = setTimeout(() => {
+      setIsPaused(false);
+    }, 6000); // vuelve después de 6s
+  };
 
   /* -------------------- SCROLL BUTTONS -------------------- */
   const updateScrollButtons = () => {
@@ -37,6 +52,7 @@ const Propositocarousel = () => {
 
   /* -------------------- DRAG (PC + MOBILE) -------------------- */
   const handlePointerDown = (e) => {
+    pauseAutoScroll();
     isDragging.current = true;
     carouselRef.current.classList.add("dragging");
 
@@ -63,6 +79,7 @@ const Propositocarousel = () => {
       if (isPaused || !carouselRef.current) return;
 
       const el = carouselRef.current;
+
       if (el.scrollLeft + el.clientWidth >= el.scrollWidth - 10) {
         el.scrollTo({ left: 0, behavior: "smooth" });
       } else {
@@ -76,31 +93,41 @@ const Propositocarousel = () => {
   /* -------------------- LISTENERS -------------------- */
   useEffect(() => {
     const el = carouselRef.current;
+    if (!el) return;
+
     updateScrollButtons();
     el.addEventListener("scroll", updateScrollButtons);
+
     return () => el.removeEventListener("scroll", updateScrollButtons);
   }, []);
 
   return (
     <section className="section">
       <div className="container">
-
         <div className="header">
-          <h2>{t('proposito.title')}</h2>
+          <h2>{t("proposito.title")}</h2>
 
           <div className="controls">
             <i
               className={`ri-arrow-left-line nav-icon ${
                 !canScrollLeft ? "disabled" : ""
               }`}
-              onClick={canScrollLeft ? scrollPrev : undefined}
+              onClick={() => {
+                if (!canScrollLeft) return;
+                pauseAutoScroll();
+                scrollPrev();
+              }}
             />
 
             <i
               className={`ri-arrow-right-line nav-icon primary ${
                 !canScrollRight ? "disabled" : ""
               }`}
-              onClick={canScrollRight ? scrollNext : undefined}
+              onClick={() => {
+                if (!canScrollRight) return;
+                pauseAutoScroll();
+                scrollNext();
+              }}
             />
           </div>
         </div>
@@ -116,8 +143,10 @@ const Propositocarousel = () => {
             onTouchStart={handlePointerDown}
             onTouchMove={handlePointerMove}
             onTouchEnd={handlePointerUp}
-
-                        
+            onMouseDown={handlePointerDown}
+            onMouseMove={handlePointerMove}
+            onMouseUp={handlePointerUp}
+            onMouseLeave={handlePointerUp}
           >
             {propositoData.map((item) => (
               <div className="card snap-center" key={item.id}>
@@ -128,7 +157,6 @@ const Propositocarousel = () => {
             ))}
           </div>
         </div>
-
       </div>
     </section>
   );

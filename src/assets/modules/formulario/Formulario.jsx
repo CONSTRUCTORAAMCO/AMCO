@@ -7,8 +7,10 @@ import {
   RiCheckLine,
   RiCloseLine,
 } from "react-icons/ri";
+import { useLanguage } from "../../../i18n/LanguageContext";
 
 const Formulario = () => {
+  const { t } = useLanguage();
   const formRef = useRef();
   const [estado, setEstado] = useState("");
   const [mostrarToast, setMostrarToast] = useState(false);

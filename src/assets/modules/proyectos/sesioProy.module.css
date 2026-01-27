@@ -1,0 +1,148 @@
+/* Animaciones y estilos para Proyectos */
+.uiverse-btn {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.9);
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 12px;
+  font-weight: 600;
+  transition: transform 220ms ease, background-color 200ms ease, opacity 200ms ease;
+}
+.uiverse-btn:hover {
+  transform: translateY(-3px);
+  background: rgba(255,255,255,0.06);
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.fadeUp {
+  opacity: 0;
+  transform: translateY(10px);
+  animation-name: fadeUp;
+  animation-duration: 520ms;
+  animation-fill-mode: forwards;
+  animation-timing-function: cubic-bezier(.2,.9,.3,1);
+}
+
+/* Utilidad para delays por índice (valores pequeños) */
+.delay-0 { animation-delay: 0ms; }
+.delay-1 { animation-delay: 80ms; }
+.delay-2 { animation-delay: 160ms; }
+.delay-3 { animation-delay: 240ms; }
+.delay-4 { animation-delay: 320ms; }
+.delay-5 { animation-delay: 400ms; }
+.delay-6 { animation-delay: 480ms; }
+
+/* Micro-interacción para pagination */
+.page-btn {
+  transition: transform 140ms ease, box-shadow 140ms ease;
+}
+.page-btn:active { transform: scale(0.96); }
+
+/* Scroll-triggered animations (transition-based, toggled via JS) */
+.scrollAnimate {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 520ms cubic-bezier(.2,.9,.3,1), transform 520ms cubic-bezier(.2,.9,.3,1);
+}
+.inView {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+/* Small helper delays in module scope (optional overrides via inline style) */
+.tDelay0 { transition-delay: 0ms; }
+.tDelay1 { transition-delay: 80ms; }
+.tDelay2 { transition-delay: 160ms; }
+.tDelay3 { transition-delay: 240ms; }
+
+/* React-Select menu animations (opens with smooth drop) */
+@keyframes rsFadeDown {
+  from { opacity: 0; transform: translateY(-8px) scale(0.995); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.rs__menu {
+  animation: rsFadeDown 220ms cubic-bezier(.2,.9,.3,1);
+  transform-origin: top center;
+  box-shadow: 0 10px 30px rgba(2,6,23,0.12);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.rs__menu-list {
+  padding: 6px 8px;
+}
+.rs__option {
+  transition: background-color 140ms ease, color 140ms ease;
+  border-radius: 8px;
+}
+.rs__option--is-focused {
+  background: #f3f4f6;
+}
+.rs__option--is-selected {
+  background: #111827; color: #fff;
+}
+
+/* Cuando la tarjeta entra en vista, la imagen escala suavemente */
+.inView img {
+  transform: scale(1.08);
+  transition: transform 700ms cubic-bezier(.2,.9,.3,1);
+}
+
+/* Asegurar estado inicial para la imagen */
+img {
+  transform: scale(1);
+  transition: transform 700ms cubic-bezier(.2,.9,.3,1);
+}
+
+.uiverse-btn {
+  --btn-default-bg: rgb(41, 41, 41);
+  --btn-padding: 15px 20px;
+  --btn-hover-bg: rgb(51, 51, 51);
+  --btn-transition: .3s;
+  --btn-letter-spacing: .1rem;
+  --btn-animation-duration: 1.2s;
+  --btn-shadow-color: rgba(0, 0, 0, 0.133);
+  --btn-shadow: 0 2px 10px 0 var(--btn-shadow-color);
+  --hover-btn-color: #FAC921;
+  --default-btn-color: #fff;
+  --font-size: 16px;
+  --font-weight: 600;
+  --font-family: 'Arial';
+}
+
+.uiverse-btn {
+  box-sizing: border-box;
+  padding: var(--btn-padding);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--default-btn-color);
+  font-family: var(--font-family);
+  font-weight: var(--font-weight);
+  font-size: var(--font-size);
+  background: var(--btn-default-bg);
+  border: none;
+  cursor: pointer;
+  transition: var(--btn-transition);
+  overflow: hidden;
+  box-shadow: var(--btn-shadow);
+  border-radius: 8px;
+}
+
+.uiverse-btn span {
+  letter-spacing: var(--btn-letter-spacing);
+  transition: var(--btn-transition);
+  box-sizing: border-box;
+  position: relative;
+  background: inherit;
+}
+
+.uiverse-btn:hover {
+  background: var(--btn-hover-bg);
+}
+
+.uiverse-btn:hover span {
+  color: var(--hover-btn-color);
+}

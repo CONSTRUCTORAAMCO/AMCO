@@ -111,7 +111,8 @@ const EntreCallesHome = () => {
                 src="https://www.youtube.com/embed/k5RfEowqxgI?autoplay=1"
                 title={t('entrecalles.iframe_title')}
                 frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
                 allowFullScreen
               ></iframe>
             </div>

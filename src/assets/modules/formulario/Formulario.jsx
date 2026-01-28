@@ -1,6 +1,7 @@
 import { useRef, useState, useEffect } from "react";
 import emailjs from "@emailjs/browser";
 import styles from "./Formulario.module.css";
+import { Link } from "react-router-dom";
 import {
   RiMailLine,
   RiPhoneLine,
@@ -13,7 +14,9 @@ const Formulario = () => {
   const formRef = useRef();
   const [estado, setEstado] = useState("");
   const [mostrarToast, setMostrarToast] = useState(false);
-  const [emailError, setEmailError] = useState(""); // Nuevo estado para error de email
+  const [emailError, setEmailError] = useState(""); 
+  const [nameError, setNameError] = useState("");
+  const [messageError, setMessageError] = useState("");
   const mainTitleRef = useRef(null);
   const statsRef = useRef(null);
 
@@ -151,6 +154,15 @@ const Formulario = () => {
   const enviarEmail = (e) => {
     e.preventDefault();
     
+    // Validar nombre antes de enviar
+    const nameInput = formRef.current.querySelector('input[name="user_name"]');
+    const nameValue = nameInput.value.trim();
+    if (!nameValue) {
+      setNameError("El nombre es obligatorio");
+      nameInput.focus();
+      return;
+    }
+
     // Validar email antes de enviar
     const emailInput = formRef.current.querySelector('input[name="user_email"]');
     const emailError = validarEmailEstricto(emailInput.value);
@@ -158,6 +170,15 @@ const Formulario = () => {
     if (emailError) {
       setEmailError(emailError);
       emailInput.focus();
+      return;
+    }
+
+    // Validar mensaje antes de enviar
+    const messageInput = formRef.current.querySelector('textarea[name="message"]');
+    const messageValue = messageInput.value.trim();
+    if (!messageValue) {
+      setMessageError("El mensaje es obligatorio");
+      messageInput.focus();
       return;
     }
     
@@ -177,6 +198,8 @@ const Formulario = () => {
           setMostrarToast(true);
           formRef.current.reset();
           setEmailError(""); // Limpiar error
+          setNameError(""); // Limpiar error
+          setMessageError(""); // Limpiar error
         },
         () => {
           setEstado("error");
@@ -221,6 +244,8 @@ const Formulario = () => {
 
   return (
     <>
+    
+    
       {/* HERO SECTION - EXACTA COMO LA TIENES */}
       <div className={styles.heroSection}>
         <div className={styles.heroOverlay}></div>
@@ -228,6 +253,7 @@ const Formulario = () => {
           <div className={styles.companyLogo}>
             <Building2 size={64} className={styles.logoIcon} />
             <div className={styles.companyName}>
+              
               <h1 className={styles.companyMainName}>CONTACTO</h1>
               <p className={styles.companySubtitle}>CONSTRUCTORA AMCO LTDA</p>
             </div>
@@ -244,15 +270,23 @@ const Formulario = () => {
       {/* STATS BAR - REEMPLAZADO POR EL MENSAJE */}
       <div ref={statsRef} className={styles.statsBar}>
         <div className={styles.messageBox}>
-          <p className={styles.messageText}>
-            "Enviamos un mensaje a través de nuestro formulario te responderemos lo antes posible"
+ <p className={styles.legalText}>
+            Al diligenciar este formulario, declaras haber leído y aceptado nuestra{" "}
+            <Link to="/politicaprivacidad" className={styles.legalLink}>
+              Política de Privacidad
+            </Link> {" "}
+            y Los{" "}
+            <Link to="/tyc" className={styles.legalLink}>
+              Términos y Condiciones
+            </Link>.
           </p>
         </div>
       </div>
+      
 
      
-      <section className={styles.section}>
-        <div className={styles.container}>
+                <section className={styles.section}>
+                  <div className={styles.container}>
           {/* IZQUIERDA - FORMULARIO */}
           <div className={styles.formBox}>
             <br />
@@ -265,18 +299,27 @@ const Formulario = () => {
             </p>
 
             <form ref={formRef} onSubmit={enviarEmail} noValidate>
-              <input
-                type="text"
-                name="user_name"
-                placeholder="Tu nombre"
-                maxLength={50}
-                pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$"
-                title="Solo se permiten letras y espacios"
-                required
-                onInput={(e) => {
-                  e.target.value = e.target.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, "");
-                }}
-              />
+              <div className={styles.emailContainer}>
+                <input
+                  type="text"
+                  name="user_name"
+                  placeholder="Tu nombre"
+                  maxLength={50}
+                  pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$"
+                  title="Solo se permiten letras y espacios"
+                  required
+                  onInput={(e) => {
+                    e.target.value = e.target.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, "");
+                    if (nameError) setNameError("");
+                  }}
+                  className={nameError ? styles.inputError : ""}
+                />
+                {nameError && (
+                  <div className={styles.errorMessage}>
+                    {nameError}
+                  </div>
+                )}
+              </div>
               
               <div className={styles.emailContainer}>
                 <input
@@ -296,12 +339,23 @@ const Formulario = () => {
                 )}
               </div>
 
-              <textarea
-                name="message"
-                placeholder="Escribe tu mensaje"
-                rows="5"
-                required
-              />
+              <div className={styles.emailContainer}>
+                <textarea
+                  name="message"
+                  placeholder="Escribe tu mensaje"
+                  rows="5"
+                  required
+                  className={messageError ? styles.inputError : ""}
+                  onChange={() => {
+                    if (messageError) setMessageError("");
+                  }}
+                />
+                {messageError && (
+                  <div className={styles.errorMessage}>
+                    {messageError}
+                  </div>
+                )}
+              </div>
 
               <button type="submit">
                 {estado === "enviando" ? "Enviando..." : "Enviar mensaje"}

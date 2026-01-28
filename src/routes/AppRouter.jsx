@@ -6,6 +6,8 @@ import Nosotros from "../pages/Nosotros";
 import Entrecalles from "../pages/Entrecalles";
 import Contacto from "../pages/Contacto";
 import Proyectos from "../pages/Proyectos";
+import Politicaprivacidad from "../pages/politicaprivacidad";
+import Tyc from "../pages/tyc";
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
           <Route path="/entrecalles" element={<Entrecalles />} />
           <Route path="/prototipos" element={<ComunidadesCarousel />} />
           <Route path="/proyectos" element={<Proyectos />} />
+          <Route path="/politicaprivacidad" element={<Politicaprivacidad />} />
+          <Route path="/tyc" element={<Tyc />} />
         </Route>
 
       </Routes>

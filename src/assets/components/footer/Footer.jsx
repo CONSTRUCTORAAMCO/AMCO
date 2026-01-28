@@ -30,7 +30,7 @@ export default function Footer() {
         <div className={styles.socials}>
           <Link to="/">Inicio</Link>
           <Link to="/Nosotros">Nosotros</Link>
-          <Link to="/Proyhectos">Proyectos</Link>
+          <Link to="/Proyectos">Proyectos</Link>
           <Link to="/entrecalles">Entrecalles</Link>
           <Link to="/contacto">Contacto</Link>
         </div>
@@ -43,8 +43,8 @@ export default function Footer() {
         <span>© 2026 CONSTRUCTORA AMCO LTDA. Todos los derechos reservados.</span>
 
         <div className={styles.legal}>
-          <a href="/terminos">Términos y condiciones</a>
-          <a href="/privacidad">Política de privacidad</a>
+          <a href="/Tyc">Términos y condiciones</a>
+          <a href="/Politicaprivacidad">Política de privacidad</a>
         </div>
       </div>
     </footer>

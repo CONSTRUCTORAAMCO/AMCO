@@ -99,6 +99,29 @@
   margin: 0 auto;
 }
 
+.legalText {
+  font-size: 1.25rem;
+  color: #666;
+  text-align: center;
+  margin: 12px 0 18px;
+  line-height: 1.4;
+}
+
+.legalLink {
+  color: #111;
+  font-weight: 500;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  transition: all 0.25s ease;
+}
+
+.legalLink:hover {
+  color: #000;
+  text-decoration-color: #facc15; /* amarillo */
+  background-color: rgba(250, 204, 21, 0.25);
+  border-radius: 4px;
+  padding: 0 4px;
+}
 /* STATS BAR - MODIFICADO PARA MOSTRAR SOLO EL MENSAJE */
 .statsBar {
   display: flex;

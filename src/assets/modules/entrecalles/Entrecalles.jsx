@@ -1,7 +1,14 @@
 import React, { useEffect, useRef } from "react";
 import styles from "./Entrecalles.module.css";
 import { Building2, Target, Users, Award, Clock, ChevronRight, CheckCircle, Calendar } from "lucide-react";
-import edificioImage from '../../img/Entrecallesimg1.png'; 
+import edificioImage from '../../img/Entrecallesimg1h.png'; //Principal la de arriba la del efecto 3d 
+import edificioImage2 from '../../img/Entrecallesimg2.png'; //Parte inferior del edificio de como se ve conectado con el suelo
+import edificioImage3 from '../../img/Entrecallesimg3.png'; //Apartamentos 
+import edificioImage4 from '../../img/Entrecallesimg4.png'; //Teatro
+import edificioImage5 from '../../img/Entrecallesimg5.png'; // Gym
+import edificioImage6 from '../../img/Entrecallesimg6.png'; //POOL
+import edificioImage7 from '../../img/Entrecallesimg7.png'; //MAIN RESTRAURANT 
+import quatum from '../../img/quamtum.png';
 
 const EntreCalles = () => {
   const sectionsRef = useRef([]);
@@ -363,26 +370,12 @@ const EntreCalles = () => {
                     title="EntreCalles - Transformando Bogotá"
                     frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerPolicy="strict-origin-when-cross-origin"
                     allowFullScreen
                     loading="lazy"
                   ></iframe>
                 </div>
-                <div className={styles.videoInfo}>
-                  <div className={styles.videoStats}>
-                    <div className={styles.videoStat}>
-                      <span className={styles.statLabel}>Inversión</span>
-                      <span className={styles.statValue}>$500M USD</span>
-                    </div>
-                    <div className={styles.videoStat}>
-                      <span className={styles.statLabel}>Empleos</span>
-                      <span className={styles.statValue}>2,000+</span>
-                    </div>
-                    <div className={styles.videoStat}>
-                      <span className={styles.statLabel}>Entrega</span>
-                      <span className={styles.statValue}>2026</span>
-                    </div>
-                  </div>
-                </div>
+             
               </div>
             </div>
           </div>

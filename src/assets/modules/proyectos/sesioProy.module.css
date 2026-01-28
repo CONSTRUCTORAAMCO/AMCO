@@ -1,22 +1,38 @@
-/* Animaciones y estilos para Proyectos */
-.uiverse-btn {
-  background: transparent;
-  border: 1px solid rgba(255,255,255,0.9);
-  color: #fff;
-  padding: 0.5rem 1rem;
-  border-radius: 12px;
-  font-weight: 600;
-  transition: transform 220ms ease, background-color 200ms ease, opacity 200ms ease;
-}
-.uiverse-btn:hover {
-  transform: translateY(-3px);
-  background: rgba(255,255,255,0.06);
+/* ==========================================================================
+   Animations & Transitions
+   ========================================================================== */
+
+/* Used for elements that animate on scroll into view */
+.scrollAnimate {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 520ms cubic-bezier(.2,.9,.3,1), transform 520ms cubic-bezier(.2,.9,.3,1);
 }
 
+/* Toggled via JS to trigger the transition */
+.inView {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+/* When a card is in view, its image scales up */
+.inView img {
+  transform: scale(1.08);
+  transition: transform 700ms cubic-bezier(.2,.9,.3,1);
+}
+
+/* Base state for images to ensure smooth animation */
+img {
+  transform: scale(1);
+  transition: transform 700ms cubic-bezier(.2,.9,.3,1);
+}
+
+/* Keyframe animation for elements fading up */
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
 .fadeUp {
   opacity: 0;
   transform: translateY(10px);
@@ -26,93 +42,32 @@
   animation-timing-function: cubic-bezier(.2,.9,.3,1);
 }
 
-/* Utilidad para delays por índice (valores pequeños) */
-.delay-0 { animation-delay: 0ms; }
-.delay-1 { animation-delay: 80ms; }
-.delay-2 { animation-delay: 160ms; }
-.delay-3 { animation-delay: 240ms; }
-.delay-4 { animation-delay: 320ms; }
-.delay-5 { animation-delay: 400ms; }
-.delay-6 { animation-delay: 480ms; }
-
-/* Micro-interacción para pagination */
-.page-btn {
-  transition: transform 140ms ease, box-shadow 140ms ease;
-}
-.page-btn:active { transform: scale(0.96); }
-
-/* Scroll-triggered animations (transition-based, toggled via JS) */
-.scrollAnimate {
-  opacity: 0;
-  transform: translateY(18px);
-  transition: opacity 520ms cubic-bezier(.2,.9,.3,1), transform 520ms cubic-bezier(.2,.9,.3,1);
-}
-.inView {
-  opacity: 1 !important;
-  transform: translateY(0) !important;
-}
-
-/* Small helper delays in module scope (optional overrides via inline style) */
-.tDelay0 { transition-delay: 0ms; }
-.tDelay1 { transition-delay: 80ms; }
-.tDelay2 { transition-delay: 160ms; }
-.tDelay3 { transition-delay: 240ms; }
-
-/* React-Select menu animations (opens with smooth drop) */
+/* Animation for React-Select dropdown menu */
 @keyframes rsFadeDown {
   from { opacity: 0; transform: translateY(-8px) scale(0.995); }
   to { opacity: 1; transform: translateY(0) scale(1); }
 }
-.rs__menu {
-  animation: rsFadeDown 220ms cubic-bezier(.2,.9,.3,1);
-  transform-origin: top center;
-  box-shadow: 0 10px 30px rgba(2,6,23,0.12);
-  border-radius: 12px;
-  overflow: hidden;
-}
-.rs__menu-list {
-  padding: 6px 8px;
-}
-.rs__option {
-  transition: background-color 140ms ease, color 140ms ease;
-  border-radius: 8px;
-}
-.rs__option--is-focused {
-  background: #f3f4f6;
-}
-.rs__option--is-selected {
-  background: #111827; color: #fff;
-}
 
-/* Cuando la tarjeta entra en vista, la imagen escala suavemente */
-.inView img {
-  transform: scale(1.08);
-  transition: transform 700ms cubic-bezier(.2,.9,.3,1);
-}
+/* ==========================================================================
+   Component-Specific Styles
+   ========================================================================== */
 
-/* Asegurar estado inicial para la imagen */
-img {
-  transform: scale(1);
-  transition: transform 700ms cubic-bezier(.2,.9,.3,1);
-}
-
+/* Custom button style */
 .uiverse-btn {
+  /* Using CSS variables for easy theming */
   --btn-default-bg: rgb(41, 41, 41);
   --btn-padding: 15px 20px;
   --btn-hover-bg: rgb(51, 51, 51);
   --btn-transition: .3s;
   --btn-letter-spacing: .1rem;
-  --btn-animation-duration: 1.2s;
   --btn-shadow-color: rgba(0, 0, 0, 0.133);
   --btn-shadow: 0 2px 10px 0 var(--btn-shadow-color);
   --hover-btn-color: #FAC921;
   --default-btn-color: #fff;
   --font-size: 16px;
   --font-weight: 600;
-  --font-family: 'Arial';
-}
+  --font-family: 'Arial', sans-serif;
 
-.uiverse-btn {
   box-sizing: border-box;
   padding: var(--btn-padding);
   display: flex;
@@ -141,8 +96,115 @@ img {
 
 .uiverse-btn:hover {
   background: var(--btn-hover-bg);
+  transform: translateY(-3px); /* Added from other definition */
 }
 
 .uiverse-btn:hover span {
   color: var(--hover-btn-color);
+}
+
+
+/* Styles for React-Select component */
+.rs__menu {
+  animation: rsFadeDown 220ms cubic-bezier(.2,.9,.3,1);
+  transform-origin: top center;
+  box-shadow: 0 10px 30px rgba(2,6,23,0.12);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.rs__menu-list {
+  padding: 6px 8px;
+}
+
+.rs__option {
+  transition: background-color 140ms ease, color 140ms ease;
+  border-radius: 8px;
+}
+
+/* Note: --is-focused and --is-selected are pseudo-classes from react-select */
+.rs__option--is-focused {
+  background: #f3f4f6;
+}
+
+.rs__option--is-selected {
+  background: #111827;
+  color: #fff;
+}
+
+
+/* Micro-interaction for pagination buttons */
+.page-btn {
+  transition: transform 140ms ease, box-shadow 140ms ease;
+}
+
+.page-btn:active {
+  transform: scale(0.96);
+}
+
+/* ==========================================================================
+   Utility Classes
+   ========================================================================== */
+
+/* Animation delay helpers */
+.delay-0 { animation-delay: 0ms; }
+.delay-1 { animation-delay: 80ms; }
+.delay-2 { animation-delay: 160ms; }
+.delay-3 { animation-delay: 240ms; }
+.delay-4 { animation-delay: 320ms; }
+.delay-5 { animation-delay: 400ms; }
+.delay-6 { animation-delay: 480ms; }
+
+/* Transition delay helpers */
+.tDelay0 { transition-delay: 0ms; }
+.tDelay1 { transition-delay: 80ms; }
+.tDelay2 { transition-delay: 160ms; }
+.tDelay3 { transition-delay: 240ms; }
+
+/* ==========================================================================
+   Responsive Layout Adjustments
+   ========================================================================== */
+.projectContentWrapper {
+  width: 100%;
+  max-width: 1280px; /* Limita el ancho máximo */
+  margin: 0 auto; /* Centra el contenido */
+  padding-left: 1rem;
+  padding-right: 1rem;
+  box-sizing: border-box;
+}
+
+/* On smaller screens (tablets and below), reduce horizontal padding */
+@media (max-width: 768px) {
+  .projectContentWrapper {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+/* On very narrow screens (phones), reduce padding further */
+@media (max-width: 480px) {
+  .projectContentWrapper {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+}
+/* ==========================================================================
+   Project Grid Responsive Adjustments
+   ========================================================================== */
+
+/* By default, the grid is a flex container (from Tailwind).
+   On mobile, we'll switch to a grid layout for uniform column control. */
+@media (max-width: 640px) {
+  .projectsGrid {
+    display: grid;
+    grid-template-columns: 1fr; /* Display cards in a single column */
+    justify-items: center;    /* Center the cards within the column */
+    gap: 2rem;                /* Adjust gap for vertical stacking */
+  }
+
+  /* Target the cards within the grid */
+  .projectsGrid > * {
+    width: 100%;              /* Ensure each card takes the full width of the column */
+    max-width: 400px;         /* Set a max-width to prevent cards from becoming too wide on larger phones */
+  }
 }

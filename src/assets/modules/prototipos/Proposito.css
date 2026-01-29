@@ -4,7 +4,7 @@
 }
 
 .section {
-  padding: 60px 0;
+  padding: 70px 0;
 }
 
 .container {
@@ -12,73 +12,70 @@
   margin: auto;
   padding: 0 24px;
 }
+
 @media (min-width: 1600px) {
   .container {
     max-width: 90vw;
   }
 }
 
-
-/* Header */
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 24px;
+  margin-bottom: 32px;
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .header h2 {
-  font-size: 3rem; /* grande */
+  font-size: 3rem;
   font-weight: 800;
   letter-spacing: -0.03em;
   color: #111;
-  position: relative;
   margin-bottom: 1.5rem;
   font-family: "Poppins", "Montserrat", sans-serif;
   text-transform: capitalize;
-  text-shadow: 
-    0 2px 4px rgba(0, 0, 0, 0.08),
-    0 6px 20px rgba(0, 0, 0, 0.05);
+  text-shadow:
+    0 3px 6px rgba(0, 0, 0, 0.07),
+    0 10px 28px rgba(0, 0, 0, 0.04);
 }
-.header h2::after {
-      font-size: 3.2rem;
-      font-weight: 700;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: #0f172a; /* azul oscuro elegante */
-      margin-bottom: 2rem;
-      font-family: "Montserrat", "Poppins", sans-serif;
-      position: relative;
-}
-    /* Controls */
-    .controls button {
-      content: "";
-      position: absolute;
-      left: -18px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 6px;
-      height: 70%;
-      background: linear-gradient(
-        180deg,
-        #0f172a,
-        #64748b
-      );
-      border-radius: 3px;
-    }
 
-/* Carousel */
+/* ===============================
+   CONTROLS
+   =============================== */
+.controls {
+  display: flex;
+  gap: 14px;
+}
+
+/* ===============================
+   CAROUSEL WRAPPER
+   =============================== */
 .carousel-wrapper {
+  max-width: 1280px;
+  margin: 0 auto;
   overflow: hidden;
 }
 
+/* ===============================
+   CAROUSEL (DESKTOP DEFAULT)
+   =============================== */
 .carousel {
   display: flex;
   gap: 24px;
-  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+.carousel::-webkit-scrollbar {
+  display: none;
 }
 
-/* Cards */
+.carousel::-webkit-scrollbar {
+  display: none;
+}
+
 .card {
   min-width: 280px;
   max-width: 280px;
@@ -87,70 +84,68 @@
 
 .card img {
   width: 100%;
-  border-radius: 6px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 10px;
   display: block;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  cursor: pointer;
+}
+@media (pointer: fine) {
+  .card img {
+    pointer-events: none;
+  }
 }
 
-.card img:hover {
-  transform: scale(1.03);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-}
 
 .card h3 {
-  margin: 12px 0 4px;
+  margin: 14px 0 6px;
   font-size: 18px;
+  font-weight: 600;
 }
 
 .card p {
   font-size: 14px;
   color: #555;
-}
-.controls {
-  display: flex;
-  gap: 12px;
-}
-/* Habilitar swipe */
-.carousel {
-  cursor: grab;
-  overflow-x: scroll;
-  scrollbar-width: none; /* Firefox */
+  line-height: 1.5;
 }
 
-.carousel::-webkit-scrollbar {
-  display: none; /* Chrome, Safari */
-}
-
-.carousel:active {
-  cursor: grabbing;
-}
-
-/* Flechas */
 .nav-icon {
   font-size: 22px;
   color: #111;
   cursor: pointer;
   user-select: none;
-
-  width: 40px;
-  height: 40px;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
-  transition: background-color 0.25s ease, transform 0.2s ease;
+  transition:
+    background-color 0.35s ease,
+    transform 0.3s ease,
+    box-shadow 0.35s ease;
 }
 
-/* Hover circular gris */
 .nav-icon:hover {
-  background-color: #f0f0f0;
-  transform: scale(1.05);
+  background-color: #f3f3f3;
+  transform: scale(1.08);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
 }
 
-/* Flecha derecha */
 .nav-icon.primary {
   color: #000;
+}
+/* SOLO MÓVIL */
+@media (pointer: coarse) {
+  .carousel {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-x pan-y;
+  }
+}
+
+/* SOLO PC */
+@media (pointer: fine) {
+  .carousel {
+    overflow-x: hidden; /* 🔒 PC no scrollea */
+  }
 }

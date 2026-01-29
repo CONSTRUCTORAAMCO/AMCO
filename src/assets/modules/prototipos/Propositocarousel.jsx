@@ -5,32 +5,33 @@ import { useLanguage } from "../../../i18n/LanguageContext";
 
 const Propositocarousel = () => {
   const carouselRef = useRef(null);
-
   const { t } = useLanguage();
 
+  /* -------------------- STATES -------------------- */
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
-  const [isPaused, setIsPaused] = useState(false);
+  const [isHoverPaused, setIsHoverPaused] = useState(false);
+  const [isInteractionPaused, setIsInteractionPaused] = useState(false);
+
+  const interactionTimeout = useRef(null);
+  const isTouchDevice = useRef(false);
 
   const scrollAmount = 300;
 
-  /* -------------------- DRAG REFS -------------------- */
-  const isDragging = useRef(false);
-  const startX = useRef(0);
-  const scrollStart = useRef(0);
-  const pauseTimeout = useRef(null);
+  /* -------------------- TOUCH DETECTION -------------------- */
+  useEffect(() => {
+    isTouchDevice.current =
+      window.matchMedia("(pointer: coarse)").matches;
+  }, []);
 
-  /* -------------------- PAUSE AUTO SCROLL -------------------- */
-  const pauseAutoScroll = () => {
-    setIsPaused(true);
+  /* -------------------- INTERACTION PAUSE -------------------- */
+  const handleInteraction = () => {
+    setIsInteractionPaused(true);
 
-    if (pauseTimeout.current) {
-      clearTimeout(pauseTimeout.current);
-    }
-
-    pauseTimeout.current = setTimeout(() => {
-      setIsPaused(false);
-    }, 6000); // vuelve después de 6s
+    clearTimeout(interactionTimeout.current);
+    interactionTimeout.current = setTimeout(() => {
+      setIsInteractionPaused(false);
+    }, 6000);
   };
 
   /* -------------------- SCROLL BUTTONS -------------------- */
@@ -43,62 +44,57 @@ const Propositocarousel = () => {
   };
 
   const scrollNext = () => {
-    carouselRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
+    carouselRef.current?.scrollBy({
+      left: scrollAmount,
+      behavior: "smooth",
+    });
   };
 
   const scrollPrev = () => {
-    carouselRef.current.scrollBy({ left: -scrollAmount, behavior: "smooth" });
+    carouselRef.current?.scrollBy({
+      left: -scrollAmount,
+      behavior: "smooth",
+    });
   };
 
-  /* -------------------- DRAG (PC + MOBILE) -------------------- */
-  const handlePointerDown = (e) => {
-    pauseAutoScroll();
-    isDragging.current = true;
-    carouselRef.current.classList.add("dragging");
-
-    startX.current = e.pageX ?? e.touches[0].pageX;
-    scrollStart.current = carouselRef.current.scrollLeft;
-  };
-
-  const handlePointerMove = (e) => {
-    if (!isDragging.current) return;
-
-    const x = e.pageX ?? e.touches[0].pageX;
-    const walk = (x - startX.current) * 1.4;
-    carouselRef.current.scrollLeft = scrollStart.current - walk;
-  };
-
-  const handlePointerUp = () => {
-    isDragging.current = false;
-    carouselRef.current.classList.remove("dragging");
-  };
-
-  /* -------------------- AUTO SCROLL -------------------- */
+  /* -------------------- AUTOPLAY (SOLO PC) -------------------- */
   useEffect(() => {
+    if (isTouchDevice.current) return;
+
     const interval = setInterval(() => {
-      if (isPaused || !carouselRef.current) return;
+      if (
+        isHoverPaused ||
+        isInteractionPaused ||
+        !carouselRef.current
+      ) {
+        return;
+      }
 
       const el = carouselRef.current;
 
       if (el.scrollLeft + el.clientWidth >= el.scrollWidth - 10) {
-        el.scrollTo({ left: 0, behavior: "smooth" });
+        el.scrollTo({ left: 0, behavior: "auto" });
       } else {
-        scrollNext();
+        el.scrollBy({ left: scrollAmount, behavior: "smooth" });
       }
     }, 3000);
 
     return () => clearInterval(interval);
-  }, [isPaused]);
+  }, [isHoverPaused, isInteractionPaused]);
 
-  /* -------------------- LISTENERS -------------------- */
+  /* -------------------- SCROLL LISTENER -------------------- */
   useEffect(() => {
     const el = carouselRef.current;
     if (!el) return;
 
-    updateScrollButtons();
-    el.addEventListener("scroll", updateScrollButtons);
+    const onScroll = () => {
+      requestAnimationFrame(updateScrollButtons);
+    };
 
-    return () => el.removeEventListener("scroll", updateScrollButtons);
+    updateScrollButtons();
+    el.addEventListener("scroll", onScroll);
+
+    return () => el.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
@@ -114,7 +110,7 @@ const Propositocarousel = () => {
               }`}
               onClick={() => {
                 if (!canScrollLeft) return;
-                pauseAutoScroll();
+                handleInteraction();
                 scrollPrev();
               }}
             />
@@ -125,7 +121,7 @@ const Propositocarousel = () => {
               }`}
               onClick={() => {
                 if (!canScrollRight) return;
-                pauseAutoScroll();
+                handleInteraction();
                 scrollNext();
               }}
             />
@@ -134,23 +130,13 @@ const Propositocarousel = () => {
 
         <div
           className="carousel-wrapper"
-          onMouseEnter={() => setIsPaused(true)}
-          onMouseLeave={() => setIsPaused(false)}
+          onMouseEnter={() => setIsHoverPaused(true)}
+          onMouseLeave={() => setIsHoverPaused(false)}
         >
-          <div
-            ref={carouselRef}
-            className="carousel snap-x snap-mandatory"
-            onTouchStart={handlePointerDown}
-            onTouchMove={handlePointerMove}
-            onTouchEnd={handlePointerUp}
-            onMouseDown={handlePointerDown}
-            onMouseMove={handlePointerMove}
-            onMouseUp={handlePointerUp}
-            onMouseLeave={handlePointerUp}
-          >
+          <div ref={carouselRef} className="carousel">
             {propositoData.map((item) => (
               <div className="card snap-center" key={item.id}>
-                <img src={item.image} alt={item.title} />
+                <img src={item.image} alt={item.title} loading="lazy" />
                 <h3>{item.title}</h3>
                 <p>{item.description}</p>
               </div>

@@ -216,10 +216,10 @@ const Navbar = () => {
                       flex items-center
                       text-left
                       px-6 gap-4
-                      transition-all duration-300
+                      transition-colors duration-300
                       ${language === item.value
-                        ? "bg-gray-100 text-black shadow-sm scale-[1.03]"
-                        : "text-gray-600 hover:bg-gray-50 hover:scale-105 hover:shadow-lg hover:translate-x-1"
+                        ? "bg-gray-100 text-black"
+                        : "text-gray-600 hover:text-black hover:bg-gray-50"
                       }
                     `}
                   >
@@ -255,16 +255,8 @@ const Navbar = () => {
         />
       )}
 
-      <div
-        className={`
-        fixed top-0 left-0 h-full w-[75%] max-w-sm 
-        bg-white/95 backdrop-blur-xl 
-        z-50 md:hidden
-        transform transition-all duration-500 ease-[cubic-bezier(.4,0,.2,1)]
-        shadow-2xl
-        ${showMobileMenu ? "translate-x-0 opacity-100" : "-translate-x-full opacity-0"}
-      `}
-      >
+      <div className={` fixed top-0 left-0 h-full w-[75%] max-w-sm  bg-white/95 backdrop-blur-xl  z-50 md:hidden transform transition-all duration-500 ease-[cubic-bezier(.4,0,.2,1)] shadow-2xl ${showMobileMenu ? "translate-x-0 opacity-100" : "-translate-x-full opacity-0"}`}>
+
         <div className="flex justify-end p-6">
           <i
             className="ri-close-line text-2xl cursor-pointer text-gray-600 hover:text-black transition-transform duration-300 hover:rotate-90"
@@ -347,8 +339,9 @@ const Navbar = () => {
                       flex items-center gap-3
                       text-left px-5
                       ${language === item.value
-                        ? "bg-gray-100 text-black shadow-sm scale-[1.03]"
-                        : "text-gray-600"}
+                        ? "bg-gray-100 text-black"
+                        : "text-gray-600 hover:text-black hover:bg-gray-50"}
+                    }
                     `}
                   >
                     <ReactCountryFlag

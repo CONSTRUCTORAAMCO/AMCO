@@ -21,7 +21,6 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import CardActionArea from '@mui/material/CardActionArea';
 import Button from '@mui/material/Button';
 
 // ================= DATA =================
@@ -205,24 +204,22 @@ export default function ProjectsSection2028() {
           <div className={`mt-10 flex flex-wrap justify-center gap-8 ${styles.projectsGrid}`}>
             {visible.map((project) => (
               <Card key={project.id} sx={{ maxWidth: 345 }}>
-                <CardActionArea>
-                  <CardMedia component="img" height="180" image={project.image} alt={project.title}
-                             style={{ width: '100%', height: '180px', objectFit: 'cover', display: 'block' }}/>
-                  <CardContent>
-                    <Typography gutterBottom variant="h6" component="div">{project.title}</Typography>
-                    <Typography variant="body2" color="text.secondary" component="div">
-                      <div className="flex items-center gap-2 mb-1">
-                        <i className="ri-briefcase-line text-lg" /> Categoría: {project.category}
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <i className="ri-map-pin-line text-lg" /> Ubicación: {project.location}
-                      </div>
-                    </Typography>
-                  </CardContent>
-                  <div style={{ padding: "0 16px 16px" }}>
-                    <Button variant="outlined" fullWidth>Ver más</Button>
-                  </div>
-                </CardActionArea>
+                <CardMedia component="img" height="180" image={project.image} alt={project.title}
+                           style={{ width: '100%', height: '180px', objectFit: 'cover', display: 'block' }}/>
+                <CardContent>
+                  <Typography gutterBottom variant="h6" component="div">{project.title}</Typography>
+                  <Typography variant="body2" color="text.secondary" component="div">
+                    <div className="flex items-center gap-2 mb-1">
+                      <i className="ri-briefcase-line text-lg" /> Categoría: {project.category}
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <i className="ri-map-pin-line text-lg" /> Ubicación: {project.location}
+                    </div>
+                  </Typography>
+                </CardContent>
+                <div style={{ padding: "0 16px 16px" }}>
+                  <Button variant="outlined" fullWidth>Ver más</Button>
+                </div>
               </Card>
             ))}
           </div>

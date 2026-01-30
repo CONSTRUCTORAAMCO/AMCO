@@ -3,13 +3,14 @@ import {
   Building2, Target, Eye, Award, Clock, Leaf, MessageSquare, 
   Lightbulb, Users, Calendar, CheckCircle, TrendingUp, 
   Home, Briefcase, ShoppingBag, School, Factory,
-  MapPin, Phone, Mail, Facebook, Instagram, Linkedin
+  User, Quote
 } from "lucide-react";
 import styles from "./Nosotros.module.css";
 
 export default function Nosotros() {
   // Referencias para las animaciones
   const mainTitleRef = useRef(null);
+  const fundadorRef = useRef(null);
   const organizacionRef = useRef(null);
   const misionRef = useRef(null);
   const visionRef = useRef(null);
@@ -37,6 +38,7 @@ export default function Nosotros() {
     // Observar todos los elementos
     const elements = [
       mainTitleRef.current,
+      fundadorRef.current,
       organizacionRef.current,
       misionRef.current,
       visionRef.current,
@@ -108,6 +110,83 @@ export default function Nosotros() {
             <div className={styles.statContent}>
               <h3 className={styles.statNumber}>1M+</h3>
               <p className={styles.statLabel}>m² Construidos</p>
+            </div>
+          </div>
+        </div>
+
+        {/* NUEVA SECCIÓN: EL FUNDADOR */}
+        <div ref={fundadorRef} className={styles.fundadorSection}>
+          <div className={styles.sectionHeader}>
+            <User className={styles.sectionIcon} />
+            <h2 className={styles.sectionTitle}>Historia Alfredo Muñoz Gerente</h2>
+          </div>
+          
+          <div className={styles.fundadorContent}>
+            {/* Tarjeta izquierda: Texto */}
+            <div className={styles.fundadorTexto}>
+              <div className={styles.fundadorHeader}>
+                <h3 className={styles.fundadorNombre}>Alfredo Muñoz Roa</h3>
+                <div className={styles.fundadorCargo}>
+                  <span>Fundador </span>
+                  <div className={styles.fundadorExperiencia}>
+                    <Calendar size={16} />
+                    <span>Más de 50 años de experiencia</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div className={styles.fundadorHistoria}>
+                <p>
+                  Alfredo Muñoz, visionario empresario colombiano, fundó Constructora AMCO en 1973 
+                  con una clara misión: contribuir al desarrollo del país a través de la construcción 
+                  de infraestructura de calidad.
+                </p>
+                <p>
+                  Con una profunda pasión por la ingeniería y el desarrollo urbano, lideró la empresa 
+                  desde sus inicios en Bogotá, estableciendo los principios de excelencia, integridad 
+                  y compromiso social que han guiado a la organización por más de cinco décadas.
+                </p>
+                <p>
+                  Su visión estratégica y dedicación permitieron no solo el crecimiento sostenido de 
+                  AMCO, sino también la creación de AMR Construcciones en el año 2000, expandiendo 
+                  así el alcance y servicios del grupo empresarial.
+                </p>
+                <p>
+                  Hoy, su legado continúa vivo en cada proyecto, inspirando a nuevas generaciones 
+                  de profesionales a construir un mejor futuro para Colombia.
+                </p>
+              </div>
+            </div>
+            
+            {/* Tarjeta derecha: Imagen */}
+            <div className={styles.fundadorImagen}>
+              <div className={styles.imagenContainer}>
+                <div className={styles.imagenPlaceholder}>
+                  <div className={styles.imagenContent}>
+                    <User size={120} className={styles.imagenIcon} />
+                    <p className={styles.imagenTexto}>Imagen de Alfredo Moreno</p>
+                  </div>
+                </div>
+                <div className={styles.imagenCaption}>
+                  <span className={styles.captionText}>Alfredo Moreno - Fundador</span>
+                  <span className={styles.captionYear}>Desde 1973</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          {/* Texto descriptivo abajo */}
+          <div className={styles.fundadorFrase}>
+            <div className={styles.fraseContainer}>
+              <Quote className={styles.fraseIcon} />
+              <p className={styles.fraseTexto}>
+                "Que sean nuestras obras las que hablen de nosotros"
+              </p>
+              <div className={styles.fraseAutor}>
+                <span className={styles.autorLine}></span>
+                <span className={styles.autorNombre}>— Alfredo Muñoz Roa</span>
+                <span className={styles.autorLine}></span>
+              </div>
             </div>
           </div>
         </div>
@@ -417,8 +496,6 @@ export default function Nosotros() {
             </div>
           </div>
         </div>
-
-
       </div>
     </section>
   );

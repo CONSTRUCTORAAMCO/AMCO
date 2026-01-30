@@ -275,7 +275,7 @@ const Formulario = () => {
             <Link to="/politicaprivacidad" className={styles.legalLink}>
               Política de Privacidad
             </Link> {" "}
-            y Los{" "}
+            y los{" "}
             <Link to="/tyc" className={styles.legalLink}>
               Términos y Condiciones
             </Link>.

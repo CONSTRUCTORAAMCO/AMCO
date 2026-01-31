@@ -54,10 +54,11 @@
    CAROUSEL WRAPPER
    =============================== */
 .carousel-wrapper {
-  max-width: 1280px;
+  width: 100%;
   margin: 0 auto;
   overflow: hidden;
 }
+
 
 /* ===============================
    CAROUSEL (DESKTOP DEFAULT)
@@ -65,9 +66,11 @@
 .carousel {
   display: flex;
   gap: 24px;
+  padding-inline: max(24px, calc((100vw - 1280px) / 2));
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
 }
+
 .carousel::-webkit-scrollbar {
   display: none;
 }

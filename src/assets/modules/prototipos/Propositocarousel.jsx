@@ -6,16 +6,13 @@ import { useLanguage } from "../../../i18n/LanguageContext";
 const Propositocarousel = () => {
   const carouselRef = useRef(null);
   const { t } = useLanguage();
-
   /* -------------------- STATES -------------------- */
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
   const [isHoverPaused, setIsHoverPaused] = useState(false);
   const [isInteractionPaused, setIsInteractionPaused] = useState(false);
-
   const interactionTimeout = useRef(null);
   const isTouchDevice = useRef(false);
-
   const scrollAmount = 300;
 
   /* -------------------- TOUCH DETECTION -------------------- */
@@ -27,7 +24,6 @@ const Propositocarousel = () => {
   /* -------------------- INTERACTION PAUSE -------------------- */
   const handleInteraction = () => {
     setIsInteractionPaused(true);
-
     clearTimeout(interactionTimeout.current);
     interactionTimeout.current = setTimeout(() => {
       setIsInteractionPaused(false);
@@ -38,18 +34,15 @@ const Propositocarousel = () => {
   const updateScrollButtons = () => {
     const el = carouselRef.current;
     if (!el) return;
-
     setCanScrollLeft(el.scrollLeft > 0);
     setCanScrollRight(el.scrollLeft + el.clientWidth < el.scrollWidth - 1);
   };
-
   const scrollNext = () => {
     carouselRef.current?.scrollBy({
       left: scrollAmount,
       behavior: "smooth",
     });
   };
-
   const scrollPrev = () => {
     carouselRef.current?.scrollBy({
       left: -scrollAmount,
@@ -60,7 +53,6 @@ const Propositocarousel = () => {
   /* -------------------- AUTOPLAY (SOLO PC) -------------------- */
   useEffect(() => {
     if (isTouchDevice.current) return;
-
     const interval = setInterval(() => {
       if (
         isHoverPaused ||
@@ -69,16 +61,13 @@ const Propositocarousel = () => {
       ) {
         return;
       }
-
       const el = carouselRef.current;
-
       if (el.scrollLeft + el.clientWidth >= el.scrollWidth - 10) {
         el.scrollTo({ left: 0, behavior: "auto" });
       } else {
         el.scrollBy({ left: scrollAmount, behavior: "smooth" });
       }
     }, 3000);
-
     return () => clearInterval(interval);
   }, [isHoverPaused, isInteractionPaused]);
 
@@ -86,14 +75,11 @@ const Propositocarousel = () => {
   useEffect(() => {
     const el = carouselRef.current;
     if (!el) return;
-
     const onScroll = () => {
       requestAnimationFrame(updateScrollButtons);
     };
-
     updateScrollButtons();
     el.addEventListener("scroll", onScroll);
-
     return () => el.removeEventListener("scroll", onScroll);
   }, []);
 

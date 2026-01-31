@@ -1,19 +1,29 @@
+import { lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
 import MainLayout from "../assets/components/layout/MainLayout";
-import { ComunidadesCarousel } from "../assets/modules/prototipos";
-import Home from "../pages/Home";
-import Nosotros from "../pages/Nosotros";
-import Entrecalles from "../pages/Entrecalles";
-import Contacto from "../pages/Contacto";
-import Proyectos from "../pages/Proyectos";
-import Politicaprivacidad from "../pages/politicaprivacidad";
-import Tyc from "../pages/tyc";
+const Home = lazy(() => import("../pages/Home"));
+const Nosotros = lazy(() => import("../pages/Nosotros"));
+const Entrecalles = lazy(() => import("../pages/Entrecalles"));
+const Contacto = lazy(() => import("../pages/Contacto"));
+const Proyectos = lazy(() => import("../pages/Proyectos"));
+const Politicaprivacidad = lazy(() => import("../pages/Politicaprivacidad"));
+const Tyc = lazy(() => import("../pages/Tyc"));
+const VistasProyecto = lazy(() =>
+  import("../assets/modules/vistasproyectos/vistaproyecto").then((module) => ({
+    default: module.default,
+  }))
+);
+
+const ComunidadesCarousel = lazy(() =>
+  import("../assets/modules/prototipos").then((module) => ({
+    default: module.ComunidadesCarousel,
+  }))
+);
 
 function App() {
   return (
- 
+    <Suspense fallback={<div>Loading...</div>}>
       <Routes>
-
         <Route element={<MainLayout />}>
           <Route path="/" element={<Home />} />
           <Route path="/nosotros" element={<Nosotros />} />
@@ -23,10 +33,10 @@ function App() {
           <Route path="/proyectos" element={<Proyectos />} />
           <Route path="/politicaprivacidad" element={<Politicaprivacidad />} />
           <Route path="/tyc" element={<Tyc />} />
+          <Route path="/vistaproyecto/:id" element={<VistasProyecto />} />
         </Route>
-
       </Routes>
-    
+    </Suspense>
   );
 }
 

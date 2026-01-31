@@ -45,3 +45,12 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+@keyframes moveParticles {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(-50%, -50%);
+  }
+}

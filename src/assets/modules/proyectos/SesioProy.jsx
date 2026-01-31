@@ -1,18 +1,7 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Select from "react-select";
-import imgBodega from "../../img/bodega abastos.jpg";
-import imgCarcel from "../../img/carcel de san angel.jpg";
-import imgCedritos from "../../img/cedritos.jpg";
-import imgCentroTalento from "../../img/Centro-de-Talento-Creativo-del-Bronx_17.jpg";
-import imgComando from "../../img/Comando-de-Policia-de-Bogota.jpg";
-import imgEjecucion from "../../img/EJECUCION-2.jpg";
-import imgEscuelaAviacion from "../../img/Escuela-de-aviacion-FAC-Cali.jpg";
-import imgGobernacion from "../../img/gobernacion de cundinamarca.jpg";
-import imgJaveriana from "../../img/javeriana.jpg";
-import imgLibreUni from "../../img/libre uni.jpg";
-import imgPersoneria from "../../img/personeria.jpg";
-import imgSenaSoacha from "../../img/Sena-de-Soacha.jpg";
-import imgPenitenciaria from "../../img/Penitenciaria-de-maxima-seguridad-de-Valledupar.jpg";
+import { proyectos as PROJECTS } from "./dataProyectos.js";
 import imgUniversidadLibre from "../../img/Universidad-libre-Bogota.jpg";
 import styles from "./SesioProy.module.css";
 import Pagination from '@mui/material/Pagination';
@@ -24,25 +13,10 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 
 // ================= DATA =================
-const PROJECTS = [
-  { id: 1, title: "Bodega Popular Corabastos", category: "Infraestructura", location: "Bogotá", image: imgBodega },
-  { id: 2, title: "Cárcel de San Ángel", category: "Infraestructura", location: "Sabanas de San Ángel", image: imgCarcel },
-  { id: 3, title: "Centro Comercial Cedritos 151", category: "Comercial", location: "Bogotá", image: imgCedritos },
-  { id: 4, title: "Sena de Bronx", category: "Residencial", location: "Bogotá", image: imgCentroTalento },
-  { id: 5, title: "Nuevo comando Policía", category: "Infraestructura", location: "Bogotá", image: imgComando },
-  { id: 6, title: "Universidad Distrital Bogotá. PROYECTO EN EJECUCIÓN", category: "Residencial", location: "Bogotá", image: imgEjecucion },
-  { id: 7, title: "Escuela De Aviación FAC", category: "Infraestructura", location: "Cali", image: imgEscuelaAviacion },
-  { id: 8, title: "Gobernación De Cundinamarca", category: "Infraestructura", location: "Bogotá", image: imgGobernacion },
-  { id: 9, title: "Universidad Javeriana Edificio Gabriel Giraldo", category: "Residencial", location: "Bogotá", image: imgJaveriana },
-  { id: 10, title: "Universidad Libre Bogotá", category: "Comercial", location: "Bogotá", image: imgUniversidadLibre },
-  { id: 11, title: "Personeria De Bogotá", category: "Comercial", location: "Bogotá", image: imgPersoneria },
-  { id: 12, title: "Sena De Soacha", category: "Residencial", location: "Bogotá", image: imgSenaSoacha },
-  { id: 13, title: "Penitenciaria De Máxima Seguridad De Valledupar", category: "Infraestructura", location: "Valledupar", image: imgPenitenciaria },
-];
-
 const ACTIVITIES = ["Todas", "Residencial", "Comercial", "Infraestructura"];
 const PAGE_SIZE = 6;
 const activityOptions = ACTIVITIES.map(a => ({ value: a, label: a }));
+
 
 // ================= React Select Styles =================
 const customStyles = {
@@ -54,8 +28,11 @@ const customStyles = {
     borderRadius: "9999px",
     fontSize: "13px",
     paddingLeft: "6px",
-    borderColor: state.isFocused ? "#cbd5e1" : "#e5e7eb",
-    boxShadow: state.isFocused ? "0 0 0 2px rgba(0,0,0,0.05)" : "none",
+    borderColor: state.isFocused ? "#f6c400" : "#e5e7eb",
+    boxShadow: "none",
+    "&:hover": {
+      borderColor: state.isFocused ? "#f6c400" : "#cbd5e1",
+    },
   }),
   valueContainer: (base) => ({ ...base, padding: "0 12px" }),
   indicatorsContainer: (base) => ({ ...base, height: "36px" }),
@@ -74,6 +51,7 @@ const customStyles = {
 
 // ================= COMPONENT =================
 export default function ProjectsSection2028() {
+  const navigate = useNavigate();
   const [region, setRegion] = useState("Todos");
   const [city, setCity] = useState("Todos");
   const [activity, setActivity] = useState("Todas");
@@ -218,7 +196,23 @@ export default function ProjectsSection2028() {
                   </Typography>
                 </CardContent>
                 <div style={{ padding: "0 16px 16px" }}>
-                  <Button variant="outlined" fullWidth>Ver más</Button>
+<Button
+  variant="outlined"
+  fullWidth
+  onClick={() => navigate(`/vistaproyecto/${project.id}`)}
+  sx={{
+    color: 'black',
+    borderColor: '#f6c400',
+    '&:hover': {
+      borderColor: '#f6c400',
+      backgroundColor: 'rgba(246, 196, 0, 0.08)',
+    },
+  }}
+>
+  Ver más
+</Button>
+
+
                 </div>
               </Card>
             ))}

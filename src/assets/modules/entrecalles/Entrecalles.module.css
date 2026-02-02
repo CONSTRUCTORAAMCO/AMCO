@@ -217,7 +217,7 @@ body {
   line-height: 1.6;
 }
 
-/* HERO SECTION - MANTENIDO EXACTO */
+/* HERO SECTION - ESPACIO PARA NAVBAR EN CELULAR */
 .heroSection {
   position: relative;
   height: 60vh;
@@ -228,8 +228,16 @@ body {
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  padding-top: 20px; 
   width: 100%;
+}
+
+/* Espacio para navbar solo en dispositivos móviles */
+@media (max-width: 768px) {
+  .heroSection {
+    padding-bottom: 60px;
+    min-height: auto;
+    height: auto;
+  }
 }
 
 .heroOverlay {
@@ -816,39 +824,13 @@ body {
   margin-top: 2px;
 }
 
-/* VIDEO SECTION MEJORADA */
+/* VIDEO SECTION SIMPLIFICADO */
 .videoSection {
-  background: linear-gradient(135deg, #000000 0%, #111111 100%);
+  background: white;
   border-radius: var(--radius-xl);
-  padding: clamp(2rem, 4vw, 4rem);
+  padding: clamp(3rem, 4vw, 4rem);
   box-shadow: var(--shadow-lg);
-}
-
-.videoHeader {
-  text-align: center;
-  margin-bottom: 3rem;
-}
-
-.videoHeader h3 {
-  font-size: clamp(1.8rem, 3vw, 2.5rem);
-  color: var(--gray-900);
-  margin-bottom: 1rem;
-}
-
-.videoHeader p {
-  color: var(--gray-700);
-  font-size: clamp(1rem, 1.5vw, 1.1rem);
-  max-width: 600px;
-  margin: 0 auto;
-  line-height: 1.6;
-}
-
-.videoContainer {
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  box-shadow: var(--shadow-xl);
-  background: linear-gradient(135deg, #000000 0%, #111111 100%);
-  padding: 2rem;
+  border: 1px solid var(--gray-200);
 }
 
 .videoContent {
@@ -858,18 +840,20 @@ body {
 }
 
 .videoTitle {
-  color: white;
+  color: var(--gray-900);
   font-size: clamp(1.5rem, 3vw, 2rem);
   text-align: center;
   margin-bottom: 0.5rem;
+  font-weight: 700;
 }
 
 .videoSubtitle {
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--gray-700);
   font-size: clamp(1rem, 1.5vw, 1.2rem);
   text-align: center;
   max-width: 600px;
   margin: 0 auto 2rem;
+  line-height: 1.6;
 }
 
 .videoWrapper {
@@ -878,7 +862,8 @@ body {
   height: 0;
   overflow: hidden;
   background: var(--gray-900);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xl);
 }
 
 .videoWrapper iframe {
@@ -919,20 +904,21 @@ body {
   margin: 0 auto;
 }
 
-/* ===== MODAL DE GALERÍA ===== */
+/* ===== MODAL DE GALERÍA MEJORADO ===== */
 .modalOverlay {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.95);
+  background: rgba(0, 0, 0, 0.98);
   z-index: 1000;
   display: flex;
   align-items: center;
   justify-content: center;
   animation: fadeIn 0.3s ease;
   padding: 1rem;
+  backdrop-filter: blur(10px);
 }
 
 .modalContent {
@@ -945,47 +931,57 @@ body {
   animation: scaleIn 0.3s ease;
   display: flex;
   flex-direction: column;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
 }
 
+/* Botón cerrar - visible en todos los dispositivos */
 .closeButton {
   position: absolute;
   top: 1.5rem;
   right: 1.5rem;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.15);
   border: none;
   color: white;
-  width: clamp(40px, 6vw, 48px);
-  height: clamp(40px, 6vw, 48px);
+  width: clamp(44px, 6vw, 52px);
+  height: clamp(44px, 6vw, 52px);
   border-radius: 50%;
-  display: flex;
+  display: flex !important;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  z-index: 10;
+  z-index: 20;
   transition: all var(--transition-base);
   backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .closeButton:hover {
-  background: rgba(255, 255, 255, 0.2);
-  transform: rotate(90deg);
+  background: rgba(255, 255, 255, 0.25);
+  transform: rotate(90deg) scale(1.1);
 }
 
+/* Contenedor de imagen mejorado */
 .modalImageContainer {
-  min-height: 300px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1rem;
+  padding: 2rem;
   flex: 1;
   overflow: hidden;
+  min-height: 400px;
+  position: relative;
+  background: #000;
 }
 
 .modalImage {
-  max-width: 100%;
+  max-width: 65%;
   max-height: 100%;
+  width: auto;
+  height: auto;
   object-fit: contain;
   border-radius: var(--radius-lg);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
 }
 
 .imageInfo {
@@ -1020,48 +1016,76 @@ body {
   font-size: clamp(0.8rem, 1.5vw, 0.9rem);
 }
 
+/* Controles de navegación - visibles en todos los dispositivos */
 .navButton {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.15);
   border: none;
   color: white;
-  width: clamp(45px, 8vw, 60px);
-  height: clamp(45px, 8vw, 60px);
+  width: clamp(48px, 8vw, 64px);
+  height: clamp(48px, 8vw, 64px);
   border-radius: 50%;
-  display: flex;
+  display: flex !important;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: all var(--transition-base);
   backdrop-filter: blur(10px);
-  z-index: 10;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  z-index: 20;
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
 .navButton:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.25);
   transform: translateY(-50%) scale(1.1);
 }
 
 .prevButton {
-  left: 1rem;
+  left: 1.5rem;
 }
 
 .nextButton {
-  right: 1rem;
+  right: 1.5rem;
+}
+
+/* Asegurar visibilidad en móviles */
+@media (max-width: 768px) {
+  .navButton {
+    width: 44px !important;
+    height: 44px !important;
+  }
+  
+  .closeButton {
+    width: 40px !important;
+    height: 40px !important;
+  }
+  
+  .prevButton {
+    left: 0.75rem !important;
+  }
+  
+  .nextButton {
+    right: 0.75rem !important;
+  }
 }
 
 .imageCounter {
   position: absolute;
-  bottom: 1.5rem;
-  right: 1.5rem;
+  bottom: 2.5rem;
+  right: 2.5rem;
   color: white;
   font-size: clamp(1rem, 2vw, 1.2rem);
-  background: rgba(0, 0, 0, 0.5);
-  padding: 0.5rem 1rem;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 0.5rem 1.25rem;
   border-radius: var(--radius-full);
   backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  font-weight: 500;
+  z-index: 20;
 }
 
 .currentIndex {
@@ -1086,6 +1110,10 @@ body {
   .sectionWrapper {
     margin-bottom: 6rem;
   }
+  
+  .modalImage {
+    max-width: 75%;
+  }
 }
 
 @media (max-width: 768px) {
@@ -1094,8 +1122,10 @@ body {
   }
   
   .heroSection {
-    height: 50vh;
-    min-height: 400px;
+    height: auto;
+    min-height: 0;
+    padding-top: 120px;
+    padding-bottom: 60px;
   }
   
   .image-masterpiece {
@@ -1123,27 +1153,61 @@ body {
     grid-template-columns: 1fr;
   }
   
+  .videoSection {
+    padding: 2rem;
+  }
+  
   .modalImageContainer {
-    padding: 0.5rem;
+    min-height: 250px;
+    padding: 0;
+    background: #000;
+  }
+
+  .modalImage {
+    max-width: 100%;
+    max-height: 50vh;
+    border-radius: 0;
   }
   
   .navButton {
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    z-index: 100;
+    opacity: 1;
+    visibility: visible;
   }
   
   .prevButton {
-    left: 0.5rem;
+    left: 10px !important;
   }
   
   .nextButton {
-    right: 0.5rem;
+    right: 10px !important;
+  }
+
+  .closeButton {
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 100;
+    top: 10px;
+    right: 10px;
+    width: 40px !important;
+    height: 40px !important;
+  }
+
+  .modalContent {
+    max-height: 95vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
   }
   
   .imageCounter {
-    bottom: 1rem;
-    right: 1rem;
+    bottom: 1.5rem;
+    right: 1.5rem;
     padding: 0.3rem 0.8rem;
+    font-size: 0.9rem;
   }
   
   .infoNote {
@@ -1158,8 +1222,8 @@ body {
   }
   
   .heroSection {
-    height: 45vh;
-    min-height: 350px;
+    padding-top: 100px;
+    padding-bottom: 50px;
   }
   
   .contentSection {
@@ -1200,18 +1264,25 @@ body {
   }
   
   .modalImageContainer {
+    padding: 0.5rem;
+    min-height: 200px;
   }
   
   .navButton {
-    width: 35px;
-    height: 35px;
+    width: 50px !important;
+    height: 36px !important;
   }
   
   .closeButton {
     top: 1rem;
     right: 1rem;
-    width: 35px;
-    height: 35px;
+    width: 50px !important;
+    height: 36px !important;
+  }
+  
+  .modalImage {
+    max-width: 100%;
+    max-height: 45vh;
   }
 }
 

@@ -168,7 +168,7 @@ export default function Nosotros() {
                   </div>
                 </div>
                 <div className={styles.imagenCaption}>
-                  <span className={styles.captionText}>Alfredo Moreno - Fundador</span>
+                  <span className={styles.captionText}>Alfredo Muñoz - Fundador</span>
                   <span className={styles.captionYear}>Desde 1973</span>
                 </div>
               </div>
@@ -180,7 +180,7 @@ export default function Nosotros() {
             <div className={styles.fraseContainer}>
               <Quote className={styles.fraseIcon} />
               <p className={styles.fraseTexto}>
-                "Que sean nuestras obras las que hablen de nosotros"
+                "Que nuestras obras hablen por nosotros"
               </p>
               <div className={styles.fraseAutor}>
                 <span className={styles.autorLine}></span>

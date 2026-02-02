@@ -37,15 +37,20 @@ const EntreCallesHome = () => {
 
         {/* Imagen del edificio en el medio (solo desktop) */}
         <div className={styles.imageSection}>
-          <img 
-            src={edificioImage} 
-            alt="Edificio Entre Calles" 
-            className={styles.edificioImage}
-            onError={(e) => {
-              // Si la imagen no carga, usa un placeholder
-              e.target.src = "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80";
-            }}
-          />
+          <div className={styles.imageWrapper}>
+            <img 
+              src={edificioImage} 
+              alt="Edificio Entre Calles" 
+              className={styles.edificioImage}
+              onError={(e) => {
+                // Si la imagen no carga, usa un placeholder
+                e.target.src = "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80";
+              }}
+            />
+            <p className={styles.copyrightText}>
+              Derechos de autor de la imagen Bher President @Quantum-AIP LLC
+            </p>
+          </div>
         </div>
         
         {/* Video a la derecha */}

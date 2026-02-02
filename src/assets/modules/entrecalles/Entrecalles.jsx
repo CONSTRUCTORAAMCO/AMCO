@@ -12,19 +12,15 @@ import edificioImage7 from '../../img/Entrecallesimg7.png';
 const EntreCalles = () => {
   const sectionsRef = useRef([]);
   
-  // Definir las referencias que faltaban
   const mainTitleRef = useRef(null);
   const statsRef = useRef(null);
   const containerRef = useRef(null);
   const imageRef = useRef(null);
 
-  // Estado para el modal de la galería
   const [selectedImageIndex, setSelectedImageIndex] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // Animaciones de scroll
   useEffect(() => {
-    // Animación inicial de elementos principales
     const timer = setTimeout(() => {
       if (mainTitleRef.current) {
         mainTitleRef.current.classList.add(styles.visible);
@@ -55,18 +51,17 @@ const EntreCalles = () => {
     };
   }, []);
 
-  // Galería de imágenes reales - TODAS CON EL MISMO TAMAÑO Y FORMATO
   const projectImages = [
     {
       id: 1,
-      title: "Vista Principal del Edificio",
-      description: "Diseño arquitectónico innovador con tecnología 3D y materiales de vanguardia (Derechos de Autor de la Imagen)",
+      title: "Vista Principal del Edificio (Derechos de autor Bher President @Quantum-AIP LLC)",
+      description: "Diseño arquitectónico innovador con tecnología 3D y materiales de vanguardia ",
       category: "Arquitectura",
       image: edificioImage
     },
     {
       id: 2,
-      title: "Integración con el Entorno Urbano",
+      title: "Integración con el Entorno Urbano (Derechos de autor Bher President @Quantum-AIP LLC)",
       description: "Conexión perfecta del edificio con la estructura urbana existente",
       category: "Integración",
       image: edificioImage2
@@ -108,12 +103,11 @@ const EntreCalles = () => {
     }
   ];
 
-  // Características del proyecto
   const projectFeatures = [
     {
       icon: <Target size={24} />,
       title: "Altura Récord",
-      description: "300+ metros - El edificio más alto de Colombia"
+      description: "500 metros - El edificio más alto de Colombia"
     },
     {
       icon: <Users size={24} />,
@@ -127,25 +121,22 @@ const EntreCalles = () => {
     },
     {
       icon: <Clock size={24} />,
-      title: "Entrega 2026",
-      description: "Proyecto en construcción avanzada con tecnología de punta"
+      title: "En Desarrollo",
+      description: "Proyecto en construcción avanzada con tecnología de punta. Actualmente en desarrollo, sin fecha de finalización establecida."
     }
   ];
 
-  // Función para abrir el modal
   const openModal = (index) => {
     setSelectedImageIndex(index);
     setIsModalOpen(true);
     document.body.style.overflow = 'hidden';
   };
 
-  // Función para cerrar el modal
   const closeModal = () => {
     setIsModalOpen(false);
     document.body.style.overflow = 'auto';
   };
 
-  // Navegación entre imágenes
   const goToPrevious = () => {
     setSelectedImageIndex(prev => 
       prev === 0 ? projectImages.length - 1 : prev - 1
@@ -183,7 +174,7 @@ const EntreCalles = () => {
 
   return (
     <>
-      {/* HERO SECTION */}
+      {/* HERO SECTION - CON MÁS ESPACIO ABAJO */}
       <div className={styles.heroSection}>
         <div className={styles.heroOverlay}></div>
         <div className={styles.heroContent}>
@@ -203,7 +194,7 @@ const EntreCalles = () => {
         </div>
       </div>
 
-      {/* STATS BAR - REEMPLAZADO POR EL MENSAJE */}
+      {/* STATS BAR */}
       <div ref={statsRef} className={styles.statsBar}>
         <div className={styles.messageBox}>
           <p className={styles.messageText}>
@@ -230,7 +221,7 @@ const EntreCalles = () => {
               </div>
               
               <div className={styles['title-container']}>
-                <h1 className={styles['main-title']}>ENTRECALLES ESMERALD TOWER</h1>
+                <h1 className={styles['main-title']}>ENTRECALLES EMERALD TOWER</h1>
                 <div className={styles['title-subtle']}>Derechos de autor de la imagen original Bher President @Quantum-AIP LLC</div>
               </div>
             </div>
@@ -241,9 +232,9 @@ const EntreCalles = () => {
             
             <div className={styles.historyContent}>
               <div className={styles.historyText}>
-                <h3>Torre EntreCalles: Un Sueño de Dos Décadas</h3>
+                <h3>TORRE ENTRECALLES EMERALD TOWER: Un Sueño de Dos Décadas</h3>
                 <p>
-                  <strong>Torre EntreCalles nació hace más de veinte años</strong> como una visión 
+                  <strong>Torre Entrecalles nació hace más de veinte años</strong> como una visión 
                   para transformar el centro histórico de Bogotá. En ese momento, visualizamos 
                   un futuro donde los desarrollos modernos se integraran perfectamente con el 
                   patrimonio urbano, creando un equilibrio entre innovación y tradición.
@@ -440,33 +431,29 @@ const EntreCalles = () => {
             </div>
           </div>
 
-          {/* VIDEO Y CONTEXTO MEJORADO */}
+          {/* VIDEO SIMPLIFICADO - SIN DOBLE CONTENEDOR */}
           <div 
             ref={el => sectionsRef.current[5] = el}
             className={styles.sectionWrapper}
           >
             <div className={styles.videoSection}>
-
-              
-              <div className={styles.videoContainer}>
-                <div className={styles.videoContent}>
-                  <h4 className={styles.videoTitle}>EntreCalles: El Futuro de Bogotá</h4>
-                  <p className={styles.videoSubtitle}>
-                    Descubre en este video exclusivo la magnitud, visión y tecnología detrás 
-                    del proyecto que redefinirá el skyline de la capital colombiana.
-                  </p>
-                  
-                  <div className={styles.videoWrapper}>
-                    <iframe
-                      src="https://www.youtube.com/embed/k5RfEowqxgI"
-                      title="EntreCalles - Transformando Bogotá"
-                      frameBorder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                      referrerPolicy="strict-origin-when-cross-origin"
-                      allowFullScreen
-                      loading="lazy"
-                    ></iframe>
-                  </div>
+              <div className={styles.videoContent}>
+                <h4 className={styles.videoTitle}>ENTRECALLES EMERALD TOWER: El Futuro de Bogotá</h4>
+                <p className={styles.videoSubtitle}>
+                  Descubre en este video exclusivo la magnitud, visión y tecnología detrás 
+                  del proyecto que redefinirá el skyline de la capital colombiana.
+                </p>
+                
+                <div className={styles.videoWrapper}>
+                  <iframe
+                    src="https://www.youtube.com/embed/k5RfEowqxgI"
+                    title="EntreCalles - Transformando Bogotá"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerPolicy="strict-origin-when-cross-origin"
+                    allowFullScreen
+                    loading="lazy"
+                  ></iframe>
                 </div>
               </div>
             </div>
@@ -481,7 +468,7 @@ const EntreCalles = () => {
               <Info className={styles.infoIcon} size={48} />
               <h3>Información del Proyecto</h3>
               <p>
-                Esta página web es una plataforma informativa dedicada al proyecto TORRE ENTRECALLES ESMERALD TOWER. 
+                Esta página web es una plataforma informativa dedicada al proyecto TORRE ENTRECALLES EMERALD TOWER. 
                 Toda la información presentada aquí corresponde al estado actual del desarrollo y 
                 está sujeta a actualizaciones periódicas a medida que avanza el proyecto.
               </p>
@@ -492,31 +479,45 @@ const EntreCalles = () => {
               </p>
               <p style={{ marginTop: '1rem', fontStyle: 'italic' }}>
                 Agradecemos su interés en el proyecto y los invitamos a mantenerse conectados 
-                para futuras actualizaciones. Ultima Actualizacion 30/01/2026
+                para futuras actualizaciones. Última Actualización: 30/01/2026
               </p>
             </div>
           </div>
         </div>
       </div>
 
-      {/* MODAL DE GALERÍA */}
+      {/* MODAL DE GALERÍA MEJORADO */}
       {isModalOpen && selectedImageIndex !== null && (
         <div className={styles.modalOverlay} onClick={closeModal}>
           <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
-            {/* Botón cerrar */}
+            {/* Botón cerrar - SIEMPRE VISIBLE */}
             <button className={styles.closeButton} onClick={closeModal}>
               <X size={24} />
             </button>
             
-            {/* Contenedor de la imagen */}
+            {/* Contenedor de la imagen con tamaño fijo */}
             <div className={styles.modalImageContainer}>
               <img 
                 src={projectImages[selectedImageIndex].image} 
                 alt={projectImages[selectedImageIndex].title}
                 className={styles.modalImage}
               />
+              {/* Controles de navegación - AHORA DENTRO DEL CONTENEDOR DE IMAGEN */}
+              <button className={`${styles.navButton} ${styles.prevButton}`} onClick={goToPrevious}>
+                <ChevronLeft size={28} />
+              </button>
+              
+              <button className={`${styles.navButton} ${styles.nextButton}`} onClick={goToNext}>
+                <RightIcon size={28} />
+              </button>
+
+              {/* Indicador de imágenes - AHORA DENTRO DEL CONTENEDOR DE IMAGEN */}
+              <div className={styles.imageCounter}>
+                <span className={styles.currentIndex}>{selectedImageIndex + 1}</span>
+                <span className={styles.totalImages}> / {projectImages.length}</span>
+              </div>
             </div>
-            
+
             {/* Información de la imagen */}
             <div className={styles.imageInfo}>
               <h3 className={styles.imageTitle}>
@@ -528,21 +529,6 @@ const EntreCalles = () => {
               <div className={styles.imageCategoryTag}>
                 {projectImages[selectedImageIndex].category}
               </div>
-            </div>
-
-            {/* Controles de navegación */}
-            <button className={`${styles.navButton} ${styles.prevButton}`} onClick={goToPrevious}>
-              <ChevronLeft size={32} />
-            </button>
-            
-            <button className={`${styles.navButton} ${styles.nextButton}`} onClick={goToNext}>
-              <RightIcon size={32} />
-            </button>
-            
-            {/* Indicador de imágenes */}
-            <div className={styles.imageCounter}>
-              <span className={styles.currentIndex}>{selectedImageIndex + 1}</span>
-              <span className={styles.totalImages}> / {projectImages.length}</span>
             </div>
           </div>
         </div>

@@ -8,14 +8,22 @@
 }
 
 .container {
-  max-width: min(1400px, 100%);
+  width: 100%;
+  max-width: 92vw;
   margin: auto;
   padding: 0 24px;
 }
 
+/* ULTRA PANTALLAS GRANDES */
 @media (min-width: 1600px) {
+  .header,
+  .carousel-wrapper,
   .container {
-    max-width: 90vw;
+    max-width: 96vw;
+  }
+
+  .container {
+    padding: 0 8px; /* menos padding lateral */
   }
 }
 
@@ -25,7 +33,9 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 32px;
-  max-width: 1280px;
+
+  width: 100%;
+  max-width: 92vw;
   margin-left: auto;
   margin-right: auto;
 }
@@ -85,7 +95,7 @@
   width: 100%;
   margin: 0 auto;
   overflow: hidden;
-  max-width: 1280px;
+  max-width: 92vw;
 }
 
 .carousel {
@@ -98,6 +108,13 @@
   display: none;
 }
 
+/* QUITAR PADDING EN PANTALLAS GRANDES */
+@media (min-width: 1400px) {
+  .carousel {
+    padding-inline: 0;
+  }
+}
+
 /* CARDS */
 .card {
   min-width: 280px;
@@ -105,6 +122,14 @@
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
+}
+
+/* HACER CARDS MÁS GRANDES EN MONITORES GRANDES */
+@media (min-width: 1600px) {
+  .card {
+    min-width: 320px;
+    max-width: 360px;
+  }
 }
 
 .card-body {

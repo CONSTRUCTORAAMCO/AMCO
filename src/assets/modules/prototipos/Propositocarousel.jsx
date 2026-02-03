@@ -88,6 +88,7 @@ const Propositocarousel = () => {
 
   return (
     <section className="section">
+      <br /><br /><br /> 
       <div className="container">
         <div className="header">
           <h2>{t("proposito.title")}</h2>

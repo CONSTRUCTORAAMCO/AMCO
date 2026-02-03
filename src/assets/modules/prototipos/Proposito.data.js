@@ -1,4 +1,4 @@
-import img1 from "../../img/Sena-de-soacha.jpg";
+import img1 from "../../img/Sena-de-Soacha.jpg";
 import img2 from "../../img/bodega abastos.jpg";
 import img3 from "../../img/carcel de san angel.jpg";
 import img4 from "../../img/cedritos.jpg";

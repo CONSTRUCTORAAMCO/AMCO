@@ -40,7 +40,7 @@ const VistaProyecto = () => {
       <div className="max-w-6xl w-full flex flex-col md:flex-row items-center gap-10 sm:gap-10">
         
         {/* IMAGEN */}
-        <div className="w-full md:w-1/2 flex justify-center">
+        <div className="w-full md:w-1/2 flex justify-cent<er">
           <img
             src={proyecto.content[0].image}
             alt={proyecto.title}

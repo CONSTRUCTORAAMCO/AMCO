@@ -19,6 +19,7 @@
   }
 }
 
+/* HEADER */
 .header {
   display: flex;
   justify-content: space-between;
@@ -42,86 +43,27 @@
     0 10px 28px rgba(0, 0, 0, 0.04);
 }
 
-/* ===============================
-   CONTROLS
-   =============================== */
+/* CONTROLES */
 .controls {
   display: flex;
   gap: 14px;
 }
 
-/* ===============================
-   CAROUSEL WRAPPER
-   =============================== */
-.carousel-wrapper {
-  width: 100%;
-  margin: 0 auto;
-  overflow: hidden;
-}
-
-
-/* ===============================
-   CAROUSEL (DESKTOP DEFAULT)
-   =============================== */
-.carousel {
-  display: flex;
-  gap: 24px;
-  padding-inline: max(24px, calc((100vw - 1280px) / 2));
-  scroll-snap-type: x mandatory;
-  scrollbar-width: none;
-}
-
-.carousel::-webkit-scrollbar {
-  display: none;
-}
-
-.carousel::-webkit-scrollbar {
-  display: none;
-}
-
-.card {
-  min-width: 280px;
-  max-width: 280px;
-  flex-shrink: 0;
-}
-
-.card img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-  border-radius: 10px;
-  display: block;
-}
-@media (pointer: fine) {
-  .card img {
-    pointer-events: none;
-  }
-}
-
-
-.card h3 {
-  margin: 14px 0 6px;
-  font-size: 18px;
-  font-weight: 600;
-}
-
-.card p {
-  font-size: 14px;
-  color: #555;
-  line-height: 1.5;
-}
-
+/* BOTONES */
 .nav-icon {
   font-size: 22px;
   color: #111;
   cursor: pointer;
   user-select: none;
-  width: 42px;
-  height: 42px;
+
+  width: 44px;
+  height: 44px;
+
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
+
   transition:
     background-color 0.35s ease,
     transform 0.3s ease,
@@ -137,7 +79,112 @@
 .nav-icon.primary {
   color: #000;
 }
-/* SOLO MÓVIL */
+
+/* CARRUSEL */
+.carousel-wrapper {
+  width: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+  max-width: 1280px;
+}
+
+.carousel {
+  display: flex;
+  gap: 24px;
+  padding-inline: 24px;
+}
+
+.carousel::-webkit-scrollbar {
+  display: none;
+}
+.card {
+  min-width: 280px;
+  max-width: 280px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  height: 420px; /* opcional si quieres totalmente rígido */
+}
+
+/* CARDS */
+.card p {
+  font-size: px;
+  color: #555;
+  line-height: 1.5;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 3;   /* número de líneas visibles */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  min-height: 180px; /* ajusta según diseño */
+}
+
+
+.ver-mas {
+  margin-top: auto;
+  padding: 8px 12px;
+  background-color: #007bff;
+  color: white;
+  text-align: center;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+
+.ver-mas:hover {
+  background-color: #0056b3;
+}
+
+/* IMÁGENES */
+.card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 10px;
+  display: block;
+  flex-shrink: 0;
+}
+
+/* TITULOS */
+.card h3 {
+  margin: 14px 0 6px;
+  font-size: 18px;
+  font-weight: 600;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+
+/* TEXTO */
+.card p {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.5;
+  min-height: 60px;
+}
+
+/* SOLO PC */
+@media (pointer: fine) {
+  .carousel {
+    overflow-x: hidden;
+  }
+
+  .card img {
+    pointer-events: none;
+  }
+}
+
+/* SOLO TOUCH / MÓVIL */
 @media (pointer: coarse) {
   .carousel {
     overflow-x: auto;
@@ -146,9 +193,18 @@
   }
 }
 
-/* SOLO PC */
-@media (pointer: fine) {
-  .carousel {
-    overflow-x: hidden; /* 🔒 PC no scrollea */
+/* AJUSTES EXTRA MÓVIL */
+@media (max-width: 480px) {
+  .card {
+    min-width: 240px;
+    max-width: 240px;
+  }
+
+  .card img {
+    height: 150px;
+  }
+
+  .header h2 {
+    font-size: 2.2rem;
   }
 }

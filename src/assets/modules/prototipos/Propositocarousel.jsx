@@ -63,7 +63,10 @@ const Propositocarousel = () => {
       }
       const el = carouselRef.current;
       if (el.scrollLeft + el.clientWidth >= el.scrollWidth - 10) {
-        el.scrollTo({ left: 0, behavior: "auto" });
+        el.firstElementChild?.scrollIntoView({
+          behavior: "auto",
+          inline: "center",
+        });
       } else {
         el.scrollBy({ left: scrollAmount, behavior: "smooth" });
       }
@@ -123,10 +126,15 @@ const Propositocarousel = () => {
             {propositoData.map((item) => (
               <div className="card snap-center" key={item.id}>
                 <img src={item.image} alt={item.title} loading="lazy" />
-                <h3>{item.title}</h3>
-                <p>{item.description}</p>
+                        
+                <div className="card-body">
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
+                  <a href="#" className="ver-mas">Ver más</a>
+                </div>
               </div>
             ))}
+
           </div>
         </div>
       </div>

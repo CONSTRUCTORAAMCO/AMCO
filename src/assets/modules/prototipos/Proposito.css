@@ -4,7 +4,7 @@
 }
 
 .section {
-  padding: 70px 0;
+  padding: 1px 0;
 }
 
 .container {
@@ -97,35 +97,21 @@
 .carousel::-webkit-scrollbar {
   display: none;
 }
+
+/* CARDS */
 .card {
   min-width: 280px;
   max-width: 280px;
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
-  height: 420px; /* opcional si quieres totalmente rígido */
 }
-
-/* CARDS */
-.card p {
-  font-size: px;
-  color: #555;
-  line-height: 1.5;
-
-  display: -webkit-box;
-  -webkit-line-clamp: 3;   /* número de líneas visibles */
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
 
 .card-body {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  min-height: 180px; /* ajusta según diseño */
 }
-
 
 .ver-mas {
   margin-top: auto;
@@ -157,13 +143,8 @@
   margin: 14px 0 6px;
   font-size: 18px;
   font-weight: 600;
-
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+  min-height: 48px;
 }
-
 
 /* TEXTO */
 .card p {

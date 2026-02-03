@@ -126,11 +126,9 @@ const Propositocarousel = () => {
             {propositoData.map((item) => (
               <div className="card snap-center" key={item.id}>
                 <img src={item.image} alt={item.title} loading="lazy" />
-                        
                 <div className="card-body">
                   <h3>{item.title}</h3>
                   <p>{item.description}</p>
-                  <a href="#" className="ver-mas">Ver más</a>
                 </div>
               </div>
             ))}

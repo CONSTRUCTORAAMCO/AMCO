@@ -1,6 +1,8 @@
 import { lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
 import MainLayout from "../assets/components/layout/MainLayout";
+import ScrollToTop from "../assets/components/scrolltotop/ScrollToTop";
+
 const Home = lazy(() => import("../pages/Home"));
 const Nosotros = lazy(() => import("../pages/Nosotros"));
 const Entrecalles = lazy(() => import("../pages/Entrecalles"));
@@ -23,6 +25,7 @@ const ComunidadesCarousel = lazy(() =>
 function App() {
   return (
     <Suspense fallback={<div>Loading...</div>}>
+      <ScrollToTop />
       <Routes>
         <Route element={<MainLayout />}>
           <Route path="/" element={<Home />} />

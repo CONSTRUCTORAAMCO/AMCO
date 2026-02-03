@@ -229,7 +229,7 @@ export default function Nosotros() {
                   <Building2 className={styles.empresaIcon} />
                 </div>
                 <div className={styles.empresaInfo}>
-                  <h3 className={styles.empresaName}>AMR Construcciones y CIA S.A.</h3>
+                  <h3 className={styles.empresaName}>AMR Construcciones</h3>
                   <div className={styles.empresaBadge}>
                     <Calendar size={16} />
                     <span>Fundada en 2000</span>

@@ -54,7 +54,6 @@ img {
 
 /* Custom button style */
 .uiverse-btn {
-  /* Using CSS variables for easy theming */
   --btn-default-bg: rgb(41, 41, 41);
   --btn-padding: 15px 20px;
   --btn-hover-bg: rgb(51, 51, 51);
@@ -96,13 +95,12 @@ img {
 
 .uiverse-btn:hover {
   background: var(--btn-hover-bg);
-  transform: translateY(-3px); /* Added from other definition */
+  transform: translateY(-3px);
 }
 
 .uiverse-btn:hover span {
   color: var(--hover-btn-color);
 }
-
 
 /* Styles for React-Select component */
 .rs__menu {
@@ -122,7 +120,6 @@ img {
   border-radius: 8px;
 }
 
-/* Note: --is-focused and --is-selected are pseudo-classes from react-select */
 .rs__option--is-focused {
   background: #f3f4f6;
 }
@@ -131,7 +128,6 @@ img {
   background: #111827;
   color: #fff;
 }
-
 
 /* Micro-interaction for pagination buttons */
 .page-btn {
@@ -162,57 +158,87 @@ img {
 .tDelay3 { transition-delay: 240ms; }
 
 /* ==========================================================================
-   Responsive Layout Adjustments
+   Project Grid - Uniform Height Solution
    ========================================================================== */
+
+/* Contenedor principal */
 .projectContentWrapper {
   width: 100%;
-  max-width: 1280px; /* Limita el ancho máximo */
-  margin: 0 auto; /* Centra el contenido */
+  max-width: 1280px;
+  margin: 0 auto;
   padding-left: 1rem;
   padding-right: 1rem;
   box-sizing: border-box;
 }
 
-/* On smaller screens (tablets and below), reduce horizontal padding */
-@media (max-width: 768px) {
-  .projectContentWrapper {
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
+/* Grid principal para las cards */
+.projectsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  width: 100%;
 }
 
-/* On very narrow screens (phones), reduce padding further */
-@media (max-width: 480px) {
-  .projectContentWrapper {
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
-  }
+/* Cada card tendrá la misma altura */
+.projectsGrid > * {
+  height: 100%;
 }
-/* ==========================================================================
-   Project Grid Responsive Adjustments
-   ========================================================================== */
 
-/* By default, the grid is a flex container (from Tailwind).
-   On mobile, we'll switch to a grid layout for uniform column control. */
-@media (max-width: 640px) {
-  .projectsGrid {
-    display: grid;
-    grid-template-columns: 1fr; /* Display cards in a single column */
-    justify-items: center;    /* Center the cards within the column */
-    gap: 2rem;                /* Adjust gap for vertical stacking */
-  }
-
-  /* Target the cards within the grid */
-  .projectsGrid > * {
-    width: 100%;              /* Ensure each card takes the full width of the column */
-    max-width: 400px;         /* Set a max-width to prevent cards from becoming too wide on larger phones */
-  }
-}
+/* Estilo uniforme para todas las cards */
 .projectCard {
   opacity: 0;
   transition: all 0.7s cubic-bezier(.2,.9,.3,1);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background: white;
 }
 
+/* Contenedor de imagen uniforme */
+.projectCard .imageContainer {
+  height: 180px;
+  width: 100%;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+/* Imagen dentro del contenedor */
+.projectCard img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+/* Efecto hover en imagen */
+.projectCard:hover img {
+  transform: scale(1.05);
+}
+
+/* Contenido de la card */
+.projectCard .cardContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 1rem 1rem;
+  min-height: 140px;
+}
+
+/* Título con altura fija */
+.projectCard .cardTitle {
+  min-height: 3rem;
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin-bottom: 0.75rem;
+}
+
+/* Animaciones de entrada */
 .fromLeft {
   transform: translateX(-80px) translateY(40px);
 }
@@ -225,13 +251,55 @@ img {
   opacity: 1;
   transform: translateX(0) translateY(0);
 }
-.fadeUp {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: all 0.6s cubic-bezier(.2,.9,.3,1);
+
+/* ==========================================================================
+   Responsive Adjustments
+   ========================================================================== */
+
+/* Tablet */
+@media (max-width: 768px) {
+  .projectContentWrapper {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  .projectsGrid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  .projectCard .imageContainer {
+    height: 160px;
+  }
 }
 
-.fadeUp.inview {
-  opacity: 1;
-  transform: translateY(0);
+/* Mobile */
+@media (max-width: 480px) {
+  .projectContentWrapper {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+  
+  .projectsGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .projectCard {
+    max-width: 100%;
+  }
+}
+
+/* Small screens */
+@media (max-width: 640px) {
+  .projectsGrid {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: 1.5rem;
+  }
+
+  .projectsGrid > * {
+    width: 100%;
+    max-width: 400px;
+  }
 }

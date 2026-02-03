@@ -31,7 +31,7 @@ export const translations = {
     },
     entrecalles: {
       badge: "PROYECTO EN DESARROLLO",
-      title: "Entre Calles",
+      title: "ENTRECALLES EMERALD TOWER",
       description: "Sobre la intersección de la Avenida 19 con la Calle Real del Comercio, más conocida como Carrera Séptima; toma vuelo el proyecto que renovará la cara del centro de Bogotá y de Colombia entera.",
       video_label: "Video del proyecto",
       video_title: "Entre Calles: El futuro de Bogotá",
@@ -77,7 +77,7 @@ export const translations = {
     },
     entrecalles: {
       badge: "PROJECT IN DEVELOPMENT",
-      title: "Entre Calles",
+      title: "ENTRECALLES EMERALD TOWER",
       description: "At the intersection of Avenue 19 and the Royal Street of Commerce, better known as Carrera Septima; a project takes flight that will renew the face of downtown Bogota and all of Colombia.",
       video_label: "Project Video",
       video_title: "Entre Calles: The future of Bogotá",

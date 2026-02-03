@@ -83,7 +83,7 @@ const EntreCallesHome = () => {
             <div className={styles.stat}>
               <Building size={20} />
               <div>
-                <div className={styles.statNumber}>300+</div>
+                <div className={styles.statNumber}>500</div>
                 <div className={styles.statText}>{t('entrecalles.height')}</div>
               </div>
             </div>

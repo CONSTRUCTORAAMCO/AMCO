@@ -139,40 +139,39 @@ export default function ProjectsSection2028() {
 
   return (
     <>
-{/* HERO */}
-<section className="relative h-screen overflow-hidden flex items-center justify-center">
+      {/* HERO */}
+      <section className="relative h-screen overflow-hidden flex items-center justify-center">
+        {/* IMAGEN */}
+        <div
+          className="absolute inset-0 bg-cover bg-center will-change-transform"
+          style={{
+            backgroundImage: `url(${imgUniversidadLibre})`,
+            transform: `scale(${1 + scrollY * 0.00025})`
+          }}
+        />
 
-  {/* IMAGEN */}
-  <div
-    className="absolute inset-0 bg-cover bg-center will-change-transform"
-    style={{
-      backgroundImage: `url(${imgUniversidadLibre})`,
-      transform: `scale(${1 + scrollY * 0.00025})` // MÁS SUAVE
-    }}
-  />
+        {/* OSCURECER GENERAL */}
+        <div className="absolute inset-0 bg-black/25" />
 
-  {/* OSCURECER GENERAL */}
-  <div className="absolute inset-0 bg-black/25" />
+        {/* DEGRADADO SOLO BORDES LIGERO */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-0 left-0 w-full h-20 bg-gradient-to-b from-black/50 to-transparent" />
+          <div className="absolute bottom-0 left-0 w-full h-20 bg-gradient-to-t from-black/50 to-transparent" />
+          <div className="absolute top-0 left-0 h-full w-16 bg-gradient-to-r from-black/40 to-transparent" />
+          <div className="absolute top-0 right-0 h-full w-16 bg-gradient-to-l from-black/40 to-transparent" />
+        </div>
 
-  {/* DEGRADADO SOLO BORDES LIGERO */}
-  <div className="absolute inset-0 pointer-events-none">
+        {/* CONTENIDO */}
+        <div className="relative z-10 text-center px-6">
+          <h1 className="text-5xl font-bold text-white mb-6">
+            <span style={{ fontFamily: "'Playfair Display', serif", fontStyle: "italic" }}>
+              {displayText}
+            </span>
+            <span className="animate-pulse">|</span>
+          </h1>
+        </div>
+      </section>
 
-    <div className="absolute top-0 left-0 w-full h-20 bg-gradient-to-b from-black/50 to-transparent" />
-    <div className="absolute bottom-0 left-0 w-full h-20 bg-gradient-to-t from-black/50 to-transparent" />
-    <div className="absolute top-0 left-0 h-full w-16 bg-gradient-to-r from-black/40 to-transparent" />
-    <div className="absolute top-0 right-0 h-full w-16 bg-gradient-to-l from-black/40 to-transparent" />
-
-  </div>
-  {/* CONTENIDO */}
-  <div className="relative z-10 text-center px-6">
-    <h1 className="text-5xl font-bold text-white mb-6">
-      <span style={{ fontFamily: "'Playfair Display', serif", fontStyle: "italic" }}>
-        {displayText}
-      </span>
-      <span className="animate-pulse">|</span>
-    </h1>
-  </div>
-</section>
       {/* CONTENT */}
       <section className="py-24 bg-gray-50">
         <div className={`${styles.projectContentWrapper} max-w-7xl mx-auto px-6`}>
@@ -196,114 +195,132 @@ export default function ProjectsSection2028() {
               gap: '24px',
               maxWidth: '1024px',
               margin: '0 auto',
-              justifyItems: 'center',  // Esto centra los selects dentro de cada celda
+              justifyItems: 'center',
             }}
           >
-          <Select menuPortalTarget={document.body} classNamePrefix="rs"
-                  value={regionOptionsState.find(o => o.value === region)}
-                  onChange={(o) => { setRegion(o.value); setPage(1); }}
-                  options={regionOptionsState} styles={customStyles} placeholder="Departamentos"/>
-          <Select menuPortalTarget={document.body} classNamePrefix="rs"
-                  value={cityOptions.find(o => o.value === city)}
-                  onChange={(o) => { setCity(o.value); setPage(1); }}
-                  options={cityOptions} styles={customStyles} placeholder="Ciudades"/>
-          <Select menuPortalTarget={document.body} classNamePrefix="rs"
-          value={activityOptions.find(o => o.value === activity)}
-          onChange={(o) => { setActivity(o.value); setPage(1); }}
-          options={activityOptions} styles={customStyles} placeholder="Categorías"/>
+            <Select menuPortalTarget={document.body} classNamePrefix="rs"
+                    value={regionOptionsState.find(o => o.value === region)}
+                    onChange={(o) => { setRegion(o.value); setPage(1); }}
+                    options={regionOptionsState} styles={customStyles} placeholder="Departamentos"/>
+            <Select menuPortalTarget={document.body} classNamePrefix="rs"
+                    value={cityOptions.find(o => o.value === city)}
+                    onChange={(o) => { setCity(o.value); setPage(1); }}
+                    options={cityOptions} styles={customStyles} placeholder="Ciudades"/>
+            <Select menuPortalTarget={document.body} classNamePrefix="rs"
+                    value={activityOptions.find(o => o.value === activity)}
+                    onChange={(o) => { setActivity(o.value); setPage(1); }}
+                    options={activityOptions} styles={customStyles} placeholder="Categorías"/>
           </div>
-<br /><br />
+
+          <br /><br />
+
           {/* RESULTS */}
           <div className="flex items-center justify-between text-sm text-gray-600 max-w-6xl mx-auto mt-10">
             <span>{filtered.length} Resultados</span>
             <span className="uppercase tracking-wide">Proyectos Destacados</span>
           </div>
 
-{/* PROJECT GRID */}
-<div className={`mt-10 flex flex-wrap justify-center gap-8 ${styles.projectsGrid}`}>
-  {visible.map((project, index) => (
-    <Card
-      key={project.id}
-      data-sr
-      className={`${styles.projectCard} ${
-        index % 2 === 0 ? styles.fromLeft : styles.fromRight
-      }`}
-      sx={{ maxWidth: 345 }}
-    >
-      <CardMedia
-        component="img"
-        height="180"
-        image={project.image}
-        alt={project.title}
-        style={{ width: '100%', height: '180px', objectFit: 'cover', display: 'block' }}
-      />
+          {/* PROJECT GRID */}
+          <div className={`mt-10 ${styles.projectsGrid}`}>
+            {visible.map((project, index) => (
+              <Card
+                key={project.id}
+                data-sr
+                className={`${styles.projectCard} ${
+                  index % 2 === 0 ? styles.fromLeft : styles.fromRight
+                }`}
+                sx={{ 
+                  width: '100%',
+                  height: '100%',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'space-between'
+                }}
+              >
+                {/* Contenedor de imagen con altura fija */}
+                <div className={styles.imageContainer}>
+                  <CardMedia
+                    component="img"
+                    image={project.image}
+                    alt={project.title}
+                    sx={{ 
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                      display: 'block'
+                    }}
+                  />
+                </div>
 
-      <CardContent>
-        <Typography gutterBottom variant="h6" component="div">
-          {project.title}
-        </Typography>
+                <CardContent className={styles.cardContent}>
+                  <Typography gutterBottom variant="h6" component="div" className={styles.cardTitle}>
+                    {project.title}
+                  </Typography>
 
-        <Typography variant="body2" color="text.secondary" component="div">
-          <div className="flex items-center gap-2 mb-1">
-            <i className="ri-briefcase-line text-lg" /> Categoría: {project.category}
+                  <Typography variant="body2" color="text.secondary" component="div">
+                    <div className="flex items-center gap-2 mb-2">
+                      <i className="ri-briefcase-line text-lg" /> 
+                      <span><strong>Categoría:</strong> {project.category}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <i className="ri-map-pin-line text-lg" /> 
+                      <span><strong>Ubicación:</strong> {project.location}</span>
+                    </div>
+                  </Typography>
+                </CardContent>
+
+                <div style={{ padding: "0 16px 16px" }}>
+                  <Button
+                    variant="outlined"
+                    fullWidth
+                    onClick={() => navigate(`/vistaproyecto/${project.id}`)}
+                    sx={{
+                      color: 'black',
+                      borderColor: '#f6c400',
+                      '&:hover': {
+                        borderColor: '#f6c400',
+                        backgroundColor: 'rgba(246, 196, 0, 0.08)',
+                      },
+                    }}
+                  >
+                    Ver más
+                  </Button>
+                </div>
+              </Card>
+            ))}
           </div>
-          <div className="flex items-center gap-2">
-            <i className="ri-map-pin-line text-lg" /> Ubicación: {project.location}
-          </div>
-        </Typography>
-      </CardContent>
 
-      <div style={{ padding: "0 16px 16px" }}>
-        <Button
-          variant="outlined"
-          fullWidth
-          onClick={() => navigate(`/vistaproyecto/${project.id}`)}
-          sx={{
-            color: 'black',
-            borderColor: '#f6c400',
-            '&:hover': {
-              borderColor: '#f6c400',
-              backgroundColor: 'rgba(246, 196, 0, 0.08)',
-            },
-          }}
-        >
-          Ver más
-        </Button>
-      </div>
-    </Card>
-  ))}
-</div>
+          <br /><br />
 
-<br />  <br />
           {/* PAGINATION */}
-<div className="flex justify-center mt-12">
-  <Stack spacing={2}>
-    <Pagination
-      count={totalPages}
-      page={page}
-      onChange={(e, value) => setPage(value)}
-      shape="rounded"
-      sx={{
-        "& .MuiPaginationItem-root": {
-          borderRadius: "12px",
-          backgroundColor: "#ffffff",
-          color: "#000000", // negro normal
-          fontWeight: 500,
-          transition: "all 0.3s ease",
-        },
-        "& .MuiPaginationItem-root:hover": {
-          backgroundColor: "#d4d4d4",
-        },
-        "& .MuiPaginationItem-root.Mui-selected": {
-          backgroundColor: "#000000", // negro seleccionado
-          color: "#ffffff",
-        },
-        "& .MuiPaginationItem-root.Mui-selected:hover": {
-          backgroundColor: "#000000",
-        },
-      }}
-    />
-  </Stack>
+          <div className="flex justify-center mt-12">
+            <Stack spacing={2}>
+              <Pagination
+                count={totalPages}
+                page={page}
+                onChange={(e, value) => setPage(value)}
+                shape="rounded"
+                sx={{
+                  "& .MuiPaginationItem-root": {
+                    borderRadius: "12px",
+                    backgroundColor: "#ffffff",
+                    color: "#000000",
+                    fontWeight: 500,
+                    transition: "all 0.3s ease",
+                  },
+                  "& .MuiPaginationItem-root:hover": {
+                    backgroundColor: "#d4d4d4",
+                  },
+                  "& .MuiPaginationItem-root.Mui-selected": {
+                    backgroundColor: "#000000",
+                    color: "#ffffff",
+                  },
+                  "& .MuiPaginationItem-root.Mui-selected:hover": {
+                    backgroundColor: "#000000",
+                  },
+                }}
+              />
+            </Stack>
           </div>
         </div>
       </section>

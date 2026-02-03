@@ -9,7 +9,7 @@ const Entrecalles = lazy(() => import("../pages/Entrecalles"));
 const Contacto = lazy(() => import("../pages/Contacto"));
 const Proyectos = lazy(() => import("../pages/Proyectos"));
 const Politicaprivacidad = lazy(() => import("../pages/Politicaprivacidad"));
-const Tyc = lazy(() => import("../pages/Tyc"));
+const Tyc = lazy(() => import("../pages/tyc"));
 const VistasProyecto = lazy(() =>
   import("../assets/modules/vistasproyectos/vistaproyecto").then((module) => ({
     default: module.default,

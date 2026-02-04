@@ -8,7 +8,7 @@ jest.mock('../assets/modules/formulario/Formulario', () => {
 });
 
 // Mock the LanguageContext to avoid errors with useLanguage hook
-jest.mock('../i18n/languagecontext', () => ({
+jest.mock('../i18n/LanguageContext', () => ({
   useLanguage: () => ({
     t: (key) => key, // Simply return the key for testing
     language: 'ES',

@@ -1,4 +1,4 @@
-import Counter from "./Counter";
+import Counter from "./counter";
 import styles from "./historial.module.css";
 import { useLanguage } from "../../../i18n/languagecontext";
 

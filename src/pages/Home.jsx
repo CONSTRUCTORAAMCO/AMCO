@@ -1,10 +1,10 @@
 
 import HeroVideo from "../assets/modules/home/home";
-import Historialproyectos from "../assets/modules/historialproyectos/Historialproyectos";
-import Services from "../assets/modules/services/Services";
-import Entrecalleshome from "../assets/modules/entrecalleshome/Entrecalleshome";
-import Objetivo from "../assets/modules/objetivo/Objetivo";
-import Valores from "../assets/modules/valores/Valores";
+import Historialproyectos from "../assets/modules/historialproyectos/historialproyectos";
+import Services from "../assets/modules/services/services";
+import Entrecalleshome from "../assets/modules/entrecalleshome/entrecalleshome";
+import Objetivo from "../assets/modules/objetivo/objetivo";
+import Valores from "../assets/modules/valores/valores";
 
 
 const Home = () => {

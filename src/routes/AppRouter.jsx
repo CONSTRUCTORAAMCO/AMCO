@@ -4,12 +4,12 @@ import MainLayout from "../assets/components/layout/MainLayout.jsx"; // ✅ May�
 import ScrollToTop from "../assets/components/scrolltotop/ScrollToTop.jsx";
 
 const Home = lazy(() => import("../pages/Home.jsx"));
-const Nosotros = lazy(() => import("../pages/nosotros.jsx")); // ✅ Mayúscula
-const Entrecalles = lazy(() => import("../pages/entrecalles.jsx")); // ✅ Mayúscula
-const Contacto = lazy(() => import("../pages/contacto.jsx")); // ✅ Mayúscula
-const Proyectos = lazy(() => import("../pages/proyectos.jsx")); // ✅ Mayúscula
-const Politicaprivacidad = lazy(() => import("../pages/politicaprivacidad.jsx")); // ✅ Mayúscula
-const Tyc = lazy(() => import("../pages/tyc.jsx")); // ✅ Mayúscula
+const Nosotros = lazy(() => import("../pages/Nosotros.jsx"));
+const Entrecalles = lazy(() => import("../pages/Entrecalles.jsx")); // ✅ Mayúscula
+const Contacto = lazy(() => import("../pages/Contacto.jsx")); // ✅ Mayúscula
+const Proyectos = lazy(() => import("../pages/Proyectos.jsx")); // ✅ Mayúscula
+const Politicaprivacidad = lazy(() => import("../pages/Politicaprivacidad.jsx")); // ✅ Mayúscula
+const Tyc = lazy(() => import("../pages/Tyc.jsx")); // ✅ Mayúscula
 const VistasProyecto = lazy(() =>
   import("../assets/modules/vistasproyectos/vistaproyecto.jsx").then((module) => ({ // ✅ Agregada extensión
     default: module.default,

@@ -1,5 +1,5 @@
 import styles from "./valores.module.css";
-import { useLanguage } from "../../../i18n/languagecontext";
+import { useLanguage } from "../../../i18n/languagecontext.jsx";
 
 const Valores = () => {
   const { t } = useLanguage();

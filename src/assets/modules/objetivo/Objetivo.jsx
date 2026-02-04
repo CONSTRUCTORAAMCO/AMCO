@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import styles from "./objetivo.module.css";
-import { useLanguage } from "../../../i18n/languagecontext";
+import { useLanguage } from "../../../i18n/languagecontext.jsx";
 
 import imagenProyecto from "../../../assets/img/objetivosocialimg.png";
 import videoBg from "../../../assets/video/21233-316116300_small.mp4";

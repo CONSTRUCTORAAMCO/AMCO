@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLanguage } from "../../../i18n/languagecontext";
+import { useLanguage } from "../../../i18n/languagecontext.jsx";
 
 const HeroVideo = () => {
   const [visible, setVisible] = useState(true);

@@ -1,6 +1,6 @@
 import Counter from "./counter";
 import styles from "./historial.module.css";
-import { useLanguage } from "../../../i18n/languagecontext";
+import { useLanguage } from "../../../i18n/languagecontext.jsx";
 
 const Historial = () => {
   const { t } = useLanguage();

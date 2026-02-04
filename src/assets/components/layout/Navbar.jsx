@@ -3,9 +3,9 @@ import { useNavigate, useLocation } from "react-router-dom";
 import AMCO from "../../img/AMCO.png";
 import { FaChevronDown } from "react-icons/fa";
 import ReactCountryFlag from "react-country-flag";
-import { useLanguage } from "../../../i18n/languagecontext";
-import { searchIndex } from "../../modules/buscador/buscador";
-import { normalizeText } from "../../modules/buscador/busquedautil";
+import { useLanguage } from "../../../i18n/languagecontext.jsx";
+import { searchIndex } from "../../modules/buscador/buscador.js";
+import { normalizeText } from "../../modules/buscador/busquedautil.jsx";
 
 const Navbar = () => {
   const navigate = useNavigate();

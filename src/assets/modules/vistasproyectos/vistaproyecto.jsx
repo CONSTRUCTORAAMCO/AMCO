@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { proyectos } from "./vistaproyectos.data";
+import { proyectos } from "./vistaproyectos.data.js";
 
 const VistaProyecto = () => {
   const { id } = useParams();

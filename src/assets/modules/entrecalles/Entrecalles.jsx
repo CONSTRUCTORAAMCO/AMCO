@@ -8,7 +8,7 @@ import edificioImage4 from '../../img/Entrecallesimg4.png';
 import edificioImage5 from '../../img/Entrecallesimg5.png';
 import edificioImage6 from '../../img/Entrecallesimg6.png';
 import edificioImage7 from '../../img/Entrecallesimg7.png';
-import { useLanguage } from "../../../i18n/languagecontext";
+import { useLanguage } from "../../../i18n/languagecontext.jsx";
 
 const EntreCalles = () => {
   const { t } = useLanguage();

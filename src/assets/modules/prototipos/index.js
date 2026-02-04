@@ -1,1 +1,1 @@
-export { default as ComunidadesCarousel } from "./propositocarousel";
+export { default as ComunidadesCarousel } from "./propositocarousel.jsx";

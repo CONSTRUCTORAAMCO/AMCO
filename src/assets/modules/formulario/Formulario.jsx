@@ -9,7 +9,7 @@ import {
   RiCloseLine,
 } from "react-icons/ri"
 import { Building2 } from "lucide-react";
-import { useLanguage } from "../../../i18n/languagecontext";
+import { useLanguage } from "../../../i18n/languagecontext.jsx";
 
 const Formulario = () => {
   const { t } = useLanguage();

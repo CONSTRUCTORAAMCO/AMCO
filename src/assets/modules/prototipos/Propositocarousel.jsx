@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
-import propositoData from "./proposito.data";
+import propositoData from "./proposito.data.js";
 import "./Proposito.css";
 import { useLanguage } from "../../../i18n/languagecontext";
 

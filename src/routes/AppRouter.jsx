@@ -1,7 +1,7 @@
 import { lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
 import MainLayout from "../assets/components/layout/MainLayout.jsx"; // ✅ Mayúscula
-import ScrollToTop from "../assets/components/scrolltotop/scrolltotop.jsx"; // ✅ Mayúscula"; ✅ Mayúscula + extensión
+import ScrollToTop from "../assets/components/scrolltotop/ScrollToTop.jsx";
 
 const Home = lazy(() => import("../pages/Home.jsx"));
 const Nosotros = lazy(() => import("../pages/nosotros.jsx")); // ✅ Mayúscula

@@ -1,6 +1,6 @@
 import { lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
-import MainLayout from "../assets/components/layout/mainlayout";
+import MainLayout from "../assets/components/layout/mainlayout.jsx";
 import ScrollToTop from "../assets/components/scrolltotop/scrollToTop";
 
 const Home = lazy(() => import("../pages/Home.jsx"));

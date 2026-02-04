@@ -1,4 +1,4 @@
-import NosotrosModule from "../assets/modules/nosotros/nosotros";
+import NosotrosModule from "../assets/modules/nosotros/Nosotros.jsx";
 
 const Nosotros = () => {
   return <NosotrosModule />;

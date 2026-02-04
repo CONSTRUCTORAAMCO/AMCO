@@ -19,7 +19,7 @@ const VistasProyecto = lazy(() =>
 
 
 const ComunidadesCarousel = lazy(() =>
-  import("../assets/modules/Prototipos.jsx").then((module) => ({
+  import("../assets/modules/prototipos/propositocarousel.jsx").then((module) => ({
     default: module.ComunidadesCarousel,
   }))
 );

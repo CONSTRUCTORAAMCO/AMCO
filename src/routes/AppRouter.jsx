@@ -5,8 +5,8 @@ import ScrollToTop from "../assets/components/scrolltotop/scrolltotop.jsx";
 
 const Home = lazy(() => import("../pages/home.jsx"));
 const Nosotros = lazy(() => import("../pages/nosotros.jsx"));
-const Entrecalles = lazy(() => import("../pages/entrecalles.jsx")); // ✅ Mayúscula
-const Contacto = lazy(() => import("../pages/contacto.jsx")); // ✅ Mayúscula
+const Entrecalles = lazy(() => import("../pages/Entrecalles.jsx")); // ✅ Mayúscula
+const Contacto = lazy(() => import("../pages/Contacto.jsx")); // ✅ Mayúscula
 const Proyectos = lazy(() => import("../pages/Proyectos.jsx")); // ✅ Mayúscula
 const Politicaprivacidad = lazy(() => import("../pages/politicaprivacidad.jsx")); // ✅ Mayúscula
 const Tyc = lazy(() => import("../pages/Tyc.jsx")); // ✅ Mayúscula
@@ -19,8 +19,6 @@ const VistasProyecto = lazy(() =>
 const ComunidadesCarousel = lazy(() =>
   import("../assets/modules/prototipos/propositocarousel.jsx")
 );
-
-
 
 
 function App() {

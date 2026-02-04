@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import Contacto from './Contacto';
+import Contacto from './contacto';
 import '@testing-library/jest-dom';
 
 // Mock the Formulario component as it's an external dependency

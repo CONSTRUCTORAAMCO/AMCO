@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./Politicaprivacidad.module.css";
+import styles from "./politicaprivacidad.module.css";
 
 const Politicaprivacidad = () => {
   return (

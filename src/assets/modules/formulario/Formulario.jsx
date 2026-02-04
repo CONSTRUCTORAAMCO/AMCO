@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 import emailjs from "@emailjs/browser";
-import styles from "./Formulario.module.css";
+import styles from "./formulario.module.css";
 import { Link } from "react-router-dom";
 import {
   RiMailLine,

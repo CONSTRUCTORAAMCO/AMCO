@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './Entrecalleshome.module.css';
 import { Play, MapPin, Building, Youtube } from 'lucide-react';
-import { useLanguage } from '../../../i18n/LanguageContext';
+import { useLanguage } from '../../../i18n/languagecontext';
 import edificioImage from '../../img/Entrecallesimg1.png'; 
 
 const EntreCallesHome = () => {

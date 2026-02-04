@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import styles from "./Historial.module.css";
+import styles from "./historial.module.css";
 
 const Counter = ({
   end,

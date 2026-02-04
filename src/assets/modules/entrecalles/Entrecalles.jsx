@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import styles from "./Entrecalles.module.css";
+import styles from "./entrecalles.module.css";
 import { Building2, Target, Users, Award, Clock, ChevronRight, CheckCircle, Calendar, X, ChevronLeft, ChevronRight as RightIcon, Info } from "lucide-react";
 import edificioImage from '../../img/Entrecallesimg1h.png';
 import edificioImage2 from '../../img/Entrecallesimg2.png';

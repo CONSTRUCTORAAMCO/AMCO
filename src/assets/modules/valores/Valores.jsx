@@ -1,4 +1,4 @@
-import styles from "./Valores.module.css";
+import styles from "./valores.module.css";
 
 const valores = [
   {

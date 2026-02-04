@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Select from "react-select";
-import { proyectos as PROJECTS } from "./dataProyectos.js";
+import { proyectos as PROJECTS } from "./dataproyectos.js";
 import imgUniversidadLibre from "../../img/bogota-proyectos.jpg";
 import styles from "./SesioProy.module.css";
 import Pagination from '@mui/material/Pagination';

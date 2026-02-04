@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "./Services.module.css";
-import { useLanguage } from "../../../i18n/LanguageContext";
+import { useLanguage } from "../../../i18n/languagecontext";
 
 export default function Services() {
   const textRef = useRef(null);

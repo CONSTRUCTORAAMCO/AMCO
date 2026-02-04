@@ -11,10 +11,12 @@ const Proyectos = lazy(() => import("../pages/Proyectos.jsx")); // ✅ Mayúscul
 const Politicaprivacidad = lazy(() => import("../pages/Politicaprivacidad.jsx")); // ✅ Mayúscula
 const Tyc = lazy(() => import("../pages/Tyc.jsx")); // ✅ Mayúscula
 const VistasProyecto = lazy(() =>
-  import("../assets/modules/vistasproyectos/VistaProyecto.jsx").then((module) => ({
+  import("../assets/modules/vistasproyectos/vistaproyecto.jsx").then((module) => ({
     default: module.default,
   }))
 );
+
+
 
 const ComunidadesCarousel = lazy(() =>
   import("../assets/modules/Prototipos.jsx").then((module) => ({

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import styles from "./Entrecalles.module.css";
+import styles from "./entrecalles.module.css";
 import { Building2, Target, Users, Award, Clock, ChevronRight, CheckCircle, Calendar, X, ChevronLeft, ChevronRight as RightIcon, Info } from "lucide-react";
 import edificioImage from '../../img/Entrecallesimg1h.png';
 import edificioImage2 from '../../img/Entrecallesimg2.png';
@@ -8,8 +8,10 @@ import edificioImage4 from '../../img/Entrecallesimg4.png';
 import edificioImage5 from '../../img/Entrecallesimg5.png';
 import edificioImage6 from '../../img/Entrecallesimg6.png';
 import edificioImage7 from '../../img/Entrecallesimg7.png';
+import { useLanguage } from "../../../i18n/languagecontext";
 
 const EntreCalles = () => {
+  const { t } = useLanguage();
   const sectionsRef = useRef([]);
   
   const mainTitleRef = useRef(null);
@@ -51,80 +53,19 @@ const EntreCalles = () => {
     };
   }, []);
 
-  const projectImages = [
-    {
-      id: 1,
-      title: "Vista Principal del Edificio (Derechos de autor Bher President @Quantum-AIP LLC)",
-      description: "Diseño arquitectónico innovador con tecnología 3D y materiales de vanguardia ",
-      category: "Arquitectura",
-      image: edificioImage
-    },
-    {
-      id: 2,
-      title: "Integración con el Entorno Urbano (Derechos de autor Bher President @Quantum-AIP LLC)",
-      description: "Conexión perfecta del edificio con la estructura urbana existente",
-      category: "Integración",
-      image: edificioImage2
-    },
-    {
-      id: 3,
-      title: "Apartamentos de Lujo",
-      description: "Espacios residenciales premium con acabados exclusivos y vistas panorámicas",
-      category: "Residencial",
-      image: edificioImage3
-    },
-    {
-      id: 4,
-      title: "Teatro y Espacio Cultural",
-      description: "Área dedicada a eventos culturales, presentaciones y actividades artísticas",
-      category: "Cultura",
-      image: edificioImage4
-    },
-    {
-      id: 5,
-      title: "Gimnasio Premium",
-      description: "Instalaciones deportivas de última generación con equipamiento profesional",
-      category: "Deportes",
-      image: edificioImage5
-    },
-    {
-      id: 6,
-      title: "Piscina Infinity",
-      description: "Vistas panorámicas desde la piscina en altura con diseño infinity edge",
-      category: "Amenidades",
-      image: edificioImage6
-    },
-    {
-      id: 7,
-      title: "Restaurante Principal",
-      description: "Gastronomía de alta cocina con vista privilegiada a la ciudad",
-      category: "Gastronomía",
-      image: edificioImage7
-    }
-  ];
+  const projectImagesRaw = t('entrecallesPage.projectImages', { returnObjects: true }) || [];
+  const projectImages = projectImagesRaw.map((item, index) => ({
+    ...item,
+    id: index + 1,
+    image: [edificioImage, edificioImage2, edificioImage3, edificioImage4, edificioImage5, edificioImage6, edificioImage7][index]
+  }));
 
-  const projectFeatures = [
-    {
-      icon: <Target size={24} />,
-      title: "Altura Récord",
-      description: "500 metros - El edificio más alto de Colombia"
-    },
-    {
-      icon: <Users size={24} />,
-      title: "Uso Mixto Inteligente",
-      description: "Integración perfecta de espacios residenciales, comerciales y oficinas"
-    },
-    {
-      icon: <Award size={24} />,
-      title: "Certificación LEED Platinum",
-      description: "Máxima certificación en sostenibilidad y eficiencia energética"
-    },
-    {
-      icon: <Clock size={24} />,
-      title: "En Desarrollo",
-      description: "Proyecto en construcción avanzada con tecnología de punta. Actualmente en desarrollo, sin fecha de finalización establecida."
-    }
-  ];
+  const projectFeaturesRaw = t('entrecallesPage.projectFeatures', { returnObjects: true }) || [];
+  const projectFeatures = projectFeaturesRaw.map((feature, index) => ({
+    ...feature,
+    icon: [<Target size={24} />, <Users size={24} />, <Award size={24} />, <Clock size={24} />][index]
+  }));
+
 
   const openModal = (index) => {
     setSelectedImageIndex(index);
@@ -181,15 +122,15 @@ const EntreCalles = () => {
           <div className={styles.companyLogo}>
             <Building2 size={64} className={styles.logoIcon} />
             <div className={styles.companyName}>
-              <h1 className={styles.companyMainName}>ENTRECALLES</h1>
-              <p className={styles.companySubtitle}>CONSTRUCTORA AMCO LTDA</p>
+              <h1 className={styles.companyMainName}>{t('entrecallesPage.mainTitle')}</h1>
+              <p className={styles.companySubtitle}>{t('entrecallesPage.mainSubtitle')}</p>
             </div>
           </div>
           <h2 ref={mainTitleRef} className={styles.heroTitle}>
-            Construyendo el Futuro de Colombia
+            {t('entrecallesPage.heroTitle')}
           </h2>
           <p className={styles.heroSubtitle}>
-            Más de 50 años de experiencia, innovación y excelencia en construcción
+            {t('entrecallesPage.heroSubtitle')}
           </p>
         </div>
       </div>
@@ -198,7 +139,7 @@ const EntreCalles = () => {
       <div ref={statsRef} className={styles.statsBar}>
         <div className={styles.messageBox}>
           <p className={styles.messageText}>
-            La columna vertebral de un nuevo centro.
+            {t('entrecallesPage.messageText')}
           </p>
         </div>
       </div>
@@ -215,37 +156,26 @@ const EntreCalles = () => {
               <div className={styles['image-wrapper']} ref={imageRef}>
                 <img 
                   src={edificioImage} 
-                  alt="Edificio con vida" 
+                  alt={t('entrecallesPage.imageAlt')} 
                   className={styles['living-image']}
                 />
               </div>
               
               <div className={styles['title-container']}>
-                <h1 className={styles['main-title']}>ENTRECALLES EMERALD TOWER</h1>
-                <div className={styles['title-subtle']}>Derechos de autor de la imagen original Bher President @Quantum-AIP LLC</div>
+                <h1 className={styles['main-title']}>{t('entrecallesPage.imageTitle')}</h1>
+                <div className={styles['title-subtle']}>{t('entrecallesPage.imageSubtitle')}</div>
               </div>
             </div>
             <br /> <br /> <br />
             <div className={styles.sectionHeader}>
-              <h2 className={styles.sectionTitle}>Historia del Proyecto</h2>
+              <h2 className={styles.sectionTitle}>{t('entrecallesPage.historyTitle')}</h2>
             </div>
             
             <div className={styles.historyContent}>
               <div className={styles.historyText}>
-                <h3>TORRE ENTRECALLES EMERALD TOWER: Un Sueño de Dos Décadas</h3>
-                <p>
-                  <strong>Torre Entrecalles nació hace más de veinte años</strong> como una visión 
-                  para transformar el centro histórico de Bogotá. En ese momento, visualizamos 
-                  un futuro donde los desarrollos modernos se integraran perfectamente con el 
-                  patrimonio urbano, creando un equilibrio entre innovación y tradición.
-                </p>
-                <p>
-                  Hoy, Torre EntreCalles se consolida como el rediseño del espacio urbano que 
-                  nuestro querido centro necesita. Este hito de gran altura, único en su tipo 
-                  y de uso mixto, no solo elevará el estándar para el desarrollo inmobiliario 
-                  en la región, sino que satisfará la demanda reprimida de espacios vibrantes 
-                  donde vivir, trabajar y disfrutar sean una constante armoniosa y placentera.
-                </p>
+                <h3>{t('entrecallesPage.historySubtitle')}</h3>
+                <p dangerouslySetInnerHTML={{ __html: t('entrecallesPage.historyParagraph1') }} />
+                <p dangerouslySetInnerHTML={{ __html: t('entrecallesPage.historyParagraph2') }} />
               </div>
               
               <div className={styles.historyStats}>
@@ -253,7 +183,7 @@ const EntreCalles = () => {
                   <Calendar className={styles.statIcon} />
                   <div className={styles.statContent}>
                     <div className={styles.statNumber}>20+</div>
-                    <div className={styles.statLabel}>Años de planeación estratégica</div>
+                    <div className={styles.statLabel}>{t('entrecallesPage.yearsOfPlanning')}</div>
                   </div>
                 </div>
                 
@@ -261,7 +191,7 @@ const EntreCalles = () => {
                   <Target className={styles.statIcon} />
                   <div className={styles.statContent}>
                     <div className={styles.statNumber}>500m</div>
-                    <div className={styles.statLabel}>Altura total arquitectónica</div>
+                    <div className={styles.statLabel}>{t('entrecallesPage.architecturalHeight')}</div>
                   </div>
                 </div>
                 
@@ -269,7 +199,7 @@ const EntreCalles = () => {
                   <Building2 className={styles.statIcon} />
                   <div className={styles.statContent}>
                     <div className={styles.statNumber}>75</div>
-                    <div className={styles.statLabel}>Niveles de innovación</div>
+                    <div className={styles.statLabel}>{t('entrecallesPage.innovationLevels')}</div>
                   </div>
                 </div>
               </div>
@@ -282,43 +212,31 @@ const EntreCalles = () => {
             className={styles.sectionWrapper}
           >
             <div className={styles.sectionHeader}>
-              <h2 className={styles.sectionTitle}>Impacto Urbano</h2>
+              <h2 className={styles.sectionTitle}>{t('entrecallesPage.urbanImpactTitle')}</h2>
             </div>
             
             <div className={styles.impactContent}>
               <div className={styles.impactIntro}>
-                <h3>EntreCalles aborda las carencias urbanas de Bogotá y su centro de tres maneras clave:</h3>
+                <h3>{t('entrecallesPage.urbanImpactIntro')}</h3>
               </div>
               
               <div className={styles.impactGrid}>
                 <div className={styles.impactCard}>
                   <div className={styles.impactNumber}>01</div>
-                  <h4>Renovación Urbana Integral</h4>
-                  <p>
-                    Ante la saturación de corredores de oficinas tradicionales, el centro se 
-                    destaca como una oportunidad única para proyectos inmobiliarios a través de 
-                    una renovación urbana que respeta la historia mientras construye el futuro.
-                  </p>
+                  <h4>{t('entrecallesPage.urbanRenewalTitle')}</h4>
+                  <p>{t('entrecallesPage.urbanRenewalText')}</p>
                 </div>
                 
                 <div className={styles.impactCard}>
                   <div className={styles.impactNumber}>02</div>
-                  <h4>Vivienda de Calidad Premium</h4>
-                  <p>
-                    Atiende la falta de viviendas de calidad para ejecutivos y estudiantes 
-                    solventes que buscan vivir en el centro histórico con todas las comodidades 
-                    y servicios de un desarrollo de primer nivel.
-                  </p>
+                  <h4>{t('entrecallesPage.premiumHousingTitle')}</h4>
+                  <p>{t('entrecallesPage.premiumHousingText')}</p>
                 </div>
                 
                 <div className={styles.impactCard}>
                   <div className={styles.impactNumber}>03</div>
-                  <h4>Hito Arquitectónico Transformador</h4>
-                  <p>
-                    El proyecto no solo ofrece espacios adicionales, sino que enriquece, 
-                    valora y contribuye al desarrollo urbano, marcando un hito arquitectónico 
-                    que se integra armoniosamente con la identidad del sector.
-                  </p>
+                  <h4>{t('entrecallesPage.architecturalLandmarkTitle')}</h4>
+                  <p>{t('entrecallesPage.architecturalLandmarkText')}</p>
                 </div>
               </div>
             </div>
@@ -330,7 +248,7 @@ const EntreCalles = () => {
             className={styles.sectionWrapper}
           >
             <div className={styles.sectionHeader}>
-              <h2 className={styles.sectionTitle}>Características del Proyecto</h2>
+              <h2 className={styles.sectionTitle}>{t('entrecallesPage.projectFeaturesTitle')}</h2>
             </div>
             
             <div className={styles.featuresGrid}>
@@ -352,9 +270,9 @@ const EntreCalles = () => {
             className={styles.sectionWrapper}
           >
             <div className={styles.sectionHeader}>
-              <h2 className={styles.sectionTitle}>Galería del Proyecto</h2>
+              <h2 className={styles.sectionTitle}>{t('entrecallesPage.galleryTitle')}</h2>
               <p className={styles.sectionSubtitle}>
-                Haz clic en cualquier imagen para explorar los espacios que harán de EntreCalles un icono arquitectónico
+                {t('entrecallesPage.gallerySubtitle')}
               </p>
             </div>
             
@@ -389,43 +307,43 @@ const EntreCalles = () => {
             className={styles.sectionWrapper}
           >
             <div className={styles.sectionHeader}>
-              <h2 className={styles.sectionTitle}>Especificaciones Técnicas</h2>
+              <h2 className={styles.sectionTitle}>{t('entrecallesPage.techSpecsTitle')}</h2>
             </div>
             
             <div className={styles.specsContainer}>
               <div className={styles.specsColumn}>
-                <h3>Datos Principales</h3>
+                <h3>{t('entrecallesPage.mainData')}</h3>
                 <ul className={styles.specsList}>
-                  <li><CheckCircle size={16} /> <strong>Altura total:</strong> 300+ metros</li>
-                  <li><CheckCircle size={16} /> <strong>Niveles totales:</strong> 75 pisos</li>
-                  <li><CheckCircle size={16} /> <strong>Área construida:</strong> 180,000 m²</li>
-                  <li><CheckCircle size={16} /> <strong>Unidades residenciales:</strong> 450 apartamentos</li>
-                  <li><CheckCircle size={16} /> <strong>Oficinas corporativas:</strong> 25,000 m²</li>
-                  <li><CheckCircle size={16} /> <strong>Área comercial:</strong> 15,000 m²</li>
+                  <li><CheckCircle size={16} /> <strong>{t('entrecallesPage.totalHeight')}</strong> 300+ metros</li>
+                  <li><CheckCircle size={16} /> <strong>{t('entrecallesPage.totalLevels')}</strong> 75 pisos</li>
+                  <li><CheckCircle size={16} /> <strong>{t('entrecallesPage.builtArea')}</strong> 180,000 m²</li>
+                  <li><CheckCircle size={16} /> <strong>{t('entrecallesPage.residentialUnits')}</strong> 450 apartamentos</li>
+                  <li><CheckCircle size={16} /> <strong>{t('entrecallesPage.corporateOffices')}</strong> 25,000 m²</li>
+                  <li><CheckCircle size={16} /> <strong>{t('entrecallesPage.commercialArea')}</strong> 15,000 m²</li>
                 </ul>
               </div>
               
               <div className={styles.specsColumn}>
-                <h3>Amenidades Premium</h3>
+                <h3>{t('entrecallesPage.premiumAmenities')}</h3>
                 <ul className={styles.specsList}>
-                  <li><ChevronRight size={16} /> Piscina infinity con vista panorámica 360°</li>
-                  <li><ChevronRight size={16} /> Gimnasio y spa de lujo con tecnología avanzada</li>
-                  <li><ChevronRight size={16} /> Jardines verticales y terrazas verdes inteligentes</li>
-                  <li><ChevronRight size={16} /> Sky lounge y bar en azotea con vista privilegiada</li>
-                  <li><ChevronRight size={16} /> Salones de eventos y espacios de coworking</li>
-                  <li><ChevronRight size={16} /> Sistema de parqueaderos automatizados</li>
+                  <li><ChevronRight size={16} /> {t('entrecallesPage.infinityPool')}</li>
+                  <li><ChevronRight size={16} /> {t('entrecallesPage.gymAndSpa')}</li>
+                  <li><ChevronRight size={16} /> {t('entrecallesPage.verticalGardens')}</li>
+                  <li><ChevronRight size={16} /> {t('entrecallesPage.skyLounge')}</li>
+                  <li><ChevronRight size={16} /> {t('entrecallesPage.eventRooms')}</li>
+                  <li><ChevronRight size={16} /> {t('entrecallesPage.automatedParking')}</li>
                 </ul>
               </div>
               
               <div className={styles.specsColumn}>
-                <h3>Sostenibilidad y Tecnología</h3>
+                <h3>{t('entrecallesPage.sustainabilityAndTech')}</h3>
                 <ul className={styles.specsList}>
-                  <li><CheckCircle size={16} /> Certificación LEED Platinum objetivo</li>
-                  <li><CheckCircle size={16} /> Sistema de recolección y reutilización de agua lluvia</li>
-                  <li><CheckCircle size={16} /> Paneles solares fotovoltaicos integrados</li>
-                  <li><CheckCircle size={16} /> Jardines verticales para regulación térmica</li>
-                  <li><CheckCircle size={16} /> Materiales locales y reciclables certificados</li>
-                  <li><CheckCircle size={16} /> Sistema de gestión inteligente de energía</li>
+                  <li><CheckCircle size={16} /> {t('entrecallesPage.leedCertification')}</li>
+                  <li><CheckCircle size={16} /> {t('entrecallesPage.waterSystem')}</li>
+                  <li><CheckCircle size={16} /> {t('entrecallesPage.solarPanels')}</li>
+                  <li><CheckCircle size={16} /> {t('entrecallesPage.thermalRegulation')}</li>
+                  <li><CheckCircle size={16} /> {t('entrecallesPage.certifiedMaterials')}</li>
+                  <li><CheckCircle size={16} /> {t('entrecallesPage.energyManagement')}</li>
                 </ul>
               </div>
             </div>
@@ -438,16 +356,15 @@ const EntreCalles = () => {
           >
             <div className={styles.videoSection}>
               <div className={styles.videoContent}>
-                <h4 className={styles.videoTitle}>ENTRECALLES EMERALD TOWER: El Futuro de Bogotá</h4>
+                <h4 className={styles.videoTitle}>{t('entrecallesPage.videoTitle')}</h4>
                 <p className={styles.videoSubtitle}>
-                  Descubre en este video exclusivo la magnitud, visión y tecnología detrás 
-                  del proyecto que redefinirá el skyline de la capital colombiana.
+                  {t('entrecallesPage.videoSubtitle')}
                 </p>
                 
                 <div className={styles.videoWrapper}>
                   <iframe
                     src="https://www.youtube.com/embed/k5RfEowqxgI"
-                    title="EntreCalles - Transformando Bogotá"
+                    title={t('entrecallesPage.videoIframeTitle')}
                     frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                     referrerPolicy="strict-origin-when-cross-origin"
@@ -466,21 +383,12 @@ const EntreCalles = () => {
           >
             <div className={styles.infoNote}>
               <Info className={styles.infoIcon} size={48} />
-              <h3>Información del Proyecto</h3>
+              <h3>{t('entrecallesPage.infoNoteTitle')}</h3>
               <p>
-                Esta página web es una plataforma informativa dedicada al proyecto TORRE ENTRECALLES EMERALD TOWER. 
-                Toda la información presentada aquí corresponde al estado actual del desarrollo y 
-                está sujeta a actualizaciones periódicas a medida que avanza el proyecto.
+                {t('entrecallesPage.infoNoteParagraph1')}
               </p>
-              <p style={{ marginTop: '1rem' }}>
-                Cada proceso, avance o modificación en el desarrollo se irá actualizando en esta 
-                plataforma, manteniendo a todos los interesados informados sobre el progreso 
-                de esta obra que marcará un hito en la arquitectura colombiana.
-              </p>
-              <p style={{ marginTop: '1rem', fontStyle: 'italic' }}>
-                Agradecemos su interés en el proyecto y los invitamos a mantenerse conectados 
-                para futuras actualizaciones. Última Actualización: 30/01/2026
-              </p>
+              <p style={{ marginTop: '1rem' }} dangerouslySetInnerHTML={{ __html: t('entrecallesPage.infoNoteParagraph2') }} />
+              <p style={{ marginTop: '1rem', fontStyle: 'italic' }} dangerouslySetInnerHTML={{ __html: t('entrecallesPage.infoNoteParagraph3') }} />
             </div>
           </div>
         </div>

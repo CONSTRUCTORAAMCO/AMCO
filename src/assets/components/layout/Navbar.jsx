@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import AMCO from "../../img/AMCO.png";
 import { FaChevronDown } from "react-icons/fa";
 import ReactCountryFlag from "react-country-flag";
-import { useLanguage } from "../../../i18n/LanguageContext";
+import { useLanguage } from "../../../i18n/languagecontext";
 import { searchIndex } from "../../modules/buscador/buscador";
 import { normalizeText } from "../../modules/buscador/busquedautil";
 

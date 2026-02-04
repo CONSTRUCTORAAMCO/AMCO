@@ -5,7 +5,7 @@ import {
   Home, Briefcase, ShoppingBag, School, Factory,
   User, Quote
 } from "lucide-react";
-import styles from "./Nosotros.module.css";
+import styles from "./nosotros.module.css";
 
 export default function Nosotros() {
   // Referencias para las animaciones

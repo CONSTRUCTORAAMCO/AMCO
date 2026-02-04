@@ -1,26 +1,27 @@
 import { lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
-import MainLayout from "../assets/components/layout/MainLayout";
-import ScrollToTop from "../assets/components/scrolltotop/ScrollToTop";
+import MainLayout from "../assets/components/layout/MainLayout.jsx"; // ✅ Mayúscula
+import ScrollToTop from "../assets/components/scrolltotop/ScrollToTop.jsx";
 
-const Home = lazy(() => import("../pages/Home"));
-const Nosotros = lazy(() => import("../pages/Nosotros"));
-const Entrecalles = lazy(() => import("../pages/Entrecalles"));
-const Contacto = lazy(() => import("../pages/Contacto"));
-const Proyectos = lazy(() => import("../pages/Proyectos"));
-const Politicaprivacidad = lazy(() => import("../pages/Politicaprivacidad"));
-const Tyc = lazy(() => import("../pages/Tyc"));
+const Home = lazy(() => import("../pages/Home.jsx"));
+const Nosotros = lazy(() => import("../pages/Nosotros.jsx"));
+const Entrecalles = lazy(() => import("../pages/Entrecalles.jsx")); // ✅ Mayúscula
+const Contacto = lazy(() => import("../pages/Contacto.jsx")); // ✅ Mayúscula
+const Proyectos = lazy(() => import("../pages/Proyectos.jsx")); // ✅ Mayúscula
+const Politicaprivacidad = lazy(() => import("../pages/Politicaprivacidad.jsx")); // ✅ Mayúscula
+const Tyc = lazy(() => import("../pages/Tyc.jsx")); // ✅ Mayúscula
 const VistasProyecto = lazy(() =>
-  import("../assets/modules/vistasproyectos/vistaproyecto").then((module) => ({
+  import("../assets/modules/vistasproyectos/vistaproyecto.jsx").then((module) => ({
     default: module.default,
   }))
 );
 
 const ComunidadesCarousel = lazy(() =>
-  import("../assets/modules/prototipos").then((module) => ({
-    default: module.ComunidadesCarousel,
-  }))
+  import("../assets/modules/prototipos/Propositocarousel.jsx")
 );
+
+
+
 
 function App() {
   return (

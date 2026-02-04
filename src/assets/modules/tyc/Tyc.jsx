@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./TYC.module.css";
+import styles from "./tyc.module.css";
 
 const TerminosCondiciones = () => {
   return (

@@ -43,8 +43,8 @@ export default function Footer() {
         <span>© 2026 CONSTRUCTORA AMCO LTDA. Todos los derechos reservados.</span>
 
         <div className={styles.legal}>
-          <Link to="/Tyc">Términos y condiciones</Link>
-          <Link to="/Politicaprivacidad">Política de privacidad</Link>
+          <Link to="/tyc">Términos y condiciones</Link>
+          <Link to="/politicaprivacidad">Política de privacidad</Link>
         </div>
       </div>
     </footer>

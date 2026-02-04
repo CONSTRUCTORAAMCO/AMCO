@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "./Services.module.css";
-import { useLanguage } from "../../../i18n/LanguageContext";
+import { useLanguage } from "../../../i18n/languagecontext";
 
 export default function Services() {
   const textRef = useRef(null);
@@ -32,6 +32,8 @@ export default function Services() {
       }
     };
   }, []);
+
+  const projects = t('services.projects', { returnObjects: true }) || [];
 
   return (
     <section className={styles.services}>
@@ -81,15 +83,7 @@ export default function Services() {
             </div>
             
             <div className={styles.projectsGrid}>
-              {[
-                "Centro Comercial Cedritos 151",
-                "Nuevo comando Policía de Bogotá", 
-                "SENA de Bronx",
-                "Bodega Popular Corabastos",
-                "Personería De Bogotá",
-                "Universidad Libre Bogotá",
-                "Gobernación de Cundinamarca"
-              ].map((project, index) => (
+              {projects.map((project, index) => (
                 <div 
                   key={index} 
                   className={styles.projectCard}

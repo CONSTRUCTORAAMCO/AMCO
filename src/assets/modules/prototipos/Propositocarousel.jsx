@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
-import propositoData from "./Proposito.data";
+import propositoData from "./Proposito.data.js";
 import "./Proposito.css";
-import { useLanguage } from "../../../i18n/LanguageContext";
+import { useLanguage } from "../../../i18n/languagecontext";
 
 const Propositocarousel = () => {
   const carouselRef = useRef(null);

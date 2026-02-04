@@ -1,4 +1,4 @@
-import TycModule from "../assets/modules/tyc/tyc";
+import TycModule from "../assets/modules/tyc/tyc.jsx";
 
 const Tyc = () => {
   return <TycModule />;

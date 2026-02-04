@@ -1,6 +1,6 @@
 import { lazy, Suspense } from "react";
 import { Outlet } from "react-router-dom";
-import Footer from "../../components/footer/Footer";
+import Footer from "../../components/footer/footer";
 import Navbar from "./Navbar";
 const WhatsAppWidget = lazy(() => import("../../modules/whatsapp/WhatsAppWidget"));
 

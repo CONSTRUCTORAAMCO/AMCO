@@ -1,4 +1,4 @@
-import EntrecallesModule from "../assets/modules/entrecalles/Entrecalles";
+import EntrecallesModule from "../assets/modules/entrecalles/entrecalles";
 
 const Entrecalles = () => {
   return <EntrecallesModule />;

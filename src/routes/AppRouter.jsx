@@ -1,15 +1,15 @@
 import { lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
-import MainLayout from "../assets/components/layout/MainLayout";
-import ScrollToTop from "../assets/components/scrolltotop/ScrollToTop";
+import MainLayout from "../assets/components/layout/mainLayout";
+import ScrollToTop from "../assets/components/scrolltotop/scrollToTop";
 
-const Home = lazy(() => import("../pages/Home"));
-const Nosotros = lazy(() => import("../pages/Nosotros"));
-const Entrecalles = lazy(() => import("../pages/Entrecalles"));
-const Contacto = lazy(() => import("../pages/Contacto"));
-const Proyectos = lazy(() => import("../pages/Proyectos"));
-const Politicaprivacidad = lazy(() => import("../pages/Politicaprivacidad"));
-const Tyc = lazy(() => import("../pages/tyc"));
+const Home = lazy(() => import("../pages/Home.jsx"));
+const Nosotros = lazy(() => import("../pages/nosotros.jsx"));
+const Entrecalles = lazy(() => import("../pages/entrecalles.jsx"));
+const Contacto = lazy(() => import("../pages/contacto.jsx"));
+const Proyectos = lazy(() => import("../pages/proyectos.jsx"));
+const Politicaprivacidad = lazy(() => import("../pages/politicaprivacidad.jsx"));
+const Tyc = lazy(() => import("../pages/tyc.jsx"));
 const VistasProyecto = lazy(() =>
   import("../assets/modules/vistasproyectos/vistaproyecto").then((module) => ({
     default: module.default,

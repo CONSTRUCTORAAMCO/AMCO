@@ -1,4 +1,4 @@
-import HeroVideo from "./HeroVideo";
+import HeroVideo from "./herovideo";
 import { ComunidadesCarousel } from "../prototipos";
 
 const Home = () => {

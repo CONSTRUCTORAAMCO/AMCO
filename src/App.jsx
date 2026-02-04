@@ -1,4 +1,4 @@
-import WhatsAppWidget from "./assets/modules/whatsapp/WhatsAppWidget";
+import WhatsAppWidget from "./assets/modules/whatsapp/whatsappwidget";
 import AppRouter from "./routes/AppRouter";
 import VistaProyecto from "./vistasproyectos/vistaproyecto";
 

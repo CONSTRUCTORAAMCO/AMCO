@@ -1,4 +1,4 @@
-import Formulario from "../assets/modules/formulario/Formulario.jsx";
+import Formulario from "../assets/modules/formulario/formulario.jsx";
 
 const Contacto = () => {
   return <Formulario />;

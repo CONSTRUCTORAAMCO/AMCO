@@ -1,4 +1,4 @@
-import PoliticaprivacidadModule from "../assets/modules/politicaprivacidad/PoliticaPrivacidad.jsx";
+import PoliticaprivacidadModule from "../assets/modules/politicaprivacidad/politicaprivacidad.jsx";
 
 const Politicaprivacidad = () => {
   return <PoliticaprivacidadModule />;

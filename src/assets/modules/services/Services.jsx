@@ -33,6 +33,8 @@ export default function Services() {
     };
   }, []);
 
+  const projects = t('services.projects', { returnObjects: true }) || [];
+
   return (
     <section className={styles.services}>
       <div ref={textRef} className={styles.container}>
@@ -81,15 +83,7 @@ export default function Services() {
             </div>
             
             <div className={styles.projectsGrid}>
-              {[
-                "Centro Comercial Cedritos 151",
-                "Nuevo comando Policía de Bogotá", 
-                "SENA de Bronx",
-                "Bodega Popular Corabastos",
-                "Personería De Bogotá",
-                "Universidad Libre Bogotá",
-                "Gobernación de Cundinamarca"
-              ].map((project, index) => (
+              {projects.map((project, index) => (
                 <div 
                   key={index} 
                   className={styles.projectCard}

@@ -40,7 +40,7 @@ const EntreCallesHome = () => {
           <div className={styles.imageWrapper}>
             <img 
               src={edificioImage} 
-              alt="Edificio Entre Calles" 
+              alt={t('entrecalles.image_alt')} 
               className={styles.edificioImage}
               onError={(e) => {
                 // Si la imagen no carga, usa un placeholder
@@ -48,7 +48,7 @@ const EntreCallesHome = () => {
               }}
             />
             <p className={styles.copyrightText}>
-              Derechos de autor de la imagen Bher President @Quantum-AIP LLC
+              {t('entrecalles.copyright')}
             </p>
           </div>
         </div>
@@ -91,7 +91,7 @@ const EntreCallesHome = () => {
               <MapPin size={20} />
               <div>
                 <div className={styles.statNumber}>{t('entrecalles.location')}</div>
-                <div className={styles.statText}>Avenida 19 con la Carrera Séptima</div>
+                <div className={styles.statText}>{t('entrecalles.address')}</div>
               </div>
             </div>
           </div>

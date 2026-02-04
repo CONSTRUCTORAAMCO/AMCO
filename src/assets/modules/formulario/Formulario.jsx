@@ -9,8 +9,10 @@ import {
   RiCloseLine,
 } from "react-icons/ri"
 import { Building2 } from "lucide-react";
+import { useLanguage } from "../../../i18n/languagecontext";
 
 const Formulario = () => {
+  const { t } = useLanguage();
   const formRef = useRef();
   const [estado, setEstado] = useState("");
   const [mostrarToast, setMostrarToast] = useState(false);
@@ -25,47 +27,47 @@ const Formulario = () => {
     const emailTrimmed = email.trim().toLowerCase();
     
     if (!emailTrimmed) {
-      return "El correo electrónico es obligatorio";
+      return t('contact.emailValidation.required');
     }
     
     const partes = emailTrimmed.split('@');
     
     // 1. Debe tener exactamente un @
     if (partes.length !== 2) {
-      return "El correo debe contener exactamente un símbolo @";
+      return t('contact.emailValidation.atSymbol');
     }
     
     const [usuario, dominio] = partes;
     
     // 2. Validar parte del usuario (antes del @)
     if (!usuario || usuario.length === 0) {
-      return "Debe haber texto antes del @ (ej: nombre@...)";
+      return t('contact.emailValidation.userPart');
     }
     
     // Caracteres válidos en usuario
     const usuarioValido = /^[a-zA-Z0-9._%+-]+$/.test(usuario);
     if (!usuarioValido) {
-      return "Caracteres inválidos antes del @. Use letras, números, ., _, %, + o -";
+      return t('contact.emailValidation.invalidCharsUser');
     }
     
     // No puede empezar o terminar con punto
     if (usuario.startsWith('.') || usuario.endsWith('.')) {
-      return "El nombre no puede empezar ni terminar con punto";
+      return t('contact.emailValidation.dotUsage');
     }
     
     // No puntos consecutivos
     if (usuario.includes('..')) {
-      return "No se permiten puntos consecutivos (..)";
+      return t('contact.emailValidation.consecutiveDots');
     }
     
     // 3. Validar dominio (después del @)
     if (!dominio || dominio.length === 0) {
-      return "Debe haber dominio después del @ (ej: ...@gmail.com)";
+      return t('contact.emailValidation.domainPart');
     }
     
     // El dominio DEBE contener al menos un punto
     if (!dominio.includes('.')) {
-      return "El dominio debe contener un punto (ej: gmail.com)";
+      return t('contact.emailValidation.domainDot');
     }
     
     // Dividir el dominio en partes
@@ -73,7 +75,7 @@ const Formulario = () => {
     
     // Debe tener al menos 2 partes después del último punto
     if (partesDominio.length < 2) {
-      return "Dominio incompleto (ej: dominio.com, no solo dominio)";
+      return t('contact.emailValidation.domainIncomplete');
     }
     
     // Verificar cada parte del dominio
@@ -82,46 +84,46 @@ const Formulario = () => {
       
       // Cada parte no puede estar vacía
       if (!parte || parte.length === 0) {
-        return "No se permiten puntos consecutivos en el dominio";
+        return t('contact.emailValidation.consecutiveDotsDomain');
       }
       
       // No puede empezar o terminar con guión
       if (parte.startsWith('-') || parte.endsWith('-')) {
-        return "Partes del dominio no pueden empezar ni terminar con guión";
+        return t('contact.emailValidation.hyphenUsage');
       }
       
       // Caracteres válidos en cada parte del dominio
       const parteValida = /^[a-zA-Z0-9-]+$/.test(parte);
       if (!parteValida) {
-        return "Dominio solo puede contener letras, números y guiones";
+        return t('contact.emailValidation.invalidCharsDomain');
       }
     }
     
     // 4. Validar TLD (última parte)
     const tld = partesDominio[partesDominio.length - 1];
     if (tld.length < 2) {
-      return "La extensión debe tener al menos 2 caracteres (ej: .com, .org)";
+      return t('contact.emailValidation.tldLength');
     }
     
     // TLD solo letras
     if (!/^[a-zA-Z]+$/.test(tld)) {
-      return "La extensión solo puede contener letras (ej: .com, .net)";
+      return t('contact.emailValidation.tldChars');
     }
     
     // 5. Longitudes máximas
     if (usuario.length > 64) {
-      return "La parte antes del @ no puede exceder 64 caracteres";
+      return t('contact.emailValidation.userLength');
     }
     
     if (dominio.length > 255) {
-      return "El dominio es demasiado largo";
+      return t('contact.emailValidation.domainLength');
     }
     
     // 6. Patrón final
     const emailRegex = /^[a-zA-Z0-9]+([._%+-][a-zA-Z0-9]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z]{2,}$/;
     
     if (!emailRegex.test(emailTrimmed)) {
-      return "Formato de correo inválido. Use: usuario@dominio.com";
+      return t('contact.emailValidation.invalidFormat');
     }
     
     // Si todo está bien
@@ -158,7 +160,7 @@ const Formulario = () => {
     const nameInput = formRef.current.querySelector('input[name="user_name"]');
     const nameValue = nameInput.value.trim();
     if (!nameValue) {
-      setNameError("El nombre es obligatorio");
+      setNameError(t('contact.nameError'));
       nameInput.focus();
       return;
     }
@@ -177,7 +179,7 @@ const Formulario = () => {
     const messageInput = formRef.current.querySelector('textarea[name="message"]');
     const messageValue = messageInput.value.trim();
     if (!messageValue) {
-      setMessageError("El mensaje es obligatorio");
+      setMessageError(t('contact.messageError'));
       messageInput.focus();
       return;
     }
@@ -254,15 +256,15 @@ const Formulario = () => {
             <Building2 size={64} className={styles.logoIcon} />
             <div className={styles.companyName}>
               
-              <h1 className={styles.companyMainName}>CONTACTO</h1>
-              <p className={styles.companySubtitle}>CONSTRUCTORA AMCO LTDA</p>
+              <h1 className={styles.companyMainName}>{t('contact.mainTitle')}</h1>
+              <p className={styles.companySubtitle}>{t('contact.mainSubtitle')}</p>
             </div>
           </div>
           <h2 ref={mainTitleRef} className={styles.heroTitle}>
-            Construyendo el Futuro de Colombia
+            {t('contact.heroTitle')}
           </h2>
           <p className={styles.heroSubtitle}>
-            Más de 50 años de experiencia, innovación y excelencia en construcción
+            {t('contact.heroSubtitle')}
           </p>
         </div>
       </div>
@@ -271,13 +273,13 @@ const Formulario = () => {
       <div ref={statsRef} className={styles.statsBar}>
         <div className={styles.messageBox}>
  <p className={styles.legalText}>
-            Al diligenciar este formulario, declaras haber leído y aceptado nuestra{" "}
+            {t('contact.legalDisclaimer')}{" "}
             <Link to="/politicaprivacidad" className={styles.legalLink}>
-              Política de Privacidad
+              {t('contact.privacyPolicy')}
             </Link> {" "}
-            y los{" "}
+            {t('contact.and')}{" "}
             <Link to="/tyc" className={styles.legalLink}>
-              Términos y Condiciones
+              {t('contact.termsAndConditions')}
             </Link>.
           </p>
         </div>
@@ -291,11 +293,11 @@ const Formulario = () => {
           <div className={styles.formBox}>
             <br />
             <h1 style={{ textAlign: "center" }}>
-              <strong>Contáctanos</strong>
+              <strong>{t('contact.formTitle')}</strong>
             </h1>
 
             <p style={{ textAlign: "center" }}>
-              Cuéntanos qué tienes en mente y te contactamos.
+              {t('contact.formSubtitle')}
             </p>
 
             <form ref={formRef} onSubmit={enviarEmail} noValidate>
@@ -303,10 +305,10 @@ const Formulario = () => {
                 <input
                   type="text"
                   name="user_name"
-                  placeholder="Tu nombre"
+                  placeholder={t('contact.namePlaceholder')}
                   maxLength={50}
                   pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$"
-                  title="Solo se permiten letras y espacios"
+                  title={t('contact.namePattern')}
                   required
                   onInput={(e) => {
                     e.target.value = e.target.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, "");
@@ -325,9 +327,9 @@ const Formulario = () => {
                 <input
                   type="email"
                   name="user_email"
-                  placeholder="Tu correo electrónico"
+                  placeholder={t('contact.emailPlaceholder')}
                   required
-                  title="Ejemplo: nombre@dominio.com (el @ y dominio son obligatorios)"
+                  title={t('contact.emailPattern')}
                   onBlur={handleEmailBlur}
                   onChange={handleEmailChange}
                   className={emailError ? styles.inputError : ""}
@@ -342,7 +344,7 @@ const Formulario = () => {
               <div className={styles.emailContainer}>
                 <textarea
                   name="message"
-                  placeholder="Escribe tu mensaje"
+                  placeholder={t('contact.messagePlaceholder')}
                   rows="5"
                   required
                   className={messageError ? styles.inputError : ""}
@@ -358,7 +360,7 @@ const Formulario = () => {
               </div>
 
               <button type="submit">
-                {estado === "enviando" ? "Enviando..." : "Enviar mensaje"}
+                {estado === "enviando" ? t('contact.sending') : t('contact.send')}
               </button>
             </form>
           </div>
@@ -368,14 +370,14 @@ const Formulario = () => {
             <div className={styles.contactoHorizontal}>
               <div className={styles.cardHorizontal}>
                 <h3>
-                  Correo <RiMailLine size={18} />
+                  {t('contact.emailLabel')} <RiMailLine size={18} />
                 </h3>
                 <p>constructoraamcoltda@gmail.com</p>
               </div>
 
               <div className={styles.cardHorizontal}>
                 <h3>
-                  Teléfono <RiPhoneLine size={18} />
+                  {t('contact.phoneLabel')} <RiPhoneLine size={18} />
                 </h3>
                 <p>+57 300 123 4567</p>
               </div>
@@ -383,7 +385,7 @@ const Formulario = () => {
 
             <div className={styles.mapCard}>
               <iframe
-                title="Ubicación Constructora AMCO"
+                title={t('contact.mapTitle')}
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5000!2d-74.0519526!3d4.6786749!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3f9a931ebe1a1d%3A0x1d267cdfe5b0e062!2sBusiness%20center%2093!5e0!3m2!1ses-419!2sco!4v1768488991782"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
@@ -402,12 +404,12 @@ const Formulario = () => {
         
                 <div className="flex-1">
                   <span className="font-medium block">
-                    {estado === "enviado" ? "Enviado" : "Error al enviar"}
+                    {estado === "enviado" ? t('contact.toastSuccessTitle') : t('contact.toastErrorTitle')}
                   </span>
                   <p className="text-sm text-gray-600 mt-2">
                     {estado === "enviado"
-                      ? "Gracias por contactarnos."
-                      : "Por favor intenta nuevamente."}
+                      ? t('contact.toastSuccessMessage')
+                      : t('contact.toastErrorMessage')}
                   </p>
                 </div>
               </div>

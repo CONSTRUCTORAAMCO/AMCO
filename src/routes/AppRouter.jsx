@@ -1,7 +1,7 @@
 import { lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
 import MainLayout from "../assets/components/layout/MainLayout.jsx";
-import ScrollToTop from "../assets/components/scrolltotop/scrolltotop.jsx";
+import ScrollToTop from "../assets/components/ScrollToTop/ScrollToTop.jsx";
 
 const Home = lazy(() => import("../pages/home.jsx"));
 const Nosotros = lazy(() => import("../pages/nosotros.jsx"));
